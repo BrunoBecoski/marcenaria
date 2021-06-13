@@ -1,27 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import { Container } from './styles'
+
+type inputMFDValues = {
+  id: number;
+  height: number;
+  width: number;
+  thickness: string;
+}
 
 type InputsMDFProps = {
   id: number;
+  addInputMDFValues: ({}: inputMFDValues) => void;
 }
 
-export default function InputsMDF({ id }: InputsMDFProps) {
-const [height, setHeight] = useState(0);
-const [width, setWidth] = useState(0);
-const [thickness, setThickness] = useState('15mm');
+export default function InputsMDF({ id, addInputMDFValues }: InputsMDFProps) {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [thickness, setThickness] = useState('15mm');
+
+
+  useEffect(() => {
+    addInputMDFValues({
+      id,
+      width,
+      height,
+      thickness
+    });
+  }, [ width, height, thickness])
 
   return (
     <Container>
-        <label htmlFor="height">Altura: 
-          <input 
-            id="height" 
-            type="number" 
-            value={height} 
-            onChange={(event) => setHeight(Number(event.target.value))} 
-          />
-        </label>
-
-        <label htmlFor="width">Largura: 
+        <label htmlFor="width">
+          Largura: 
           <input 
             id="width" 
             type="number" 
@@ -30,7 +41,18 @@ const [thickness, setThickness] = useState('15mm');
           />
         </label>
 
-        <label htmlFor="thickness">Espessura: 
+        <label htmlFor="height">
+          Altura: 
+          <input 
+            id="height" 
+            type="number" 
+            value={height} 
+            onChange={(event) => setHeight(Number(event.target.value))} 
+          />
+        </label>
+
+        <label htmlFor="thickness">
+          Espessura: 
           <select 
             id="thickness" 
             value={thickness} 
