@@ -11,9 +11,6 @@ type resultMDFProps = {
 }
 
 export default function ResultMDF({ data }: resultMDFProps) {
-
-  console.log(data)
-
   return (
     <Container>
       <h2>Resultados do MDF</h2>

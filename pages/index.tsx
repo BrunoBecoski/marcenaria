@@ -30,10 +30,22 @@ export default function Home() {
   }
   
   function addInputMDFValues(object: inputsMDFValuesProps) {
-    setInputsMDFValues([...inputsMDFValues, object]);
-  }
 
-  function handleSubmit(event: any) {
+    const oldInputsMDF = inputsMDFValues.map((value) => {
+      if(value.id === object.id) {
+        return {}
+      } 
+        
+      return value
+    }); 
+
+    console.log('oldInputsMDF');
+    console.log(JSON.stringify(oldInputsMDF, null, 1));
+
+    // setInputsMDFValues([...inputsMDFValues, object]);
+  }
+  
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
     setInputsMDFResult(inputsMDFValues.reduce((acc, input) => {
