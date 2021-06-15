@@ -1,33 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Container } from './styles'
 
-type inputMFDValues = {
-  id: number;
-  height: number;
-  width: number;
-  thickness: string;
-}
-
-type InputsMDFProps = {
-  id: number;
-  addInputMDFValues: ({}: inputMFDValues) => void;
-}
-
-export default function InputsMDF({ id, addInputMDFValues }: InputsMDFProps) {
+export default function InputsMDF() {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [thickness, setThickness] = useState('15mm');
-
-
-  useEffect(() => {
-    addInputMDFValues({
-      id,
-      width,
-      height,
-      thickness
-    });
-  }, [ width, height, thickness])
 
   return (
     <Container>

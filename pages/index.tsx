@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import InputsMDF from '../components/InputsMDF';
 import ResultMDF from '../components/ResultMDF';
 
-type inputsMDFValuesProps = {
-  id: number;
+type inputValuesMDFProps = {
   width: number;
   height: number;
   thickness: string;
@@ -20,35 +19,30 @@ type inputsMDFResultProps = {
 
 export default function Home() {
   const [keyInputsMDF, setInputsMDF] = useState(1);
-  const [inputsMDFValues, setInputsMDFValues] = useState<inputsMDFValuesProps[]>([]);
-  const [inputsMDFComponent, setInputsMDFComponent] = useState([<InputsMDF key={0} id={0} addInputMDFValues={addInputMDFValues} />]);
+  const [inputsMDFComponent, setInputsMDFComponent] = useState([<InputsMDF key={0} />]);
   const [inputsMDFResult, setInputsMDFResult] = useState<inputsMDFResultProps>();
   
   function handleAddNewInputsMDF() {
-    setInputsMDFComponent([...inputsMDFComponent, <InputsMDF key={keyInputsMDF} id={keyInputsMDF} addInputMDFValues={addInputMDFValues} />])
+    setInputsMDFComponent([...inputsMDFComponent, <InputsMDF key={keyInputsMDF}  />])
     setInputsMDF(keyInputsMDF + 1);
   }
-  
-  function addInputMDFValues(object: inputsMDFValuesProps) {
-
-    const oldInputsMDF = inputsMDFValues.map((value) => {
-      if(value.id === object.id) {
-        return {}
-      } 
-        
-      return value
-    }); 
-
-    console.log('oldInputsMDF');
-    console.log(JSON.stringify(oldInputsMDF, null, 1));
-
-    // setInputsMDFValues([...inputsMDFValues, object]);
-  }
-  
+    
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    setInputsMDFResult(inputsMDFValues.reduce((acc, input) => {
+    let inputValuesMDF: inputValuesMDFProps[] = [];
+
+    for (let index = 0; index < keyInputsMDF; index++) {
+      const inputValue = {
+        width: event.target.width[index].value,
+        height: event.target.height[index].value,
+        thickness: event.target.thickness[index].value
+      }
+      inputValuesMDF.push(inputValue)
+    }
+
+
+    setInputsMDFResult(inputValuesMDF.reduce((acc, input) => {
       switch(input.thickness) {
         case '3mm':
           acc.total3 += input.height * input.width;
@@ -59,7 +53,7 @@ export default function Home() {
         case '9mm':
           acc.total9 += input.height * input.width;
           break;
-        case '12mm':
+          case '12mm':
           acc.total12 += input.height * input.width;
           break;
         case '15mm':
@@ -85,7 +79,7 @@ export default function Home() {
 
     <form onSubmit={handleSubmit}>
       {inputsMDFComponent}
-      <button onClick={handleAddNewInputsMDF}>+</button>
+      <button type="button" onClick={handleAddNewInputsMDF}>+</button>
       <button type="submit">Calcular</button>
     </form>
 
