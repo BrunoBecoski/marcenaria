@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import InputsMDF from '../components/InputsMDF';
-import ResultMDF from '../components/ResultMDF';
+import Aside from '../components/Aside';
+import Form from '../components/Form';
+import Results from '../components/Results'
+
+import { Container } from '../styles/Home-styles';
 
 type inputValuesMDFProps = {
   width: number;
@@ -90,35 +93,21 @@ export default function Home() {
   }
 
   return (
-    <div>
-
+    <Container>
       <h1>Cálculos</h1>
-      <br />
 
-      <button type="button" onClick={() => handleAddComponentInput('mdf')}>+ MDF</button>
-
-      <form onSubmit={handleSubmit}>
-        {
-          componentInputList.map((input) => {
-            switch (input.type) {
-              case 'mdf':
-                return <InputsMDF 
-                        key={input.id} 
-                        id={input.id} 
-                        handleRemoveComponentInput={handleRemoveComponentInput} 
-                      />
-                break;
-            }
-
-          })
-        }
-        <button type="submit">Calcular</button>
-      </form>
-
-      <h1>Resultado</h1>
-
-      {inputsMDFResult && <ResultMDF data={inputsMDFResult}/>}
-      
-    </div>
+      <main>
+        <Aside 
+          handleAddComponentInput={handleAddComponentInput}
+        />   
+        <section>
+          <Form 
+            onSubmit={handleSubmit} 
+            componentInputList={componentInputList} 
+            />
+          <Results />
+        </section>
+      </main>
+    </Container>
   )
 }

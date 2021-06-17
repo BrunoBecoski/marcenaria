@@ -4,17 +4,17 @@ import { Container } from './styles'
 
 type InputsMDFProps = {
   id: number;
-  handleRemoveComponentInput: (id: number) => void;
+  // handleRemoveComponentInput: (id: number) => void;
 }
 
-export default function InputsMDF({ id ,handleRemoveComponentInput }: InputsMDFProps) {
+export default function InputsMDF({ id  }: InputsMDFProps) {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [thickness, setThickness] = useState('15mm');
 
-  function handleRemoveInput() {
-    handleRemoveComponentInput(id);
-  }
+  // function handleRemoveInput() {
+  //   handleRemoveComponentInput(id);
+  // }
 
   return (
     <Container>
@@ -53,7 +53,7 @@ export default function InputsMDF({ id ,handleRemoveComponentInput }: InputsMDFP
         </select>
       </label>
 
-      <button type="button" onClick={handleRemoveInput}>-</button>
+      {/* <button type="button" onClick={handleRemoveInput}>-</button> */}
     </Container>
   )
 }
