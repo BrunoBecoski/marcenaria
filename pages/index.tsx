@@ -94,17 +94,19 @@ export default function Home() {
 
   return (
     <Container>
-      <h1>Cálculos</h1>
-
       <main>
+
         <Aside 
           handleAddComponentInput={handleAddComponentInput}
         />   
+
         <section>
+          <h2>Formulário</h2>
           <Form 
             onSubmit={handleSubmit} 
             componentInputList={componentInputList} 
             />
+          <h2>Resultado</h2>
           <Results />
         </section>
       </main>

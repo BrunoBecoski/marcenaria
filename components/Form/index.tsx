@@ -15,8 +15,7 @@ type FormProps = {
 export default function Form({ onSubmit, componentInputList}: FormProps) {
   return (  
     <Container onSubmit={onSubmit}>
-      <h1>Formulário</h1>
-        {
+        {/* {
           componentInputList.map((input) => {
             switch (input.type) {
               case 'mdf':
@@ -29,7 +28,11 @@ export default function Form({ onSubmit, componentInputList}: FormProps) {
             }
 
           })
-        }
+        } */}
+
+        <InputsMDF />
+        <InputsMDF />
+        <InputsMDF />
 
       <button type="submit">Calcular</button>
 

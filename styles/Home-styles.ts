@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 5px solid blue;
-
   main {
     display: flex;
+    padding: 1rem;
+
+    aside {
+      margin-right: 1rem;
+      width: 10rem;
+      height: calc(100vh - 2rem);
+    }
     
     section {
+      flex: 1;
       display: flex;
-      border: 5px solid green;
       flex-direction: column;
     }
   }

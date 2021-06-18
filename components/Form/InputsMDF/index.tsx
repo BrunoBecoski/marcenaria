@@ -18,42 +18,49 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
 
   return (
     <Container>
-      <label htmlFor="width">
-        Largura: 
-        <input 
-          id="width" 
-          type="number" 
-          value={width} 
-          onChange={(event) => setWidth(Number(event.target.value))} 
-        />
-      </label>
+      <header>
+        <h3>Mdf</h3>
+        <button type="button" >-</button>
+      </header>
 
-      <label htmlFor="height">
-        Altura: 
-        <input 
-          id="height" 
-          type="number" 
-          value={height} 
-          onChange={(event) => setHeight(Number(event.target.value))} 
-        />
-      </label>
+      <main>
+        <div>
+          <label htmlFor="width">Largura:</label>
+          <input 
+            id="width" 
+            type="number" 
+            value={width} 
+            onChange={(event) => setWidth(Number(event.target.value))} 
+            />
+        </div>
 
-      <label htmlFor="thickness">
-        Espessura: 
-        <select 
-          id="thickness" 
-          value={thickness} 
-          onChange={(event) => setThickness(event.target.value)}
-        >
-          <option value="3mm" >3mm</option>
-          <option value="6mm" >6mm</option>
-          <option value="9mm" >9mm</option>
-          <option value="12mm" >12mm</option>
-          <option value="15mm" >15mm</option>
-        </select>
-      </label>
+        <div>
+          <label htmlFor="height">Altura:</label>
+          <input 
+            id="height" 
+            type="number" 
+            value={height} 
+            onChange={(event) => setHeight(Number(event.target.value))} 
+            />
+        </div>
 
-      {/* <button type="button" onClick={handleRemoveInput}>-</button> */}
+        <div>
+
+        <label htmlFor="thickness">Espessura:</label>
+          <select 
+            id="thickness" 
+            value={thickness} 
+            onChange={(event) => setThickness(event.target.value)}
+            >
+            <option value="3mm" >3mm</option>
+            <option value="6mm" >6mm</option>
+            <option value="9mm" >9mm</option>
+            <option value="12mm" >12mm</option>
+            <option value="15mm" >15mm</option>
+          </select>
+        </div>
+      </main>
+
     </Container>
   )
 }
