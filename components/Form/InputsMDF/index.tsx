@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Container } from './styles'
+import { Container, Header, Main } from './styles'
 
 type InputsMDFProps = {
   id: number;
@@ -18,12 +18,12 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
 
   return (
     <Container>
-      <header>
+      <Header>
         <h3>Mdf</h3>
-        <button type="button" >-</button>
-      </header>
+        <button type="button" >X</button>
+      </Header>
 
-      <main>
+      <Main>
         <div>
           <label htmlFor="width">Largura:</label>
           <input 
@@ -59,7 +59,7 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
             <option value="15mm" >15mm</option>
           </select>
         </div>
-      </main>
+      </Main>
 
     </Container>
   )
