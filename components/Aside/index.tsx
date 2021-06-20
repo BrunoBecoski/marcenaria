@@ -5,7 +5,10 @@ import { Container } from './styles';
 export default function Aside() {
   return(
     <Container>
-      <Buttons />
+      <h2>Adicionar</h2>
+      <div>
+        <Buttons />
+      </div>
     </Container>
   )
 }

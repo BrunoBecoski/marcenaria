@@ -10,6 +10,8 @@ export const GlobalStyle = createGlobalStyle`
   :root { 
     --primary-color: #BE1621;
     --font-color: #3C3C3B;
+
+    --mdf-color: #38A169;
   }
   
   * {

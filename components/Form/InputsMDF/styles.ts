@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   padding: .25rem;
   margin-bottom: 1rem;
-  border: 5px double var(--primary-color);
+  border: 3px solid var(--mdf-color);
 
   background-color: whitesmoke;
 `;
