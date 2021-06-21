@@ -105,6 +105,7 @@ export default function Home() {
           <Form 
             onSubmit={handleSubmit} 
             componentInputList={componentInputList} 
+            handleRemoveComponentInput={handleRemoveComponentInput}
             />
           <h2>Resultado</h2>
           <Results />
