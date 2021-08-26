@@ -17,6 +17,8 @@ type FormProps = {
 export default function Form({ onSubmit, componentInputList, handleRemoveComponentInput}: FormProps) {
   const value = useInputBox();
 
+  console.log(value);
+
   return (  
     <Container onSubmit={onSubmit}>
       <h6>{value}</h6>
