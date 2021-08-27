@@ -4,12 +4,15 @@ type InputBoxProviderProps = {
   children: ReactNode;
 }
 
+
+
 const InputBoxContext = createContext({});
 
 export function InputBoxProvider({ children }: InputBoxProviderProps) {
 
+
   return (
-    <InputBoxContext.Provider value={'valor'}>
+    <InputBoxContext.Provider value={'test'}>
       {children}
     </InputBoxContext.Provider>
   );

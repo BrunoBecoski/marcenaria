@@ -12,14 +12,6 @@ type inputValuesMDFProps = {
   thickness: string;
 }
 
-type inputsMDFResultProps = {
-  total3: number;
-  total6: number;
-  total9: number;
-  total12: number;
-  total15: number;
-}
-
 type inputListProps = {
   id: number;
   type: 'mdf';
@@ -28,7 +20,6 @@ type inputListProps = {
 export default function Home() {
   const [keyComponentInput, setKeyComponentInput] = useState(0);
   const [componentInputList, setComponentInputList] = useState<inputListProps[]>([]);
-  const [inputsMDFResult, setInputsMDFResult] = useState<inputsMDFResultProps>();
   
   function handleAddComponentInput(type: 'mdf') {
     setComponentInputList([...componentInputList, { id: keyComponentInput, type: type }]);

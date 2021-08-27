@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useInputBox } from '../../contexts/InputBoxContext';
 import InputsMDF from './InputsMDF';
 
@@ -14,7 +15,17 @@ type FormProps = {
   handleRemoveComponentInput: (id: number) => void;
 }
 
+type inputsMDFResultProps = {
+  total3: number;
+  total6: number;
+  total9: number;
+  total12: number;
+  total15: number;
+}
+
 export default function Form({ onSubmit, componentInputList, handleRemoveComponentInput}: FormProps) {
+  const [inputsMDFResult, setInputsMDFResult] = useState<inputsMDFResultProps>();
+
   const value = useInputBox();
 
   console.log(value);
