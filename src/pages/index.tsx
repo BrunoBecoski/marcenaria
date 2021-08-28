@@ -6,12 +6,6 @@ import Results from '../components/Results'
 
 import { Container } from '../styles/Home-styles';
 
-type inputValuesMDFProps = {
-  width: number;
-  height: number;
-  thickness: string;
-}
-
 type inputListProps = {
   id: number;
   type: 'mdf';
@@ -31,58 +25,6 @@ export default function Home() {
     setComponentInputList(newComponentInputList);
   }
     
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-
-    let inputValuesMDF: inputValuesMDFProps[] = [];
-  
-    if(componentInputList.length === 1) {
-      const inputValue = {
-        width: event.target.width.value,
-        height: event.target.height.value,
-        thickness: event.target.thickness.value
-      }
-      inputValuesMDF.push(inputValue)
-    } else {
-      for (let index = 0; index < componentInputList.length; index++) {
-        const inputValue = {
-          width: event.target.width[index].value,
-          height: event.target.height[index].value,
-          thickness: event.target.thickness[index].value
-        }
-        inputValuesMDF.push(inputValue)
-      }
-    }
-
-    setInputsMDFResult(inputValuesMDF.reduce((acc, input) => {
-      switch(input.thickness) {
-        case '3mm':
-          acc.total3 += input.height * input.width;
-          break;
-        case '6mm':
-          acc.total6 += input.height * input.width;
-          break;
-        case '9mm':
-          acc.total9 += input.height * input.width;
-          break;
-          case '12mm':
-          acc.total12 += input.height * input.width;
-          break;
-        case '15mm':
-          acc.total15 += input.height * input.width;
-          break;
-      }
-  
-      return acc;
-    }, {
-      total3: 0,
-      total6: 0,
-      total9: 0,
-      total12: 0,
-      total15: 0,
-    }));
-  }
-
   return (
     <Container>
       <main>
@@ -94,7 +36,6 @@ export default function Home() {
         <section>
           <h2>Formulário</h2>
           <Form 
-            onSubmit={handleSubmit} 
             componentInputList={componentInputList} 
             handleRemoveComponentInput={handleRemoveComponentInput}
             />

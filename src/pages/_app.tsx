@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 
 import { InputBoxProvider } from '../contexts/InputBoxContext';
+import { FormResultProvider } from '../contexts/FormResultContext';
 
 import { GlobalStyle } from '../styles/global';
 
@@ -9,7 +10,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <GlobalStyle />
       <InputBoxProvider >
-        <Component {...pageProps} />
+        <FormResultProvider>
+          <Component {...pageProps} />
+        </FormResultProvider>
       </InputBoxProvider>
     </>
   )
