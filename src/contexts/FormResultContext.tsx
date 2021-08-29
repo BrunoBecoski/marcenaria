@@ -12,13 +12,21 @@ type inputsMDFResultProps = {
   total15: number;
 }
 
-const FormResultContext = createContext({});
+type FormContextData = {
+  inputsMDFResult: inputsMDFResultProps;
+  setInputsMDFResult: (data: inputsMDFResultProps) => void;
+}
+
+const FormResultContext = createContext({} as FormContextData);
 
 export function FormResultProvider({ children }: FormResultProviderProps) {
-  const [inputsMDFResult, setInputsMDFResult] = useState<inputsMDFResultProps[]>([]);
+  const [inputsMDFResult, setInputsMDFResult] = useState({} as inputsMDFResultProps);
 
   return (
-    <FormResultContext.Provider value={{inputsMDFResult, setInputsMDFResult}}>
+    <FormResultContext.Provider value={{
+      inputsMDFResult, 
+      setInputsMDFResult
+    }}>
       {children}
     </FormResultContext.Provider>
   );
