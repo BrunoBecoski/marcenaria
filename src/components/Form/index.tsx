@@ -25,6 +25,16 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
+    const dadosDoForm = new FormData(event.target);
+
+    console.log(dadosDoForm);
+
+    console.log('=============')
+    console.log(dadosDoForm.get('width'));
+    console.log(dadosDoForm.get('height'));
+    console.log(dadosDoForm.get('thickness'));
+    console.log('=============')
+
     let inputValuesMDF: inputValuesMDFProps[] = [];
   
     if(componentInputList.length === 1) {

@@ -29,6 +29,7 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
           <input 
             id="width" 
             type="number" 
+            name="width"
             value={width} 
             onChange={(event) => setWidth(Number(event.target.value))} 
             />
@@ -39,6 +40,7 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
           <input 
             id="height" 
             type="number" 
+            name="height"
             value={height} 
             onChange={(event) => setHeight(Number(event.target.value))} 
             />
@@ -49,6 +51,7 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
         <label htmlFor="thickness">Espessura:</label>
           <select 
             id="thickness" 
+            name="thickness"
             value={thickness} 
             onChange={(event) => setThickness(event.target.value)}
             >
