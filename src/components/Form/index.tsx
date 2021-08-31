@@ -16,24 +16,14 @@ type FormProps = {
 type inputValuesMDFProps = {
   width: number;
   height: number;
-  thickness: string;
+  thickness: '3mm' | '6mm' | '9mm' | '12mm' | '15mm';
 }
 
 export default function Form({ componentInputList, handleRemoveComponentInput}: FormProps) {
-  const { setInputsMDFResult }  = useFormResult();
+  const { setInputsMDFValues }  = useFormResult();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
-    const dadosDoForm = new FormData(event.target);
-
-    console.log(dadosDoForm);
-
-    console.log('=============')
-    console.log(dadosDoForm.get('width'));
-    console.log(dadosDoForm.get('height'));
-    console.log(dadosDoForm.get('thickness'));
-    console.log('=============')
 
     let inputValuesMDF: inputValuesMDFProps[] = [];
   
@@ -55,33 +45,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
       }
     }
 
-    setInputsMDFResult(inputValuesMDF.reduce((acc, input) => {
-      switch(input.thickness) {
-        case '3mm':
-          acc.total3 += input.height * input.width;
-          break;
-        case '6mm':
-          acc.total6 += input.height * input.width;
-          break;
-        case '9mm':
-          acc.total9 += input.height * input.width;
-          break;
-          case '12mm':
-          acc.total12 += input.height * input.width;
-          break;
-        case '15mm':
-          acc.total15 += input.height * input.width;
-          break;
-      }
-  
-      return acc;
-    }, {
-      total3: 0,
-      total6: 0,
-      total9: 0,
-      total12: 0,
-      total15: 0,
-    }));
+    setInputsMDFValues(inputValuesMDF);
   }
 
   return (  

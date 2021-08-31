@@ -4,28 +4,26 @@ type FormResultProviderProps = {
   children: ReactNode;
 }
 
-type inputsMDFResultProps = {
-  total3: number;
-  total6: number;
-  total9: number;
-  total12: number;
-  total15: number;
+type inputsMDFValuesProps = {
+  width: number;  
+  height: number;
+  thickness: '3mm' | '6mm' | '9mm' | '12mm' | '15mm';
 }
 
 type FormContextData = {
-  inputsMDFResult: inputsMDFResultProps;
-  setInputsMDFResult: (data: inputsMDFResultProps) => void;
+  inputsMDFValues: inputsMDFValuesProps;
+  setInputsMDFValues: (data: inputsMDFValuesProps) => void;
 }
 
 const FormResultContext = createContext({} as FormContextData);
 
 export function FormResultProvider({ children }: FormResultProviderProps) {
-  const [inputsMDFResult, setInputsMDFResult] = useState({} as inputsMDFResultProps);
+  const [inputsMDFValues, setInputsMDFValues] = useState<inputsMDFValuesProps[]>([]);
 
   return (
     <FormResultContext.Provider value={{
-      inputsMDFResult, 
-      setInputsMDFResult
+      inputsMDFValues, 
+      setInputsMDFValues
     }}>
       {children}
     </FormResultContext.Provider>
