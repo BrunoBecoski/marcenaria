@@ -19,8 +19,6 @@ export function ResultMDF() {
   useEffect(() => {
     setInputsMDFResult(inputsMDFValues.reduce((acc, input) => {
       switch(input.thickness) {
-        case undefined:
-          break;
           case '3mm':
           acc.total3 += input.height * input.width;
           break;

@@ -11,8 +11,8 @@ type inputsMDFValuesProps = {
 }
 
 type FormContextData = {
-  inputsMDFValues: inputsMDFValuesProps;
-  setInputsMDFValues: (data: inputsMDFValuesProps) => void;
+  inputsMDFValues: inputsMDFValuesProps[];
+  setInputsMDFValues: (data: inputsMDFValuesProps[]) => void;
 }
 
 const FormResultContext = createContext({} as FormContextData);
