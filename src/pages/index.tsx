@@ -4,7 +4,8 @@ import { FormResultProvider } from '../contexts/FormResultContext';
 
 import Aside from '../components/Aside';
 import Form from '../components/Form';
-import Results from '../components/Results'
+import Results from '../components/Results';
+import Price from '../components/Price';
 
 import { Container } from '../styles/Home-styles';
 
@@ -47,6 +48,9 @@ export default function Home() {
             <Results />
           </section>
           </FormResultProvider>
+
+
+          <Price />
       </main>
     </Container>
   )
