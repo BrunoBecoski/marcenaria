@@ -1,6 +1,27 @@
 import { Container } from './styles';
 
+import { FormMdfPrice } from './FormMdfPrice';
+
 export default function Price() {
+
+  function showLiInputs(id: string) {
+    const allLi = ['mdf3', 'mdf6', 'mdf9', 'mdf12', 'mdf15'];
+    const allLiHidden = allLi.filter((liId) => liId !== id);
+
+    if(id === 'mdf0') {
+      allLi.forEach((liId) => {
+        document.getElementById(liId).hidden = true;
+      });
+    } else {
+      const liClick = document.getElementById(id);
+      liClick.hidden = !liClick.hidden;
+      
+
+      allLiHidden.forEach((liId) => {
+        document.getElementById(liId).hidden = true;
+      });
+    }
+  } 
 
   return (
     <Container>
@@ -12,165 +33,37 @@ export default function Price() {
             <button onClick={() => {
               const ul = document.getElementById('mdf');  
               ul.hidden = !ul.hidden;
+              showLiInputs('mdf0');
             }}>
               MDF
             </button>
             
             <ul id="mdf" hidden>
-              <li>
-                <button
-                  onClick={() => {
-                    const li3 = document.getElementById('mdf3');
-                    const li6 = document.getElementById('mdf6');
-                    const li9 = document.getElementById('mdf9');
-                    const li12 = document.getElementById('mdf12');
-                    const li15 = document.getElementById('mdf15');
 
-                    li3.hidden = !li3.hidden;
+              <FormMdfPrice 
+                id="3"
+                showLiInputs={showLiInputs}
+              />
 
-                    li6.hidden = true;
-                    li9.hidden = true;
-                    li12.hidden = true;
-                    li15.hidden = true;
-                  }}
-                >
-                  3mm
-                </button>
-                <div className="mdf" id="mdf3" hidden>
-                  <label>
-                    Valor
-                    <input />
-                  </label>
-                  <label>
-                    cm²
-                    <input />
-                  </label>
-                </div>
-              </li>
+              <FormMdfPrice 
+                id="6"
+                showLiInputs={showLiInputs}
+              />
 
-              <li>
-                <button
-                  onClick={() => {
-                    const li3 = document.getElementById('mdf3');
-                    const li6 = document.getElementById('mdf6');
-                    const li9 = document.getElementById('mdf9');
-                    const li12 = document.getElementById('mdf12');
-                    const li15 = document.getElementById('mdf15');
+              <FormMdfPrice 
+                id="9"
+                showLiInputs={showLiInputs}
+              />
 
-                    li6.hidden = !li6.hidden;
-
-                    li3.hidden = true;
-                    li9.hidden = true;
-                    li12.hidden = true;
-                    li15.hidden = true;
-                  }}
-                >
-                  6mm
-                </button>
-                <div className="mdf" id="mdf6" hidden>
-                  <label>
-                    Valor
-                    <input />
-                  </label>
-                  <label>
-                    cm²
-                    <input />
-                  </label>
-                </div>
-              </li>
-
-              <li>
-                <button
-                  onClick={() => {
-                    const li3 = document.getElementById('mdf3');
-                    const li6 = document.getElementById('mdf6');
-                    const li9 = document.getElementById('mdf9');
-                    const li12 = document.getElementById('mdf12');
-                    const li15 = document.getElementById('mdf15');
-
-                    li9.hidden = !li9.hidden;
-
-                    li3.hidden = true;
-                    li6.hidden = true;
-                    li12.hidden = true;
-                    li15.hidden = true;
-                  }}
-                >
-                  9mm
-                </button>
-                <div className="mdf" id="mdf9" hidden>
-                  <label>
-                    Valor
-                    <input />
-                  </label>
-                  <label>
-                    cm²
-                    <input />
-                  </label>
-                </div>
-              </li>
-
-              <li>
-                <button
-                  onClick={() => {
-                    const li3 = document.getElementById('mdf3');
-                    const li6 = document.getElementById('mdf6');
-                    const li9 = document.getElementById('mdf9');
-                    const li12 = document.getElementById('mdf12');
-                    const li15 = document.getElementById('mdf15');
-
-                    li12.hidden = !li12.hidden;
-
-                    li3.hidden = true;
-                    li6.hidden = true;
-                    li9.hidden = true;
-                    li15.hidden = true;
-                  }}
-                >
-                  12mm
-                </button>
-                <div className="mdf" id="mdf12" hidden>
-                  <label>
-                    Valor
-                    <input />
-                  </label>
-                  <label>
-                    cm²
-                    <input />
-                  </label>
-                </div>
-              </li>
-
-              <li>
-                <button
-                  onClick={() => {
-                    const li3 = document.getElementById('mdf3');
-                    const li6 = document.getElementById('mdf6');
-                    const li9 = document.getElementById('mdf9');
-                    const li12 = document.getElementById('mdf12');
-                    const li15 = document.getElementById('mdf15');
-
-                    li15.hidden = !li15.hidden;
-
-                    li3.hidden = true;
-                    li6.hidden = true;
-                    li9.hidden = true;
-                    li12.hidden = true;
-                  }}
-                >
-                  15mm
-                </button>
-                <div className="mdf" id="mdf15" hidden>
-                  <label>
-                    Valor
-                    <input />
-                  </label>
-                  <label>
-                    cm²
-                    <input />
-                  </label>
-                </div>
-              </li>
+              <FormMdfPrice 
+                id="12"
+                showLiInputs={showLiInputs}
+              />
+                     
+              <FormMdfPrice 
+                id="15"
+                showLiInputs={showLiInputs}
+              />
 
             </ul>
           </div>

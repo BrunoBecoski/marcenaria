@@ -6,10 +6,17 @@ export const Container = styled.div`
   background: #fff;
   margin-left: 10px;
   padding: 12px;
+  width: 150px;
 
-  .mdf {
-    label {
-      display: flex;
-    }
+  li {
+    margin-top: 8px;
+  }
+
+  h2 {
+    margin-bottom: 14px;
+  }
+
+  ul {
+    margin-left: 10px;
   }
 `;
