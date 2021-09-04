@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { FormResultProvider } from '../contexts/FormResultContext';
-
+import { PriceProvider } from '../contexts/PriceContext';
+ 
 import Aside from '../components/Aside';
 import Form from '../components/Form';
 import Results from '../components/Results';
@@ -36,21 +37,23 @@ export default function Home() {
           handleAddComponentInput={handleAddComponentInput}
           />   
 
-          <FormResultProvider>
-          <section>
-            <h2>Formulário</h2>
+          <PriceProvider>
+            <FormResultProvider>
+              <section>
+                <h2>Formulário</h2>
 
-            <Form 
-              componentInputList={componentInputList} 
-              handleRemoveComponentInput={handleRemoveComponentInput}
-            />
-            <h2>Resultado</h2>
-            <Results />
-          </section>
-          </FormResultProvider>
+                <Form 
+                  componentInputList={componentInputList} 
+                  handleRemoveComponentInput={handleRemoveComponentInput}
+                />
+                <h2>Resultado</h2>
 
+                <Results />
+              </section>
+            </FormResultProvider>
+            <Price />
 
-          <Price />
+          </PriceProvider>
       </main>
     </Container>
   )

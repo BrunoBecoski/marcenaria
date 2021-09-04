@@ -1,6 +1,6 @@
-import { Container } from './styles';
-
 import { FormMdfPrice } from './FormMdfPrice';
+
+import { Container } from './styles';
 
 export default function Price() {
 
@@ -41,27 +41,27 @@ export default function Price() {
             <ul id="mdf" hidden>
 
               <FormMdfPrice 
-                id="3"
+                id={3}
                 showLiInputs={showLiInputs}
               />
 
               <FormMdfPrice 
-                id="6"
+                id={6}
                 showLiInputs={showLiInputs}
               />
 
               <FormMdfPrice 
-                id="9"
+                id={9}
                 showLiInputs={showLiInputs}
               />
 
               <FormMdfPrice 
-                id="12"
+                id={12}
                 showLiInputs={showLiInputs}
               />
                      
               <FormMdfPrice 
-                id="15"
+                id={15}
                 showLiInputs={showLiInputs}
               />
 

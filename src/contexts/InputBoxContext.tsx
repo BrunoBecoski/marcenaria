@@ -7,8 +7,6 @@ type InputBoxProviderProps = {
 const InputBoxContext = createContext({});
 
 export function InputBoxProvider({ children }: InputBoxProviderProps) {
-
-
   return (
     <InputBoxContext.Provider value={'test'}>
       {children}
