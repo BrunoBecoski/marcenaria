@@ -13,6 +13,7 @@ type MdfPriceProps = {
 
 type PriceContextData  = {
   mdfPrice: MdfPriceProps[];
+  updatePrice: (data: MdfPriceProps) => void;
 }
 
 const PriceContext = createContext({} as PriceContextData);
@@ -50,10 +51,20 @@ export function PriceProvider({ children }: PriceContextProps) {
     }
   ]);
 
+  function updatePrice(data: MdfPriceProps) {
+    console.log('=======');
+    console.log(data.id);
+    console.log(data.value);
+    console.log(data.cm1);
+    console.log(data.cm2);
+    console.log('=======');
+  }
+
   return (
     <PriceContext.Provider
       value={{
-        mdfPrice
+        mdfPrice,
+        updatePrice
       }}
     >
       {children}
