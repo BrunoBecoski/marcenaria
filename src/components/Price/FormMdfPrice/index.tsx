@@ -11,7 +11,7 @@ export function FormMdfPrice({ id, showLiInputs }: formMdfPriceProps) {
 
   const { mdfPrice, updatePrice }  = usePrice();
 
-  const asd = mdfPrice.find((mdf) => mdf.id === id);
+  const mdfData = mdfPrice.find((mdf) => mdf.id === id);
 
   return (
     <Li>
@@ -23,9 +23,9 @@ export function FormMdfPrice({ id, showLiInputs }: formMdfPriceProps) {
           event.preventDefault(); 
           updatePrice({
             id,
-            value: new FormData(event.target).get('value'),
-            cm1: new FormData(event.target).get('cm1'),
-            cm2: new FormData(event.target).get('cm2'),
+            value: Number(new FormData(event.target).get('value')),
+            cm1: Number(new FormData(event.target).get('cm1')),
+            cm2: Number(new FormData(event.target).get('cm2')),
           });
         }} 
         id={`mdf${id}`} 
@@ -33,13 +33,13 @@ export function FormMdfPrice({ id, showLiInputs }: formMdfPriceProps) {
       >
         <label>
           Valor
-          <input name="value" defaultValue={asd?.value || 0}/>
+          <input name="value" type="number" defaultValue={mdfData?.value}/>
         </label>
 
         <label >
           cm²
-          <input name="cm1" defaultValue={asd?.cm1 || 0}/>
-          <input name="cm2" defaultValue={asd?.cm2 || 0}/>
+          <input step="any" name="cm1" type="number" defaultValue={mdfData?.cm1}/>
+          <input step="any" name="cm2" type="number" defaultValue={mdfData?.cm2}/>
         </label>
         <button type="submit">✓</button>
       </form>

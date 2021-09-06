@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const Li = styled.li`
   
-  div {
+  form {
     border: 3px double black;
     
-    input { 
-      width: 100%;
+    label {
+      input { 
+        width: 100%;
+      }
     }
 
     button {

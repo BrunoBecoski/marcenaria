@@ -52,12 +52,7 @@ export function PriceProvider({ children }: PriceContextProps) {
   ]);
 
   function updatePrice(data: MdfPriceProps) {
-    console.log('=======');
-    console.log(data.id);
-    console.log(data.value);
-    console.log(data.cm1);
-    console.log(data.cm2);
-    console.log('=======');
+    setMdfPrice([data, ...mdfPrice.filter((mdf) => mdf.id !== data.id)]);
   }
 
   return (
