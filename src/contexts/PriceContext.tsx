@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 type  PriceContextProps = {
   children: ReactNode;
@@ -50,6 +50,33 @@ export function PriceProvider({ children }: PriceContextProps) {
       value: 400,
     }
   ]);
+
+  const [] = useState([
+    {
+      id: 3,
+      price: 120
+    },
+    {
+      id: 6,
+      price: 120
+    },
+    {
+      id: 9,
+      price: 120
+    },
+    {
+      id: 12,
+      price: 120
+    },
+    {
+      id: 15,
+      price: 120
+    }
+  ]) ;
+
+  useEffect(() => {
+
+  }, [mdfPrice])
 
   function updatePrice(data: MdfPriceProps) {
     setMdfPrice([data, ...mdfPrice.filter((mdf) => mdf.id !== data.id)]);
