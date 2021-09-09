@@ -82,9 +82,25 @@ export function PriceProvider({ children }: PriceContextProps) {
     setMdfPrice([data, ...mdfPrice.filter((mdf) => mdf.id !== data.id)]);
   }
 
-  //  3.7125 = (2.75 * 1.35)
-  //  3.7125 = 200
-  //  1 = 0.0185625 
+  //  = = = = = = = = = = = = =
+  //
+  //  5.0325 = (2.75 * 1.83)
+  //
+  //  5.03     230
+  //        X    
+  //  0.1      4.75 
+  //
+  //  23 = (230 * 0.1) 
+  //  4.57 = (23 / 5.03)
+  //
+  //  = = = = = = = = = = = = =
+  //  
+  //  2025 = (45 * 45)  
+  //  
+  //  9331.94 = (2042 * 4.57)
+  //  
+  //  = = = = = = = = = = = = =
+
 
   return (
     <PriceContext.Provider
