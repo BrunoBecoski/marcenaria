@@ -5,15 +5,12 @@ export const Li = styled.li`
   form {
     border: 3px double black;
     
-    label {
-      input { 
-        width: 100%;
-      }
+    input { 
+      width: 100%;
+      margin: 8px 0;
     }
 
     button {
-      display: block;
-      margin-top: 8px;
       width: 100%;
     }
   }

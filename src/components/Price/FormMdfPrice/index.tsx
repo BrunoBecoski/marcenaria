@@ -24,8 +24,6 @@ export function FormMdfPrice({ id, showLiInputs }: formMdfPriceProps) {
           updatePrice({
             id,
             value: Number(new FormData(event.target).get('value')),
-            cm1: Number(new FormData(event.target).get('cm1')),
-            cm2: Number(new FormData(event.target).get('cm2')),
           });
         }} 
         id={`mdf${id}`} 
@@ -36,11 +34,6 @@ export function FormMdfPrice({ id, showLiInputs }: formMdfPriceProps) {
           <input name="value" type="number" defaultValue={mdfData?.value}/>
         </label>
 
-        <label >
-          cm²
-          <input step="any" name="cm1" type="number" defaultValue={mdfData?.cm1}/>
-          <input step="any" name="cm2" type="number" defaultValue={mdfData?.cm2}/>
-        </label>
         <button type="submit">✓</button>
       </form>
     </Li>
