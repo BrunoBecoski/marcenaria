@@ -24,16 +24,13 @@ export function PriceProvider({ children }: PriceContextProps) {
     },{
       id: 6,
       price: 250,
-    },
-    {
+    },{
       id: 9,
       price: 300,
-    },
-    {
+    },{
       id: 12,
       price: 350,
-    },
-    {
+    },{
       id: 15,
       price: 400,
     }

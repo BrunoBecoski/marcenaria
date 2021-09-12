@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Container } from './styles';
 
 import { useFormResult } from '../../../contexts/FormResultContext';
+
+import { Container } from './styles';
 
 type resultMdfProps = {
   total3: number;
@@ -54,35 +55,35 @@ export function ResultMDF() {
       {(inputsMdfResult.total3 > 0) &&
         <>
           <h3>3mm</h3>
-          <strong>{inputsMdfResult.total3}cm²</strong>
+          <p>{inputsMdfResult.total3}cm²</p>
         </>
       }
 
       {(inputsMdfResult.total6 > 0) &&
         <>
           <h3>6mm</h3>
-          <strong>{inputsMdfResult.total6}cm²</strong>
+          <p>{inputsMdfResult.total6}cm²</p>
         </> 
       }
 
       {(inputsMdfResult.total9 > 0) && 
         <>
           <h3>9mm</h3>
-          <strong>{inputsMdfResult.total9}cm²</strong>
+          <p>{inputsMdfResult.total9}cm²</p>
         </>
       }
 
       {(inputsMdfResult.total12 > 0) && 
         <>
           <h3>12mm</h3>
-          <strong>{inputsMdfResult.total12}cm²</strong>
+          <p>{inputsMdfResult.total12}cm²</p>
         </>
       }
 
       {(inputsMdfResult.total15 > 0) && 
         <>
           <h3>15mm</h3>
-          <strong>{inputsMdfResult.total15}cm²</strong>
+          <p>{inputsMdfResult.total15}cm²</p>
         </>
       } 
     </Container>
