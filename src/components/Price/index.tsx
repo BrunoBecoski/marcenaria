@@ -9,16 +9,25 @@ export default function Price() {
     const allLiHidden = allLi.filter((liId) => liId !== id);
 
     if(id === 'mdf0') {
+      // hide all li 
       allLi.forEach((liId) => {
-        document.getElementById(liId).hidden = true;
+        const li = document.getElementById(liId);
+        if (li) {
+          li.hidden = true;
+        }
       });
     } else {
+      // show li click hide others
       const liClick = document.getElementById(id);
-      liClick.hidden = !liClick.hidden;
-      
+      if(liClick) {
+        liClick.hidden = !liClick.hidden;
+      }      
 
       allLiHidden.forEach((liId) => {
-        document.getElementById(liId).hidden = true;
+        const liClick =  document.getElementById(liId);
+        if (liClick) {
+          liClick.hidden = true;
+        }
       });
     }
   } 
@@ -32,7 +41,9 @@ export default function Price() {
           <div>
             <button onClick={() => {
               const ul = document.getElementById('mdf');  
-              ul.hidden = !ul.hidden;
+              if(ul) {
+                ul.hidden = !ul.hidden;
+              }
               showLiInputs('mdf0');
             }}>
               MDF

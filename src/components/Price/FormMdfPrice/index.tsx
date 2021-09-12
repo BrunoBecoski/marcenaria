@@ -19,19 +19,19 @@ export function FormMdfPrice({ id, showLiInputs }: formMdfPriceProps) {
         {id}mm
       </button>
       <form 
+        id={`mdf${id}`} 
+        hidden
         onSubmit={(event) => {
           event.preventDefault(); 
           updatePrice({
             id,
-            value: Number(new FormData(event.target).get('value')),
+            price: Number(new FormData(event.target).get('value')),
           });
         }} 
-        id={`mdf${id}`} 
-        hidden
       >
         <label>
           Valor
-          <input name="value" type="number" defaultValue={mdfData?.value}/>
+          <input name="value" type="number" defaultValue={mdfData?.price}/>
         </label>
 
         <button type="submit">✓</button>

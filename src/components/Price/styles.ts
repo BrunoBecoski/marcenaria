@@ -18,5 +18,9 @@ export const Container = styled.div`
 
   ul {
     margin-left: 10px;
+  
+    ul button {
+      width: 100%;
+    }
   }
 `;

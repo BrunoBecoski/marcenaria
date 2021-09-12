@@ -6,7 +6,7 @@ type  PriceContextProps = {
 
 type MdfPriceProps = {
   id: number;
-  value: number;
+  price: number;
 }
 
 type PriceContextData  = {
@@ -20,51 +20,24 @@ export function PriceProvider({ children }: PriceContextProps) {
   const [mdfPrice, setMdfPrice] = useState([
     {
       id: 3,
-      value: 200,
+      price: 200,
     },{
       id: 6,
-      value: 250,
+      price: 250,
     },
     {
       id: 9,
-      value: 300,
+      price: 300,
     },
     {
       id: 12,
-      value: 350,
+      price: 350,
     },
     {
       id: 15,
-      value: 400,
+      price: 400,
     }
   ]);
-
-  const [] = useState([
-    {
-      id: 3,
-      price: 120
-    },
-    {
-      id: 6,
-      price: 120
-    },
-    {
-      id: 9,
-      price: 120
-    },
-    {
-      id: 12,
-      price: 120
-    },
-    {
-      id: 15,
-      price: 120
-    }
-  ]) ;
-
-  useEffect(() => {
-
-  }, [mdfPrice])
 
   function updatePrice(data: MdfPriceProps) {
     setMdfPrice([data, ...mdfPrice.filter((mdf) => mdf.id !== data.id)]);
