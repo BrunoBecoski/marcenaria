@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useFormResult } from '../../../contexts/FormResultContext';
+import { usePrice } from '../../../contexts/PriceContext';
 
 import { Container } from './styles';
 
@@ -16,6 +17,7 @@ export function ResultMDF() {
   const [inputsMdfResult, setInputsMDFResult] = useState({} as resultMdfProps);
 
   const { inputsMDFValues }  = useFormResult();
+  const { mdfPrice } = usePrice();
 
   useEffect(() => {
     setInputsMDFResult(inputsMDFValues.reduce((acc, input) => {
@@ -47,7 +49,7 @@ export function ResultMDF() {
       }));
 
   }, [inputsMDFValues])
-    
+
   return (
     <Container>
       <h2>Resultados do MDF</h2>
@@ -56,6 +58,15 @@ export function ResultMDF() {
         <>
           <h3>3mm</h3>
           <p>{inputsMdfResult.total3}cm²</p>
+          <br />
+          <p>{inputsMdfResult.total3}cm²</p>  
+          <p>{mdfPrice[0].price}</p>
+          <br />
+          {}
+          <h3>Não convertido (cm² X preço)</h3>
+          <p>{inputsMdfResult.total3 * mdfPrice[0].price}R$</p>
+          <h3>Convertido (m² X preço)</h3>
+          <p>{(inputsMdfResult.total3 / 10000) * mdfPrice[0].price}R$</p>
         </>
       }
 
