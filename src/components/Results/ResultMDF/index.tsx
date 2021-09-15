@@ -58,15 +58,7 @@ export function ResultMDF() {
         <>
           <h3>3mm</h3>
           <p>{inputsMdfResult.total3}cm²</p>
-          <br />
-          <p>{inputsMdfResult.total3}cm²</p>  
-          <p>{mdfPrice[0].price}</p>
-          <br />
-          {}
-          <h3>Não convertido (cm² X preço)</h3>
-          <p>{inputsMdfResult.total3 * mdfPrice[0].price}R$</p>
-          <h3>Convertido (m² X preço)</h3>
-          <p>{(inputsMdfResult.total3 / 10000) * mdfPrice[0].price}R$</p>
+          <p>R${inputsMdfResult.total3 * mdfPrice[0].price}</p>
         </>
       }
 
@@ -74,6 +66,7 @@ export function ResultMDF() {
         <>
           <h3>6mm</h3>
           <p>{inputsMdfResult.total6}cm²</p>
+          <p>R${inputsMdfResult.total6 * mdfPrice[1].price}</p>
         </> 
       }
 
@@ -81,6 +74,7 @@ export function ResultMDF() {
         <>
           <h3>9mm</h3>
           <p>{inputsMdfResult.total9}cm²</p>
+          <p>R${inputsMdfResult.total9 * mdfPrice[2].price}</p>
         </>
       }
 
@@ -88,6 +82,7 @@ export function ResultMDF() {
         <>
           <h3>12mm</h3>
           <p>{inputsMdfResult.total12}cm²</p>
+          <p>R${inputsMdfResult.total12 * mdfPrice[3].price}</p>
         </>
       }
 
@@ -95,6 +90,7 @@ export function ResultMDF() {
         <>
           <h3>15mm</h3>
           <p>{inputsMdfResult.total15}cm²</p>
+          <p>R${inputsMdfResult.total15 * mdfPrice[4].price}</p>
         </>
       } 
     </Container>
