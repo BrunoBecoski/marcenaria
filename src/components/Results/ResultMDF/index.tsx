@@ -50,6 +50,13 @@ export function ResultMDF() {
 
   }, [inputsMDFValues])
 
+
+  const mdf3 = mdfPrice.find((mdf) => mdf.id === 3);
+  const mdf6 = mdfPrice.find((mdf) => mdf.id === 6);
+  const mdf9 = mdfPrice.find((mdf) => mdf.id === 9);
+  const mdf12 = mdfPrice.find((mdf) => mdf.id === 12);
+  const mdf15 = mdfPrice.find((mdf) => mdf.id === 15);
+
   return (
     <Container>
       <h2>Resultados do MDF</h2>
@@ -58,7 +65,7 @@ export function ResultMDF() {
         <>
           <h3>3mm</h3>
           <p>{inputsMdfResult.total3}cm²</p>
-          <p>R${inputsMdfResult.total3 * mdfPrice[0].price}</p>
+          <p>R${inputsMdfResult.total3 * mdf3?.price}</p>
         </>
       }
 
@@ -66,7 +73,7 @@ export function ResultMDF() {
         <>
           <h3>6mm</h3>
           <p>{inputsMdfResult.total6}cm²</p>
-          <p>R${inputsMdfResult.total6 * mdfPrice[1].price}</p>
+          <p>R${inputsMdfResult.total6 * mdf6?.price}</p>
         </> 
       }
 
@@ -74,7 +81,7 @@ export function ResultMDF() {
         <>
           <h3>9mm</h3>
           <p>{inputsMdfResult.total9}cm²</p>
-          <p>R${inputsMdfResult.total9 * mdfPrice[2].price}</p>
+          <p>R${inputsMdfResult.total9 * mdf9?.price}</p>
         </>
       }
 
@@ -82,7 +89,7 @@ export function ResultMDF() {
         <>
           <h3>12mm</h3>
           <p>{inputsMdfResult.total12}cm²</p>
-          <p>R${inputsMdfResult.total12 * mdfPrice[3].price}</p>
+          <p>R${inputsMdfResult.total12 * mdf12?.price}</p>
         </>
       }
 
@@ -90,7 +97,7 @@ export function ResultMDF() {
         <>
           <h3>15mm</h3>
           <p>{inputsMdfResult.total15}cm²</p>
-          <p>R${inputsMdfResult.total15 * mdfPrice[4].price}</p>
+          <p>R${inputsMdfResult.total15 * mdf15?.price}</p>
         </>
       } 
     </Container>
