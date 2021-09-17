@@ -9,7 +9,7 @@ type InputsMDFProps = {
 
 export default function InputsMDF({ id  }: InputsMDFProps) {
   const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [length, setLength] = useState(0);
   const [thickness, setThickness] = useState('15mm');
 
   // function handleRemoveInput() {
@@ -19,7 +19,7 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
   return (
     <Container>
       <Header>
-        <h3>Mdf</h3>
+        <h3>Mdf - 15mm</h3>
         <button type="button" >X</button>
       </Header>
 
@@ -36,32 +36,16 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
         </div>
 
         <div>
-          <label htmlFor="height">Altura:</label>
+          <label htmlFor="length">Comprimento:</label>
           <input 
-            id="height" 
+            id="length" 
             type="number" 
-            name="height"
-            value={height} 
-            onChange={(event) => setHeight(Number(event.target.value))} 
+            name="length"
+            value={length} 
+            onChange={(event) => setLength(Number(event.target.value))} 
             />
         </div>
 
-        <div>
-
-        <label htmlFor="thickness">Espessura:</label>
-          <select 
-            id="thickness" 
-            name="thickness"
-            value={thickness} 
-            onChange={(event) => setThickness(event.target.value)}
-            >
-            <option value="3mm" >3mm</option>
-            <option value="6mm" >6mm</option>
-            <option value="9mm" >9mm</option>
-            <option value="12mm" >12mm</option>
-            <option value="15mm" >15mm</option>
-          </select>
-        </div>
       </Main>
 
     </Container>

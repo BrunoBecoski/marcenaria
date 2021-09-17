@@ -1,8 +1,7 @@
 import styled  from 'styled-components';
 
 export const Container = styled.div`
-  width: 10rem;
-  height: 7.5rem;
+  width: 12rem;
 
   display: flex;
   flex-direction: column;
@@ -58,12 +57,9 @@ export const Main = styled.main`
     justify-content: space-between;
 
     input {
-      margin-bottom: .25rem;
-    }
-
-    input, select {
       width: 4rem;
       padding: .1rem;
+      margin-bottom: .25rem;
     }
   }
 `;
