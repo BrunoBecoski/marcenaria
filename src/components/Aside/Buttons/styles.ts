@@ -14,5 +14,18 @@ export const Button = styled.button`
     box-shadow: none;
     transform: translateY(2px) translateX(2px);
   }
+`;
 
+export const Container = styled.div`
+
+
+  div {
+    
+    display: flex;
+
+    flex-direction: column;
+
+    background: green;
+    
+  }
 `;

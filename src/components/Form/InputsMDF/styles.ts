@@ -45,7 +45,6 @@ export const Header = styled.header`
       border-color: var(--primary-color);
     }
   }
-
 `;
 
 export const Main = styled.main`
