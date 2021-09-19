@@ -16,14 +16,14 @@ export default function Buttons({ handleAddComponentInput }: ButtonProps) {
   return (
     <>
     {/* <Button type="button" onClick={() => handleAddComponentInput('mdf')}>MDF</Button> */}
-    <button onClick={modalMdf}>MDF</button>
+    <Button onClick={modalMdf}>MDF</Button>
     <Container>
       <div style={{ display: isModalMdfOpen ? "flex" : "none" }}>
-        <button>3mm</button>
-        <button>6mm</button>
-        <button>9mm</button>
-        <button>12mm</button>
-        <button>15mm</button>
+        <button onClick={() => handleAddComponentInput('mdf')}>3mm</button>
+        <button onClick={() => handleAddComponentInput('mdf')}>6mm</button>
+        <button onClick={() => handleAddComponentInput('mdf')}>9mm</button>
+        <button onClick={() => handleAddComponentInput('mdf')}>12mm</button>
+        <button onClick={() => handleAddComponentInput('mdf')}>15mm</button>
       </div>
     </Container>
     </>
