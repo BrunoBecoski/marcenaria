@@ -7,6 +7,7 @@ import Aside from '../components/Aside';
 import Form from '../components/Form';
 import Results from '../components/Results';
 import Price from '../components/Price';
+import Mdf from '../components/Mdf';
 
 import { Container } from '../styles/Home-styles';
 
@@ -36,7 +37,7 @@ export default function Home() {
         <Aside 
           handleAddComponentInput={handleAddComponentInput}
           />   
-
+          <Mdf /> 
           <PriceProvider>
             <FormResultProvider>
               <section>
