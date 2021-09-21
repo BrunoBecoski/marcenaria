@@ -14,10 +14,3 @@ export const Button = styled.button`
     color: black;
   }
 `;
-
-export const Container = styled.div`
-  div {
-    display: flex;
-    flex-direction: column;   
-  }
-`;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { FormResultProvider } from '../contexts/FormResultContext';
 import { PriceProvider } from '../contexts/PriceContext';
+import { MdfProvider } from '../contexts/MdfContext';
  
 import Aside from '../components/Aside';
 import Form from '../components/Form';
@@ -34,27 +35,29 @@ export default function Home() {
     <Container>
       <main>
 
-        <Aside 
-          handleAddComponentInput={handleAddComponentInput}
-          />   
+        <MdfProvider>
+          <Aside 
+            handleAddComponentInput={handleAddComponentInput}
+            />   
           <Mdf /> 
-          <PriceProvider>
-            <FormResultProvider>
-              <section>
-                <h2>Formulário</h2>
+        </MdfProvider>
+        <PriceProvider>
+          <FormResultProvider>
+            <section>
+              <h2>Formulário</h2>
 
-                <Form 
-                  componentInputList={componentInputList} 
-                  handleRemoveComponentInput={handleRemoveComponentInput}
-                />
-                <h2>Resultado</h2>
+              <Form 
+                componentInputList={componentInputList} 
+                handleRemoveComponentInput={handleRemoveComponentInput}
+              />
+              <h2>Resultado</h2>
 
-                <Results />
-              </section>
-            </FormResultProvider>
-            <Price />
+              <Results />
+            </section>
+          </FormResultProvider>
+          <Price />
 
-          </PriceProvider>
+        </PriceProvider>
       </main>
     </Container>
   )
