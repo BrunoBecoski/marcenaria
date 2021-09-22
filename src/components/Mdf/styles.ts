@@ -7,7 +7,23 @@ export const Container = styled.div`
 
   padding: 10px;
 
-  h2 {
+  gap: 120px;
+
+  h2, h3 {
     color: white;
+  }
+
+  div {
+    border: 3px solid white;
+    padding: 8px;
+    margin: 16px 0;
+
+    h3 {
+      background-color: #3f3f3f;
+      width: 40%;
+      /* text-align: center; */
+      margin-top: -20px;
+      padding: 0 8px;
+    }
   }
 `;
