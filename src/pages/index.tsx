@@ -40,24 +40,24 @@ export default function Home() {
             handleAddComponentInput={handleAddComponentInput}
             />   
           <Mdf /> 
+          <PriceProvider>
+            <FormResultProvider>
+              <section>
+                <h2>Formulário</h2>
+
+                <Form 
+                  componentInputList={componentInputList} 
+                  handleRemoveComponentInput={handleRemoveComponentInput}
+                  />
+                <h2>Resultado</h2>
+
+                <Results />
+              </section>
+            </FormResultProvider>
+            <Price />
+
+          </PriceProvider>
         </MdfProvider>
-        <PriceProvider>
-          <FormResultProvider>
-            <section>
-              <h2>Formulário</h2>
-
-              <Form 
-                componentInputList={componentInputList} 
-                handleRemoveComponentInput={handleRemoveComponentInput}
-              />
-              <h2>Resultado</h2>
-
-              <Results />
-            </section>
-          </FormResultProvider>
-          <Price />
-
-        </PriceProvider>
       </main>
     </Container>
   )

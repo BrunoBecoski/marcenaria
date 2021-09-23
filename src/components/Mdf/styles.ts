@@ -13,17 +13,25 @@ export const Container = styled.div`
     color: white;
   }
 
-  div {
-    border: 3px solid white;
-    padding: 8px;
-    margin: 16px 0;
+  form {
+    div {
+      border: 3px solid white;
+      padding: 8px;
+      margin: 16px 0;
 
-    h3 {
-      background-color: #3f3f3f;
-      width: 40%;
-      /* text-align: center; */
-      margin-top: -20px;
-      padding: 0 8px;
+
+      label {
+        color: white;
+        margin: 8px;
+        font-weight: bold;      
+      }
+
+      h3 {
+        background-color: #3f3f3f;
+        width: 28%;
+        margin-top: -20px;
+        padding: 0 8px;
+      }
     }
   }
 `;
