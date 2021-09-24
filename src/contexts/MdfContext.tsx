@@ -12,7 +12,8 @@ type CreateMdfBoxProps = {
 type MdfContextData = {
   isMdfOpen: boolean;
   handleMdfOpen: () => void;
-  setCreateMdfBox: (data: CreateMdfBoxProps) => void; 
+  setCreateMdfBox: (data: CreateMdfBoxProps) => void;
+  createMdfBox: CreateMdfBoxProps; 
 }
 
 const MdfContext = createContext({} as MdfContextData);
@@ -26,7 +27,7 @@ export function MdfProvider({ children }: MdfProviderProps) {
   }
 
   return (
-    <MdfContext.Provider value={{ isMdfOpen, handleMdfOpen, setCreateMdfBox }}>
+    <MdfContext.Provider value={{ isMdfOpen, handleMdfOpen, setCreateMdfBox, createMdfBox }}>
       {children}
     </MdfContext.Provider>
   );

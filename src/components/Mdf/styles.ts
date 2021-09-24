@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: rgba(0, 0, 0, .5);
-  width: 500px;
-  height: 500px;
+  width: 380px;
+  height: 210px;
 
   padding: 10px;
 
@@ -26,9 +26,15 @@ export const Container = styled.div`
         font-weight: bold;      
       }
 
+      input {
+        background: #3f3f3f;
+        border: none;
+        color: white;
+      }
+
       h3 {
         background-color: #3f3f3f;
-        width: 28%;
+        width: 35%;
         margin-top: -20px;
         padding: 0 8px;
       }

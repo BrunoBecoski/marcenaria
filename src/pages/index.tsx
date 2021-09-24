@@ -54,7 +54,7 @@ export default function Home() {
                 <Results />
               </section>
             </FormResultProvider>
-            <Price />
+            {/* <Price /> */}
 
           </PriceProvider>
         </MdfProvider>

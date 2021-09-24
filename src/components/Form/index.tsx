@@ -1,4 +1,5 @@
 import { useFormResult } from '../../contexts/FormResultContext';
+import { useMdf } from '../../contexts/MdfContext';
 import InputsMDF from './InputsMDF';
 
 import { Container } from './styles';
@@ -21,6 +22,9 @@ type inputValuesMDFProps = {
 
 export default function Form({ componentInputList, handleRemoveComponentInput}: FormProps) {
   const { setInputsMDFValues }  = useFormResult();
+
+  const { createMdfBox } = useMdf();
+
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -48,22 +52,22 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
     setInputsMDFValues(inputValuesMDF);
   }
 
+  let list = [];
+
+  for (let index = 0; index < createMdfBox?.range; index++) {
+    list.push(`${createMdfBox.thick}_${index}`)
+  }
+
+  console.log(list)
+
   return (  
     <Container onSubmit={handleSubmit}>
-        {
-          componentInputList.map((input) => {
-            switch (input.type) {
-              case 'mdf':
-                return <InputsMDF 
-                        key={input.id} 
-                        id={input.id} 
-                        // handleRemoveComponentInput={handleRemoveComponentInput(input.id)} 
-                      />
-                break;
-            }
-
-          })
-        }
+      {list.map((item) => {
+        <InputsMDF 
+          key={item}
+          thick={createMdfBox.thick}
+        />
+      })}
       <button type="submit">Calcular</button>
 
     </Container>

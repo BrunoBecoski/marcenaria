@@ -56,9 +56,14 @@ export default function MdfP() {
           <div>
             <h3>Quantidade</h3>
             <label>
-              {rangeValue}
               <input 
-                name="amount" 
+                type="number" 
+                min="1" 
+                max="20"
+                value={rangeValue}
+                onChange={(e) => setRangeValue(Number(e.target.value))}
+              />
+              <input 
                 type="range" 
                 min="1" 
                 max="20"

@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { Container, Header, Main } from './styles'
 
 type InputsMDFProps = {
-  id: number;
+  thick: string;
   // handleRemoveComponentInput: (id: number) => void;
 }
 
-export default function InputsMDF({ id  }: InputsMDFProps) {
+export default function InputsMDF({ thick }: InputsMDFProps) {
   const [width, setWidth] = useState(0);
   const [length, setLength] = useState(0);
   const [thickness, setThickness] = useState('15mm');
@@ -16,10 +16,12 @@ export default function InputsMDF({ id  }: InputsMDFProps) {
   //   handleRemoveComponentInput(id);
   // }
 
+  console.log('inputMDF')
+
   return (
     <Container>
       <Header>
-        <h3>Mdf - 15mm</h3>
+        <h3>Mdf - {thick}</h3>
         <button type="button" >X</button>
       </Header>
 
