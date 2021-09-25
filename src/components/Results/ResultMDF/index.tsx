@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useFormResult } from '../../../contexts/FormResultContext';
-import { usePrice } from '../../../contexts/PriceContext';
-
 import { Container } from './styles';
 
 type resultMdfProps = {
@@ -16,46 +13,36 @@ type resultMdfProps = {
 export function ResultMDF() {
   const [inputsMdfResult, setInputsMDFResult] = useState({} as resultMdfProps);
 
-  const { inputsMDFValues }  = useFormResult();
-  const { mdfPrice } = usePrice();
-
-  useEffect(() => {
-    setInputsMDFResult(inputsMDFValues.reduce((acc, input) => {
-      switch(input.thickness) {
-          case '3mm':
-          acc.total3 += input.height * input.width;
-          break;
-          case '6mm':
-            acc.total6 += input.height * input.width;
-          break;
-          case '9mm':
-            acc.total9 += input.height * input.width;
-            break;
-          case '12mm':
-            acc.total12 += input.height * input.width;
-            break;
-            case '15mm':
-              acc.total15 += input.height * input.width;
-          break;
-      }
+  // useEffect(() => {
+  //   setInputsMDFResult(inputsMDFValues.reduce((acc, input) => {
+  //     switch(input.thickness) {
+  //         case '3mm':
+  //         acc.total3 += input.height * input.width;
+  //         break;
+  //         case '6mm':
+  //           acc.total6 += input.height * input.width;
+  //         break;
+  //         case '9mm':
+  //           acc.total9 += input.height * input.width;
+  //           break;
+  //         case '12mm':
+  //           acc.total12 += input.height * input.width;
+  //           break;
+  //           case '15mm':
+  //             acc.total15 += input.height * input.width;
+  //         break;
+  //     }
       
-        return acc;
-      }, {
-        total3: 0,
-        total6: 0,
-        total9: 0,
-        total12: 0,
-        total15: 0,
-      }));
+  //       return acc;
+  //     }, {
+  //       total3: 0,
+  //       total6: 0,
+  //       total9: 0,
+  //       total12: 0,
+  //       total15: 0,
+  //     }));
 
-  }, [inputsMDFValues])
-
-
-  const mdf3 = mdfPrice.find((mdf) => mdf.id === 3);
-  const mdf6 = mdfPrice.find((mdf) => mdf.id === 6);
-  const mdf9 = mdfPrice.find((mdf) => mdf.id === 9);
-  const mdf12 = mdfPrice.find((mdf) => mdf.id === 12);
-  const mdf15 = mdfPrice.find((mdf) => mdf.id === 15);
+  // }, [inputsMDFValues])
 
   return (
     <Container>

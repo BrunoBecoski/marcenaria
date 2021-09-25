@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 
-import { FormResultProvider } from '../contexts/FormResultContext';
-import { PriceProvider } from '../contexts/PriceContext';
 import { MdfProvider } from '../contexts/MdfContext';
  
 import Aside from '../components/Aside';
 import Form from '../components/Form';
 import Results from '../components/Results';
-import Price from '../components/Price';
-import Mdf from '../components/Mdf';
+import MdfConfig from '../components/MdfConfig';
 
 import { Container } from '../styles/Home-styles';
 
@@ -39,9 +36,7 @@ export default function Home() {
           <Aside 
             handleAddComponentInput={handleAddComponentInput}
             />   
-          <Mdf /> 
-          <PriceProvider>
-            <FormResultProvider>
+          <MdfConfig /> 
               <section>
                 <h2>Formulário</h2>
 
@@ -53,10 +48,7 @@ export default function Home() {
 
                 <Results />
               </section>
-            </FormResultProvider>
-            {/* <Price /> */}
 
-          </PriceProvider>
         </MdfProvider>
       </main>
     </Container>

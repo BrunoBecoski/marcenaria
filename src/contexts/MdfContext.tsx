@@ -20,7 +20,10 @@ const MdfContext = createContext({} as MdfContextData);
 
 export function MdfProvider({ children }: MdfProviderProps) {
   const [isMdfOpen, setIsMdfOpen] = useState(false);
-  const [createMdfBox, setCreateMdfBox] = useState<CreateMdfBoxProps>();
+  const [createMdfBox, setCreateMdfBox] = useState<CreateMdfBoxProps>({
+    thick: '0mm',
+    range: 0
+  });
 
   function handleMdfOpen() {
     setIsMdfOpen(!isMdfOpen)

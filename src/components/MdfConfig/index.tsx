@@ -4,7 +4,7 @@ import { useMdf } from '../../contexts/MdfContext';
 
 import { Container } from './styles';
 
-export default function MdfP() {
+export default function MdfConfig() {
   const { isMdfOpen, setCreateMdfBox } = useMdf();
 
   const [rangeValue, setRangeValue] = useState(1);

@@ -9,7 +9,7 @@ export const Container = styled.div`
 
   gap: 120px;
 
-  h2, h3 {
+  h2, h3, h4 {
     color: white;
   }
 
