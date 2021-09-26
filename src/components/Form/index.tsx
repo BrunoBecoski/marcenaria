@@ -58,18 +58,18 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
     list.push(`${createMdfBox.thick}_${index}`)
   }
 
-  console.log(list)
+  console.log('list: ' + list);
 
   return (  
     <Container onSubmit={handleSubmit}>
-      {list.map((item) => {
+      {list.map((item) => 
         <InputsMDF 
+          id={item}
           key={item}
           thick={createMdfBox.thick}
         />
-      })}
+      )}
       <button type="submit">Calcular</button>
-
     </Container>
   )
 }

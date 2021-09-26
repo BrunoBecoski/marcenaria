@@ -4,10 +4,11 @@ import { Container, Header, Main } from './styles'
 
 type InputsMDFProps = {
   thick: string;
+  id: string;
   // handleRemoveComponentInput: (id: number) => void;
 }
 
-export default function InputsMDF({ thick }: InputsMDFProps) {
+export default function InputsMDF({ thick, id }: InputsMDFProps) {
   const [width, setWidth] = useState(0);
   const [length, setLength] = useState(0);
   const [thickness, setThickness] = useState('15mm');
@@ -17,7 +18,7 @@ export default function InputsMDF({ thick }: InputsMDFProps) {
   // }
 
   return (
-    <Container>
+    <Container id={id}>
       <Header>
         <h3>Mdf - {thick}</h3>
         <button type="button" >X</button>
