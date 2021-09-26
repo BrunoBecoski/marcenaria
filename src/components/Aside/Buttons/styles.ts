@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
-  background: none;
+type ButtonProps = {
+  isMdfOpen: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+  background: ${(props) => (props.isMdfOpen ?  'white' : 'black')};
+  color: ${(props) => (props.isMdfOpen ?  'black' : 'white')};
 
   border: none;
-  color: white;
   font-weight: bold;
   width: 3rem;
   height: 2rem;

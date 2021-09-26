@@ -9,12 +9,12 @@ type ButtonProps = {
 }
 
 export default function Buttons({ handleAddComponentInput }: ButtonProps) {
-   const { handleMdfOpen } = useMdf();
+   const { handleMdfOpen, isMdfOpen } = useMdf();
 
   return (
     <>
       {/* <Button type="button" onClick={() => handleAddComponentInput('mdf')}>MDF</Button> */}
-      <Button onClick={handleMdfOpen}>MDF</Button>
+      <Button onClick={handleMdfOpen} isMdfOpen={isMdfOpen}>MDF</Button>
     </>
   );
 }
