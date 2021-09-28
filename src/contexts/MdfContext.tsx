@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 type MdfProviderProps = {
   children: ReactNode;
@@ -12,8 +12,7 @@ type CreateMdfBoxProps = {
 type MdfContextData = {
   isMdfOpen: boolean;
   handleMdfOpen: () => void;
-  setCreateMdfBox: (data: CreateMdfBoxProps) => void;
-  createMdfBox: CreateMdfBoxProps; 
+  handleAddNewMdfBox: (data: CreateMdfBoxProps) => void;
 }
 
 const MdfContext = createContext({} as MdfContextData);
@@ -29,8 +28,18 @@ export function MdfProvider({ children }: MdfProviderProps) {
     setIsMdfOpen(!isMdfOpen)
   }
 
+  let list = [];
+
+  for (let index = 0; index < createMdfBox?.range; index++) {
+    list.push(`${createMdfBox.thick}_${index}`)
+  }
+
+  function handleAddNewMdfBox({ thick, range }: CreateMdfBoxProps) {
+    setCreateMdfBox({thick, range});
+  }
+
   return (
-    <MdfContext.Provider value={{ isMdfOpen, handleMdfOpen, setCreateMdfBox, createMdfBox }}>
+    <MdfContext.Provider value={{ isMdfOpen, handleMdfOpen, handleAddNewMdfBox }}>
       {children}
     </MdfContext.Provider>
   );

@@ -5,16 +5,16 @@ import { useMdf } from '../../contexts/MdfContext';
 import { Container } from './styles';
 
 export default function MdfConfig() {
-  const { isMdfOpen, setCreateMdfBox } = useMdf();
+  const { isMdfOpen, handleAddNewMdfBox  } = useMdf();
 
   const [rangeValue, setRangeValue] = useState(1);
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    setCreateMdfBox({
+    handleAddNewMdfBox({
       thick: new FormData(event.target).get('thick'),
       range: rangeValue,
-    });
+    })
   }
 
   if(isMdfOpen) {
