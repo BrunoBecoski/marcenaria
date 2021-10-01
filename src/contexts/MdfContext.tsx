@@ -5,6 +5,11 @@ type MdfProviderProps = {
 }
 
 type CreateMdfBoxProps = {
+  id: string;
+  thick: string;
+}
+
+type AddNewMdfBoxProps = {
   thick: string;
   range: number;
 }
@@ -12,36 +17,37 @@ type CreateMdfBoxProps = {
 type MdfContextData = {
   isMdfOpen: boolean;
   handleMdfOpen: () => void;
-  handleAddNewMdfBox: (data: CreateMdfBoxProps) => void;
-  list: [string];
+  handleAddNewMdfBox: (data: AddNewMdfBoxProps) => void;
 }
 
 const MdfContext = createContext({} as MdfContextData);
 
 export function MdfProvider({ children }: MdfProviderProps) {
   const [isMdfOpen, setIsMdfOpen] = useState(false);
-  const [createMdfBox, setCreateMdfBox] = useState<CreateMdfBoxProps>({
-    thick: '0mm',
-    range: 0
-  });
+  const [createMdfBox, setCreateMdfBox] = useState();
 
   function handleMdfOpen() {
     setIsMdfOpen(!isMdfOpen)
   }
 
-  let list = ['test'];
+  let idMdfBox = 0;
 
-  for (let index = 0; index < createMdfBox?.range; index++) {
-    list.push(`${createMdfBox.thick}_${index}`)
+  
+  function handleAddNewMdfBox({ thick, range }: AddNewMdfBoxProps) {
+    let list = [];
+    for (let index = 0; index < range; index++) {
+      list.push({
+        id: `${thick}_${idMdfBox}`,
+        thick,
+      })
+      idMdfBox++;
+    }
+    setCreateMdfBox([...createMdfBox, ...list]);
   }
-
-  function handleAddNewMdfBox({ thick, range }: CreateMdfBoxProps) {
-    console.log('add')
-    setCreateMdfBox({thick, range});
-  }
+  console.log(createMdfBox);
 
   return (
-    <MdfContext.Provider value={{ isMdfOpen, handleMdfOpen, handleAddNewMdfBox, list }}>
+    <MdfContext.Provider value={{ isMdfOpen, handleMdfOpen, handleAddNewMdfBox }}>
       {children}
     </MdfContext.Provider>
   );

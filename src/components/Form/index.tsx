@@ -22,7 +22,7 @@ type inputValuesMDFProps = {
 
 export default function Form({ componentInputList, handleRemoveComponentInput}: FormProps) {
   const { setInputsMDFValues }  = useFormResult();
-  const { list } = useMdf();
+  // const { list } = useMdf();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -50,16 +50,17 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
     setInputsMDFValues(inputValuesMDF);
   }
 
-  console.log(list)
+  // console.log(list)
 
   return (  
     <Container onSubmit={handleSubmit}>
-      {list.map((item) => 
+      {/* {.map((item) => 
         <InputsMDF 
           id={item}
           key={item}
+          thick={item}
         />
-      )}
+      )} */}
       <button type="submit">Calcular</button>
     </Container>
   )
