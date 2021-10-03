@@ -54,26 +54,19 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
 
   return (  
     <Container onSubmit={handleSubmit}>
-      {createMdfBox.map((item) => 
+      {/* {createMdfBox.map((item) => 
         <InputsMDF 
           id={item}
           key={item}
           thick={item}
         />
-      )}
+      )} */}
 
-        <InputsMDF 
-          id={'test'}
-          key={'test'}
-          thick={'test'}
-        />  
-      
-
-        <InputsMDF 
-          id={createMdfBox[0].id}
-          key={createMdfBox[0].id}
-          thick={createMdfBox[0].thick}
-        />
+      <InputsMDF 
+        id={'test'}
+        key={'test'}
+        thick={'test'}
+      />  
 
       <button type="submit">Calcular</button>
     </Container>
