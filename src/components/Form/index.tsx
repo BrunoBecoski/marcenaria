@@ -24,50 +24,43 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
   const { setInputsMDFValues }  = useFormResult();
   const { createMdfBox } = useMdf();
 
-  function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
+  // function handleSubmit(event: React.FormEvent) {
+  //   event.preventDefault();
 
-    let inputValuesMDF: inputValuesMDFProps[] = [];
+  //   let inputValuesMDF: inputValuesMDFProps[] = [];
   
-    if(componentInputList.length === 1) {
-      const inputValue = {
-        width: event.target.width.value,
-        height: event.target.height.value,
-        thickness: event.target.thickness.value
-      }
-      inputValuesMDF.push(inputValue)
-    } else {
-      for (let index = 0; index < componentInputList.length; index++) {
-        const inputValue = {
-          width: event.target.width[index].value,
-          height: event.target.height[index].value,
-          thickness: event.target.thickness[index].value
-        }
-        inputValuesMDF.push(inputValue)
-      }
-    }
+  //   if(componentInputList.length === 1) {
+  //     const inputValue = {
+  //       width: event.target.width.value,
+  //       height: event.target.height.value,
+  //       thickness: event.target.thickness.value
+  //     }
+  //     inputValuesMDF.push(inputValue)
+  //   } else {
+  //     for (let index = 0; index < componentInputList.length; index++) {
+  //       const inputValue = {
+  //         width: event.target.width[index].value,
+  //         height: event.target.height[index].value,
+  //         thickness: event.target.thickness[index].value
+  //       }
+  //       inputValuesMDF.push(inputValue)
+  //     }
+  //   }
 
-    setInputsMDFValues(inputValuesMDF);
-  }
+  //   setInputsMDFValues(inputValuesMDF);
+  // }
 
   console.log(createMdfBox)
 
   return (  
-    <Container onSubmit={handleSubmit}>
-      {/* {createMdfBox.map((item) => 
+    <Container>
+      {createMdfBox.map((item) => 
         <InputsMDF 
-          id={item}
-          key={item}
-          thick={item}
+          id={item.id}
+          key={item.id}
+          thick={item.thick}
         />
-      )} */}
-
-      <InputsMDF 
-        id={'test'}
-        key={'test'}
-        thick={'test'}
-      />  
-
+      )}
       <button type="submit">Calcular</button>
     </Container>
   )

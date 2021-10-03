@@ -25,7 +25,7 @@ const MdfContext = createContext({} as MdfContextData);
 
 export function MdfProvider({ children }: MdfProviderProps) {
   const [isMdfOpen, setIsMdfOpen] = useState(false);
-  const [createMdfBox, setCreateMdfBox] = useState<CreateMdfBoxProps>();
+  const [createMdfBox, setCreateMdfBox] = useState<CreateMdfBoxProps>([]);
 
   function handleMdfOpen() {
     setIsMdfOpen(!isMdfOpen)
@@ -35,7 +35,7 @@ export function MdfProvider({ children }: MdfProviderProps) {
 
   
   function handleAddNewMdfBox({ thick, range }: AddNewMdfBoxProps) {
-    let list = [];
+    let list = createMdfBox;
     for (let index = 0; index < range; index++) {
       list.push({
         id: `${thick}_${idMdfBox}`,
@@ -43,6 +43,7 @@ export function MdfProvider({ children }: MdfProviderProps) {
       })
       idMdfBox++;
     }
+    console.log(list)
     setCreateMdfBox(list);
   }
 
