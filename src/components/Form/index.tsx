@@ -50,8 +50,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
   //   setInputsMDFValues(inputValuesMDF);
   // }
 
-  console.log(createMdfBox)
-
+console.log('render form')
   return (  
     <Container>
       {createMdfBox.map((item) => 
@@ -61,6 +60,13 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
           thick={item.thick}
         />
       )}
+
+        <InputsMDF 
+          id="id_test"
+          key="id_test"
+          thick="thick_test"
+        />
+
       <button type="submit">Calcular</button>
     </Container>
   )
