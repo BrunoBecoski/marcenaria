@@ -60,13 +60,6 @@ console.log('render form')
           thick={item.thick}
         />
       )}
-
-        <InputsMDF 
-          id="id_test"
-          key="id_test"
-          thick="thick_test"
-        />
-
       <button type="submit">Calcular</button>
     </Container>
   )
