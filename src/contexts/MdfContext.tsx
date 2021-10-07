@@ -43,7 +43,6 @@ export function MdfProvider({ children }: MdfProviderProps) {
       })
       idMdfBox++;
     }
-    console.log(list)
     setCreateMdfBox(list);
   }
 

@@ -50,7 +50,6 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
   //   setInputsMDFValues(inputValuesMDF);
   // }
 
-console.log('render form')
   return (  
     <Container>
       {createMdfBox.map((item) => 

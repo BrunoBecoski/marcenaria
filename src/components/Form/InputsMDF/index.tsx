@@ -17,8 +17,6 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
   //   handleRemoveComponentInput(id);
   // }
 
-  console.log('render')
-
   return (
     <Container id={id}>
       <Header>
