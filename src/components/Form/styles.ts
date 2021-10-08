@@ -5,4 +5,12 @@ export const Container = styled.form`
   border-radius: 8px;
   background-color: white;
   padding: 1rem;
+
+  > div {
+    display: flex;
+    div  {
+      border: 1px solid black;
+    }
+  }
+  
 `;

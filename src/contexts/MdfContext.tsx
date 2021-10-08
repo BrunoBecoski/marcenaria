@@ -7,6 +7,7 @@ type MdfProviderProps = {
 type CreateMdfBoxProps = Array<{
   id: string;
   thick: string;
+  group: string;
 }>
 
 type AddNewMdfBoxProps = {
@@ -40,6 +41,7 @@ export function MdfProvider({ children }: MdfProviderProps) {
       list.push({
         id: `${thick}_${idMdfBox}`,
         thick,
+        group: thick,
       })
       idMdfBox++;
     }

@@ -24,6 +24,18 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
   const { setInputsMDFValues }  = useFormResult();
   const { createMdfBox } = useMdf();
 
+  const group3 = createMdfBox.filter((data) => data.group === "3mm");
+  const group6 = createMdfBox.filter((data) => data.group === "6mm");
+  const group9 = createMdfBox.filter((data) => data.group === "9mm");
+  const group12 = createMdfBox.filter((data) => data.group === "12mm");
+  const group15 = createMdfBox.filter((data) => data.group === "15mm");
+
+  console.log(group3)
+  console.log(group6)
+  console.log(group9)
+  console.log(group12)
+  console.log(group15)
+
   // function handleSubmit(event: React.FormEvent) {
   //   event.preventDefault();
 
@@ -52,13 +64,63 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
 
   return (  
     <Container>
-      {createMdfBox.map((item) => 
-        <InputsMDF 
-          id={item.id}
-          key={item.id}
-          thick={item.thick}
-        />
-      )}
+      <div>
+        <div>
+          <h3>3mm</h3>
+          {group3.map((item) => 
+            <InputsMDF 
+            id={item.id}
+            key={item.id}
+            thick={item.thick}
+            />
+          )}
+        </div>
+
+        <div>
+          <h3>6mm</h3>
+          {group6.map((item) => 
+            <InputsMDF 
+            id={item.id}
+            key={item.id}
+            thick={item.thick}
+            />
+          )}
+        </div>
+
+        <div>
+          <h3>9mm</h3>
+          {group9.map((item) => 
+            <InputsMDF 
+            id={item.id}
+            key={item.id}
+            thick={item.thick}
+            />
+          )}
+        </div>
+
+        <div>
+          <h3>12mm</h3>
+          {group12.map((item) => 
+            <InputsMDF 
+            id={item.id}
+            key={item.id}
+            thick={item.thick}
+            />
+          )}
+        </div>
+
+        <div>
+          <h3>15mm</h3>
+          {group15.map((item) => 
+            <InputsMDF 
+            id={item.id}
+            key={item.id}
+            thick={item.thick}
+            />
+          )}
+        </div>
+      </div>
+
       <button type="submit">Calcular</button>
     </Container>
   )
