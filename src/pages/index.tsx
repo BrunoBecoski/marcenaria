@@ -38,14 +38,11 @@ export default function Home() {
             />   
           <MdfConfig /> 
               <section>
-                <h2>Formulário</h2>
-
                 <Form 
                   componentInputList={componentInputList} 
                   handleRemoveComponentInput={handleRemoveComponentInput}
                   />
-                <h2>Resultado</h2>
-
+                  
                 <Results />
               </section>
 
