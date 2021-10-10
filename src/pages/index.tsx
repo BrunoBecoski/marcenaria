@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { MdfProvider } from '../contexts/MdfContext';
+import { useMdf } from '../contexts/MdfContext';
  
 import Aside from '../components/Aside';
 import Form from '../components/Form';
@@ -17,6 +17,8 @@ type inputListProps = {
 export default function Home() {
   const [keyComponentInput, setKeyComponentInput] = useState(0);
   const [componentInputList, setComponentInputList] = useState<inputListProps[]>([]);
+
+  const { isMdfOpen } = useMdf();
   
   function handleAddComponentInput(type: 'mdf') {
     setComponentInputList([...componentInputList, { id: keyComponentInput, type: type }]);
@@ -32,21 +34,25 @@ export default function Home() {
     <Container>
       <main>
 
-        <MdfProvider>
+        
           <Aside 
             handleAddComponentInput={handleAddComponentInput}
             />   
           <MdfConfig /> 
-              <section>
-                <Form 
-                  componentInputList={componentInputList} 
-                  handleRemoveComponentInput={handleRemoveComponentInput}
-                  />
-                  
-                <Results />
-              </section>
+          {isMdfOpen ?
+              <>
+              </>
+            :
+            <section>
+              <Form 
+                componentInputList={componentInputList} 
+                handleRemoveComponentInput={handleRemoveComponentInput}
+                />
+                
+              <Results />
+            </section>
+          }
 
-        </MdfProvider>
       </main>
     </Container>
   )
