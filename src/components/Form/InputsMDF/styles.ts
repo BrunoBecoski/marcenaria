@@ -1,7 +1,7 @@
 import styled  from 'styled-components';
 
 export const Container = styled.div`
-  width: 12rem;
+  width: 10.5rem;
 
   display: flex;
   flex-direction: column;
@@ -9,7 +9,6 @@ export const Container = styled.div`
 
   padding: .25rem;
   margin-bottom: 1rem;
-  border: 3px solid var(--mdf-color);
 
   background-color: whitesmoke;
 `;
@@ -58,6 +57,8 @@ export const Main = styled.main`
     input {
       width: 4rem;
       padding: .1rem;
+    }
+    &:first-child {
       margin-bottom: .25rem;
     }
   }
