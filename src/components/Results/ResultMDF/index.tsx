@@ -47,7 +47,7 @@ export function ResultMDF() {
   return (
     <Container>
       <h2>Resultados do MDF</h2>
- 
+
       {(inputsMdfResult.total3 > 0) &&
         <>
           <h3>3mm</h3>

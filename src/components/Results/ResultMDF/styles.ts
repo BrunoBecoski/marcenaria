@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: whitesmoke;
+  padding: 1rem;
+
+  h2 {
+    color: white;
+  }
 `;
