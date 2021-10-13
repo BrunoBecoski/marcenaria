@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .8);
   width: 380px;
-  height: 210px;
+  height: 50%;
 
   padding: 10px;
 
@@ -27,15 +27,11 @@ export const Container = styled.div`
       }
 
       input {
-        background: #3f3f3f;
         border: none;
-        color: white;
       }
 
       h3 {
-        background-color: #3f3f3f;
         width: 35%;
-        margin-top: -20px;
         padding: 0 8px;
       }
     }

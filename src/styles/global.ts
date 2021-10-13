@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .7);
   }
 
   h1, h2, h3, h4, h5, h6 {

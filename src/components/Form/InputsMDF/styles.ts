@@ -1,6 +1,7 @@
 import styled  from 'styled-components';
 
 export const Container = styled.div`
+
   width: 10.5rem;
 
   display: flex;
@@ -10,7 +11,8 @@ export const Container = styled.div`
   padding: .25rem;
   margin-bottom: 1rem;
 
-  background-color: whitesmoke;
+  background-color: rgba(255, 255, 255, 0.8);
+
 `;
 
 export const Header = styled.header`
