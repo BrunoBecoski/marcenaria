@@ -19,10 +19,9 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
 
   return (
     <Container id={id}>
-      {/* <Header>
-        <h3>Mdf - {thick}</h3>
+      <Header>
         <button type="button" >X</button>
-      </Header> */}
+      </Header>
 
       <Main>
         <div>

@@ -16,17 +16,8 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding-bottom: 2px;
+  margin-left: 140px;
   margin-bottom: 3px;
-  border-bottom: 1px solid var(--font-color);
-
-  h3 {
-    font-size: 1.2rem;
-  }
 
   button {
     width: 1.2rem;

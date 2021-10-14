@@ -67,7 +67,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
       <h2>Formulário</h2>
       <div>
         <div>
-          <h3>3mm</h3>
+          <h3>3mm - {group3.length}</h3>
           {group3.map((item) => 
             <InputsMDF 
             id={item.id}
@@ -78,7 +78,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
         </div>
 
         <div>
-          <h3>6mm</h3>
+          <h3>6mm - {group6.length}</h3>
           {group6.map((item) => 
             <InputsMDF 
             id={item.id}
@@ -89,7 +89,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
         </div>
 
         <div>
-          <h3>9mm</h3>
+          <h3>9mm - {group9.length}</h3>
           {group9.map((item) => 
             <InputsMDF 
             id={item.id}
@@ -100,7 +100,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
         </div>
 
         <div>
-          <h3>12mm</h3>
+          <h3>12mm - {group12.length}</h3>
           {group12.map((item) => 
             <InputsMDF 
             id={item.id}
@@ -111,7 +111,7 @@ export default function Form({ componentInputList, handleRemoveComponentInput}: 
         </div>
 
         <div>
-          <h3>15mm</h3>
+          <h3>15mm - {group15.length}</h3>
           {group15.map((item) => 
             <InputsMDF 
             id={item.id}
