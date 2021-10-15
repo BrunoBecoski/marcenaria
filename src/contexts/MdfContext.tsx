@@ -20,6 +20,7 @@ type MdfContextData = {
   handleMdfOpen: () => void;
   handleAddNewMdfBox: (data: AddNewMdfBoxProps) => void;
   createMdfBox: CreateMdfBoxProps;
+  handleRemoveMdfBox: (id: string) => void;
 }
 
 const MdfContext = createContext({} as MdfContextData);
@@ -48,13 +49,19 @@ export function MdfProvider({ children }: MdfProviderProps) {
     setCreateMdfBox(list);
   }
 
+  function handleRemoveMdfBox(id: string) {
+    const newList = createMdfBox.filter((mdf) => mdf.id !== id);
+    setCreateMdfBox(newList)
+  }
+
   return (
     <MdfContext.Provider 
       value={{ 
         isMdfOpen, 
         handleMdfOpen, 
         handleAddNewMdfBox, 
-        createMdfBox 
+        createMdfBox, 
+        handleRemoveMdfBox
       }}
     >
       {children}

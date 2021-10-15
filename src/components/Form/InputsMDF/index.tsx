@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useMdf } from '../../../contexts/MdfContext';
+
 import { Container, Header, Main } from './styles'
 
 type InputsMDFProps = {
@@ -13,6 +15,8 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
   const [length, setLength] = useState(0);
   const [thickness, setThickness] = useState('15mm');
 
+  const { handleRemoveMdfBox } = useMdf();
+
   // function handleRemoveInput() {
   //   handleRemoveComponentInput(id);
   // }
@@ -20,7 +24,7 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
   return (
     <Container id={id}>
       <Header>
-        <button type="button" >X</button>
+        <button type="button" onClick={() => handleRemoveMdfBox(id)} >X</button>
       </Header>
 
       <Main>
