@@ -21,6 +21,7 @@ type MdfContextData = {
   handleAddNewMdfBox: (data: AddNewMdfBoxProps) => void;
   createMdfBox: CreateMdfBoxProps;
   handleRemoveMdfBox: (id: string) => void;
+  handleAddMdfBox: (thick: string) => void;
 }
 
 const MdfContext = createContext({} as MdfContextData);
@@ -54,6 +55,10 @@ export function MdfProvider({ children }: MdfProviderProps) {
     setCreateMdfBox(newList)
   }
 
+  function handleAddMdfBox(thick: string) {
+    console.log(thick)
+  }
+
   return (
     <MdfContext.Provider 
       value={{ 
@@ -61,7 +66,8 @@ export function MdfProvider({ children }: MdfProviderProps) {
         handleMdfOpen, 
         handleAddNewMdfBox, 
         createMdfBox, 
-        handleRemoveMdfBox
+        handleRemoveMdfBox,
+        handleAddMdfBox
       }}
     >
       {children}
