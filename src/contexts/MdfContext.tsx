@@ -38,20 +38,19 @@ export function MdfProvider({ children }: MdfProviderProps) {
 
   // let idMdfBox = 0;
 
-  function SumIdMdfBox() {
-    setIdMdfBox(idMdfBox + 1);
-  }
+  function SumIdMdfBox(index: number) {
+    setIdMdfBox(idMdfBox + index);
+    return idMdfBox;
+  }  
 
-  
   function handleAddNewMdfBox({ thick, range }: AddNewMdfBoxProps) {
     let list = createMdfBox;
     for (let index = 0; index < range; index++) {
       list.push({
-        id: `${thick}_${idMdfBox}`,
+        id: `${thick}_${SumIdMdfBox(index + 1) + index}`,
         thick,
         group: thick,
       })
-      SumIdMdfBox()
     }
     setCreateMdfBox(list);
   }
@@ -63,11 +62,10 @@ export function MdfProvider({ children }: MdfProviderProps) {
 
   function handleAddMdfBox(thick: string) {
     setCreateMdfBox([...createMdfBox, {
-      id: `${thick}_${idMdfBox}`,
+      id: `${thick}_${SumIdMdfBox(1)}`,
       thick: thick,
       group: thick,
     }]);
-    SumIdMdfBox()
   }
 
   return (
