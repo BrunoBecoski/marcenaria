@@ -16,8 +16,10 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  margin-left: 140px;
-  margin-bottom: 3px;
+  /* margin-left: 140px;
+  margin-bottom: 3px; */
+  display: flex;
+  justify-content: space-between;
 
   button {
     width: 1.2rem;

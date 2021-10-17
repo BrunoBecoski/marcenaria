@@ -30,11 +30,17 @@ export function MdfProvider({ children }: MdfProviderProps) {
   const [isMdfOpen, setIsMdfOpen] = useState(false);
   const [createMdfBox, setCreateMdfBox] = useState<CreateMdfBoxProps>([]);
 
+  const [idMdfBox, setIdMdfBox] = useState(0)
+
   function handleMdfOpen() {
     setIsMdfOpen(!isMdfOpen)
   }
 
-  let idMdfBox = 0;
+  // let idMdfBox = 0;
+
+  function SumIdMdfBox() {
+    setIdMdfBox(idMdfBox + 1);
+  }
 
   
   function handleAddNewMdfBox({ thick, range }: AddNewMdfBoxProps) {
@@ -45,7 +51,7 @@ export function MdfProvider({ children }: MdfProviderProps) {
         thick,
         group: thick,
       })
-      idMdfBox++;
+      SumIdMdfBox()
     }
     setCreateMdfBox(list);
   }
@@ -56,7 +62,12 @@ export function MdfProvider({ children }: MdfProviderProps) {
   }
 
   function handleAddMdfBox(thick: string) {
-    console.log(thick)
+    setCreateMdfBox([...createMdfBox, {
+      id: `${thick}_${idMdfBox}`,
+      thick: thick,
+      group: thick,
+    }]);
+    SumIdMdfBox()
   }
 
   return (

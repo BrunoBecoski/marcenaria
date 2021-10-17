@@ -24,6 +24,7 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
   return (
     <Container id={id}>
       <Header>
+        <p>{id}</p>
         <button type="button" onClick={() => handleRemoveMdfBox(id)} >X</button>
       </Header>
 
