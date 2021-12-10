@@ -1,0 +1,131 @@
+import { useState } from 'react';
+
+import { Container, Thickness, Range } from './styles';
+
+export default function MdfCreate() {
+  const [rangeValue, setRangeValue] = useState(1);
+  const [thickValue, setThickValue] = useState('12mm');
+
+  return (
+    <Container>
+      <form>
+        <Thickness>
+          <h2>Espessura</h2>
+          <label
+            style={{
+              color: (thickValue == '3mm' ? '#007df9' : 'white'),
+              background: (thickValue == '3mm' ? 'white' : ''),
+              borderColor: (thickValue == '3mm' ? '#007df9' : 'white')
+            }}
+          >
+            <input name="thick" type="radio" value="3mm" onClick={() => setThickValue('3mm')} />
+            3mm
+            <div
+              style={{
+                height: '3px',
+                background: (thickValue == '3mm' ? '#007df9' : 'white')
+              }}
+            >
+            </div>
+          </label>
+
+          <label
+            style={{
+              color: (thickValue == '6mm' ? '#007df9' : 'white'),
+              background: (thickValue == '6mm' ? 'white' : ''),
+              borderColor: (thickValue == '6mm' ? '#007df9' : 'white')
+            }}
+          >
+            <input
+              name="thick" type="radio" value="6mm"
+              onClick={() => setThickValue('6mm')}
+            />
+            6mm
+            <div
+              style={{
+                height: '6px',
+                background: (thickValue == '6mm' ? '#007df9' : 'white')
+              }}
+            >
+            </div>
+          </label>
+
+          <label
+            style={{
+              color: (thickValue == '9mm' ? '#007df9' : 'white'),
+              background: (thickValue == '9mm' ? 'white' : ''),
+              borderColor: (thickValue == '9mm' ? '#007df9' : 'white')
+            }}
+          >
+            <input name="thick" type="radio" value="9mm" onClick={() => setThickValue('9mm')} />
+            9mm
+            <div
+              style={{
+                height: '9px',
+                background: (thickValue == '9mm' ? '#007df9' : 'white')
+              }}
+            >
+            </div>
+          </label>
+
+          <label
+            style={{
+              color: (thickValue == '12mm' ? '#007df9' : 'white'),
+              background: (thickValue == '12mm' ? 'white' : ''),
+              borderColor: (thickValue == '12mm' ? '#007df9' : 'white')
+            }}
+          >
+            <input name="thick" type="radio" value="12mm" onClick={() => setThickValue('12mm')} defaultChecked />
+            12mm
+            <div
+              style={{
+                height: '12px',
+                background: (thickValue == '12mm' ? '#007df9' : 'white')
+              }}
+            >
+            </div>
+          </label>
+
+          <label
+            style={{
+              color: (thickValue == '15mm' ? '#007df9' : 'white'),
+              background: (thickValue == '15mm' ? 'white' : ''),
+              borderColor: (thickValue == '15mm' ? '#007df9' : 'white')
+            }}
+          >
+            <input name="thick" type="radio" value="15mm" onClick={() => setThickValue('15mm')} />
+            15mm
+            <div
+              style={{
+                height: '15px',
+                background: (thickValue == '15mm' ? '#007df9' : 'white')
+              }}
+            >
+            </div>
+          </label>
+        </Thickness>
+
+        <Range>
+          <h2>Quantidade</h2>
+          <label>
+            <input
+              type="number"
+              min="1"
+              value={rangeValue}
+              onChange={(e) => setRangeValue(Number(e.target.value))}
+            />
+            <input
+              type="range"
+              min="1"
+              max="20"
+              value={rangeValue}
+              onChange={(e) => setRangeValue(Number(e.target.value))}
+            />
+          </label>
+        </Range>
+
+        <button type="submit">Criar</button>
+      </form>
+    </Container >
+  );
+}

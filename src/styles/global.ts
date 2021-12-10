@@ -9,9 +9,8 @@ export const GlobalStyle = createGlobalStyle`
 
   :root { 
     --primary-color: #BE1621;
-    --font-color: #3C3C3B;
-
-    --mdf-color: #38A169;
+    --font-color: whitesmoke;
+    --color-background: #121214;
   }
   
   * {
@@ -21,7 +20,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    background-color: rgba(0, 0, 0, .7);
+    background-color: var(--color-background);
   }
 
   h1, h2, h3, h4, h5, h6 {
