@@ -2,11 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: rgba(0, 0, 0, .8);
-  width: 80%;
-  height: 100%;
-
   padding: 15px;
-  margin: 20px;
 
   button {
     border: 2px solid white;
@@ -14,6 +10,7 @@ export const Container = styled.div`
     background: black;
     color: white;
     margin-top: 8px;
+    font-weight: bold;
   }
 `;
 
@@ -31,11 +28,10 @@ export const Thickness = styled.div`
     border: 5px double white; 
     font-weight: bold;
 
-    display: flex;
     font-size: 24px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4px;
+
+    margin: 4px;
+    padding: 2px 4px;
     
     div {
       width: 50%;
