@@ -6,9 +6,16 @@ export default function MdfCreate() {
   const [rangeValue, setRangeValue] = useState(1);
   const [thickValue, setThickValue] = useState('12mm');
 
+  function handleCreate(event) {
+    event.preventDefault();
+    console.log('submit');
+    console.log(rangeValue);
+    console.log(thickValue);
+  }
+
   return (
     <Container>
-      <form>
+      <form onSubmit={handleCreate}>
         <Thickness>
           <h2>Espessura</h2>
           <label
