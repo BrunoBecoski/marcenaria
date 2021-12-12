@@ -20,7 +20,7 @@ type inputValuesMDFProps = {
   thickness: '3mm' | '6mm' | '9mm' | '12mm' | '15mm';
 }
 
-export default function Form({ componentInputList, handleRemoveComponentInput}: FormProps) {
+export default function Form() {
   const { setInputsMDFValues }  = useFormResult();
   const { createMdfBox, handleAddMdfBox } = useMdf();
 

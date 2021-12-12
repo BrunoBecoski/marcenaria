@@ -11,15 +11,15 @@ export const Container = styled.div`
   padding: .25rem;
   margin-bottom: 1rem;
 
-  background-color: rgba(255, 255, 255, 0.8);
-
+  background-color: black;
+  border: 2px solid white;
 `;
 
 export const Header = styled.header`
-  /* margin-left: 140px;
-  margin-bottom: 3px; */
   display: flex;
   justify-content: space-between;
+
+  margin-bottom: 8px;
 
   button {
     width: 1.2rem;
@@ -33,6 +33,7 @@ export const Header = styled.header`
     border-radius: 3px;
     background-color: white;
     border: 2px solid black;
+    color: black;
 
     &:hover {
       color: var(--primary-color);
@@ -48,9 +49,10 @@ export const Main = styled.main`
   div {
     display: flex;
     justify-content: space-between;
+    color: white;
 
     input {
-      width: 4rem;
+      width: 3rem;
       padding: .1rem;
     }
     &:first-child {

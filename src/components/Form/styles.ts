@@ -20,6 +20,27 @@ export const Container = styled.form`
       border: 1px solid black;
       border-color: white;
       padding: 8px 16px;
+    
+      > button {
+        background: black;
+        color: white;
+        border: 3px solid white;
+        font-size: 32px;
+        padding-bottom: 8px;
+        height: 32px;
+
+      
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 12px;
+
+        &:hover {
+          color: green;
+          border-color: green;
+        }
+      }
     }
   }
   
