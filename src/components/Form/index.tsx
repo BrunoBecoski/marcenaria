@@ -30,34 +30,37 @@ export default function Form() {
   const group12 = createMdfBox.filter((data) => data.group === "12mm");
   const group15 = createMdfBox.filter((data) => data.group === "15mm");
 
-  // function handleSubmit(event: React.FormEvent) {
-  //   event.preventDefault();
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
 
-  //   let inputValuesMDF: inputValuesMDFProps[] = [];
+    console.log('submitado')
+    console.log(group3)
+
+    // let inputValuesMDF: inputValuesMDFProps[] = [];
   
-  //   if(componentInputList.length === 1) {
-  //     const inputValue = {
-  //       width: event.target.width.value,
-  //       height: event.target.height.value,
-  //       thickness: event.target.thickness.value
-  //     }
-  //     inputValuesMDF.push(inputValue)
-  //   } else {
-  //     for (let index = 0; index < componentInputList.length; index++) {
-  //       const inputValue = {
-  //         width: event.target.width[index].value,
-  //         height: event.target.height[index].value,
-  //         thickness: event.target.thickness[index].value
-  //       }
-  //       inputValuesMDF.push(inputValue)
-  //     }
-  //   }
+    // if(componentInputList.length === 1) {
+    //   const inputValue = {
+    //     width: event.target.width.value,
+    //     height: event.target.height.value,
+    //     thickness: event.target.thickness.value
+    //   }
+    //   inputValuesMDF.push(inputValue)
+    // } else {
+    //   for (let index = 0; index < componentInputList.length; index++) {
+    //     const inputValue = {
+    //       width: event.target.width[index].value,
+    //       height: event.target.height[index].value,
+    //       thickness: event.target.thickness[index].value
+    //     }
+    //     inputValuesMDF.push(inputValue)
+    //   }
+    // }
 
-  //   setInputsMDFValues(inputValuesMDF);
-  // }
+    // setInputsMDFValues(inputValuesMDF);
+  }
 
   return (  
-    <Container>
+    <Container onSubmit={handleSubmit}>
       <h2>Formulário</h2>
       <div>
         <div>
