@@ -49,7 +49,13 @@ export const Container = styled.form`
     color: white;
     background: black;
     font-weight: bold;
-    border: none;
     padding: 8px;
+
+    border: 2px solid white;
+
+    &:hover {
+      color: green;
+      border-color: green;
+    }
   }
 `;

@@ -30,9 +30,9 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
 
       <Main>
         <div>
-          <label htmlFor="width">Largura:</label>
+          <label htmlFor={`width_${id}`} >Largura:</label>
           <input 
-            id="width" 
+            id={`width_${id}`} 
             type="number" 
             name="width"
             value={width} 
@@ -41,9 +41,9 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
         </div>
 
         <div>
-          <label htmlFor="length">Comprimento:</label>
+          <label htmlFor={`length_${id}`}>Comprimento:</label>
           <input 
-            id="length" 
+            id={`length_${id}`}
             type="number" 
             name="length"
             value={length} 

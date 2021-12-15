@@ -33,8 +33,10 @@ export default function Form() {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    console.log('submitado')
-    console.log(group3)
+    console.log(document.getElementById(createMdfBox[1].id));
+
+    // console.log(document.getElementById("width").value);
+    // console.log(document.getElementById("length").value);
 
     // let inputValuesMDF: inputValuesMDFProps[] = [];
   
