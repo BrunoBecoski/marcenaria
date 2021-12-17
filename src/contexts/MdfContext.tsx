@@ -8,6 +8,10 @@ type CreateMdfBoxProps = Array<{
   id: string;
   thick: string;
   group: string;
+  width_1: number;
+  height_1: number;
+  width_2: number;
+  height_2: number;
 }>
 
 type AddNewMdfBoxProps = {
@@ -50,6 +54,10 @@ export function MdfProvider({ children }: MdfProviderProps) {
         id: `${thick}_${SumIdMdfBox(index + 1) + index}`,
         thick,
         group: thick,
+        width_1: 0,
+        height_1: 0,
+        width_2: 0,
+        height_2: 0,
       })
     }
     setCreateMdfBox(list);
@@ -65,6 +73,10 @@ export function MdfProvider({ children }: MdfProviderProps) {
       id: `${thick}_${SumIdMdfBox(1)}`,
       thick: thick,
       group: thick,
+      width_1: 0,
+      height_1: 0,
+      width_2: 0,
+      height_2: 0,
     }]);
   }
 

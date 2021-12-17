@@ -33,10 +33,12 @@ export default function Form() {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    console.log(document.getElementById(createMdfBox[1].id));
+    // console.log(document.getElementById(createMdfBox[1].id));
 
-    console.log(document.getElementById(`width_${createMdfBox[0].id}`).value);
-    console.log(document.getElementById(`length_${createMdfBox[0].id}`).value);
+    // console.log(document.getElementById(`width_${createMdfBox[0].id}`).value);
+    // console.log(document.getElementById(`length_${createMdfBox[0].id}`).value);
+
+    console.log(group3)
 
     // let inputValuesMDF: inputValuesMDFProps[] = [];
   
@@ -73,9 +75,11 @@ export default function Form() {
           }}>+</button>
           {group3.map((item) => 
             <InputsMDF 
-            id={item.id}
-            key={item.id}
-            thick={item.thick}
+              id={item.id}
+              key={item.id}
+              thick={item.thick}
+              width={item.width}
+              height={item.height}
             />
           )}
         </div>
