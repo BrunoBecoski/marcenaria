@@ -92,9 +92,11 @@ export default function Form() {
           }}>+</button>
           {group6.map((item) => 
             <InputsMDF 
-            id={item.id}
-            key={item.id}
-            thick={item.thick}
+              id={item.id}
+              key={item.id}
+              thick={item.thick}
+              width={item.width}
+              height={item.height}
             />
           )}
         </div>
@@ -107,9 +109,11 @@ export default function Form() {
           }}>+</button>
           {group9.map((item) => 
             <InputsMDF 
-            id={item.id}
-            key={item.id}
-            thick={item.thick}
+              id={item.id}
+              key={item.id}
+              thick={item.thick}
+              width={item.width}
+              height={item.height}
             />
           )}
         </div>
@@ -122,9 +126,11 @@ export default function Form() {
           }}>+</button>
           {group12.map((item) => 
             <InputsMDF 
-            id={item.id}
-            key={item.id}
-            thick={item.thick}
+              id={item.id}
+              key={item.id}
+              thick={item.thick}
+              width={item.width}
+              height={item.height}
             />
           )}
         </div>
@@ -137,9 +143,11 @@ export default function Form() {
           }}>+</button>
           {group15.map((item) => 
             <InputsMDF 
-            id={item.id}
-            key={item.id}
-            thick={item.thick}
+              id={item.id}
+              key={item.id}
+              thick={item.thick}
+              width={item.width}
+              height={item.height}
             />
           )}
         </div>

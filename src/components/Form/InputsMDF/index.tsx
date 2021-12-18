@@ -7,6 +7,8 @@ import { Container, Header, Main } from './styles'
 type InputsMDFProps = {
   thick: string;
   id: string;
+  width: number;
+  height: number;
   // handleRemoveComponentInput: (id: number) => void;
 }
 
