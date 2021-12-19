@@ -14,7 +14,7 @@ type InputsMDFProps = {
 
 export default function InputsMDF({ thick, id }: InputsMDFProps) {
   const [width, setWidth] = useState(0);
-  const [length, setLength] = useState(0);
+  const [height, setHeight] = useState(0);
   const [thickness, setThickness] = useState('15mm');
 
   const { handleRemoveMdfBox } = useMdf();
@@ -49,7 +49,7 @@ export default function InputsMDF({ thick, id }: InputsMDFProps) {
             type="number" 
             name="length"
             value={length} 
-            onChange={(event) => setLength(Number(event.target.value))} 
+            onChange={(event) => setHeight(Number(event.target.value))} 
             />
         </div>
 
