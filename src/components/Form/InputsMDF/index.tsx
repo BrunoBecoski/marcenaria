@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useMdf } from '../../../contexts/MdfContext';
 
@@ -12,12 +12,28 @@ type InputsMDFProps = {
   // handleRemoveComponentInput: (id: number) => void;
 }
 
-export default function InputsMDF({ thick, id, width, height }: InputsMDFProps) {
-  // const [width, setWidth] = useState(0);
-  // const [height, setHeight] = useState(0);
+export default function InputsMDF(
+  { 
+    thick, 
+    id, 
+  }: InputsMDFProps) {
   const [thickness, setThickness] = useState('15mm');
 
-  const { handleRemoveMdfBox } = useMdf();
+  const { handleRemoveMdfBox,  } = useMdf();
+
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    console.log('Width: ');
+    console.log(width);
+  }, [width])
+
+
+  useEffect(() => {
+    console.log('Height: ');
+    console.log(height);
+  }, [height])
 
   // function handleRemoveInput() {
   //   handleRemoveComponentInput(id);
@@ -37,7 +53,7 @@ export default function InputsMDF({ thick, id, width, height }: InputsMDFProps) 
             id={`width_${id}`} 
             type="number" 
             name="width"
-            onChange={(event) => width = (Number(event.target.value))} 
+            onChange={(event) => setWidth(Number(event.target.value))} 
             />
         </div>
 
@@ -47,7 +63,7 @@ export default function InputsMDF({ thick, id, width, height }: InputsMDFProps) 
             id={`length_${id}`}
             type="number" 
             name="length"
-            onChange={(event) => height = (Number(event.target.value))} 
+            onChange={(event) => setHeight(Number(event.target.value))} 
             />
         </div>
 

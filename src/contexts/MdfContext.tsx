@@ -20,7 +20,7 @@ type AddNewMdfBoxProps = {
 type MdfContextData = {
   isMdfOpen: boolean;
   handleMdfOpen: () => void;
-  handleAddNewMdfBox: (data: AddNewMdfBoxProps) => void;
+  // handleAddNewMdfBox: (data: AddNewMdfBoxProps) => void;
   createMdfBox: CreateMdfBoxProps;
   handleRemoveMdfBox: (id: string) => void;
   handleAddMdfBox: (thick: string) => void;
@@ -45,19 +45,17 @@ export function MdfProvider({ children }: MdfProviderProps) {
     return idMdfBox;
   }  
 
-  function handleAddNewMdfBox({ thick, range }: AddNewMdfBoxProps) {
-    let list = createMdfBox;
-    for (let index = 0; index < range; index++) {
-      list.push({
-        id: `${thick}_${SumIdMdfBox(index + 1) + index}`,
-        thick,
-        group: thick,
-        width: 0,
-        height: 0,
-      })
-    }
-    setCreateMdfBox(list);
-  }
+  // function handleAddNewMdfBox({ thick, range }: AddNewMdfBoxProps) {
+  //   let list = createMdfBox;
+  //   for (let index = 0; index < range; index++) {
+  //     list.push({
+  //       id: `${thick}_${SumIdMdfBox(index + 1) + index}`,
+  //       thick,
+  //       group: thick,
+  //     })
+  //   }
+  //   setCreateMdfBox(list);
+  // }
 
   function handleRemoveMdfBox(id: string) {
     const newList = createMdfBox.filter((mdf) => mdf.id !== id);
@@ -79,7 +77,7 @@ export function MdfProvider({ children }: MdfProviderProps) {
       value={{ 
         isMdfOpen, 
         handleMdfOpen, 
-        handleAddNewMdfBox, 
+        // handleAddNewMdfBox, 
         createMdfBox, 
         handleRemoveMdfBox,
         handleAddMdfBox
