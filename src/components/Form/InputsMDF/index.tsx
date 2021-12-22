@@ -7,50 +7,39 @@ import { Container, Header, Main } from './styles'
 type InputsMDFProps = {
   thick: string;
   id: string;
-  width: number;
-  height: number;
+  values: {
+    width: number;
+    height: number;
+  }
   // handleRemoveComponentInput: (id: number) => void;
 }
 
-export default function InputsMDF(
-  { 
-    thick, 
-    id, 
-  }: InputsMDFProps) {
+export default function InputsMDF(props: any) {
   const [thickness, setThickness] = useState('15mm');
 
   const { handleRemoveMdfBox,  } = useMdf();
 
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(10);
+  const [height, setHeight] = useState(10);
 
-  useEffect(() => {
-    console.log('Width: ');
-    console.log(width);
-  }, [width])
-
-
-  useEffect(() => {
-    console.log('Height: ');
-    console.log(height);
-  }, [height])
+  console.log(props)
 
   // function handleRemoveInput() {
   //   handleRemoveComponentInput(id);
   // }
 
   return (
-    <Container id={id}>
+    <Container id={props.id}>
       <Header>
-        <p>{id}</p>
-        <button type="button" onClick={() => handleRemoveMdfBox(id)} >X</button>
+        <p>{props.id}</p>
+        <button type="button" onClick={() => handleRemoveMdfBox(props.id)} >X</button>
       </Header>
 
       <Main>
         <div>
-          <label htmlFor={`width_${id}`} >Largura:</label>
+          <label htmlFor={`width_${props.id}`} >Largura:</label>
           <input 
-            id={`width_${id}`} 
+            id={`width_${props.id}`} 
             type="number" 
             name="width"
             onChange={(event) => setWidth(Number(event.target.value))} 
@@ -58,9 +47,9 @@ export default function InputsMDF(
         </div>
 
         <div>
-          <label htmlFor={`length_${id}`}>Comprimento:</label>
+          <label htmlFor={`length_${props.id}`}>Comprimento:</label>
           <input 
-            id={`length_${id}`}
+            id={`length_${props.id}`}
             type="number" 
             name="length"
             onChange={(event) => setHeight(Number(event.target.value))} 
