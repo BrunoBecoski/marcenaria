@@ -7,21 +7,19 @@ import { Container, Header, Main } from './styles'
 type InputsMDFProps = {
   thick: string;
   id: string;
-  values: {
-    width: number;
-    height: number;
-  }
+  width: number;
+  height: number;
+  
   // handleRemoveComponentInput: (id: number) => void;
 }
 
 export default function InputsMDF(props: any) {
-  const [thickness, setThickness] = useState('15mm');
-
   const { handleRemoveMdfBox,  } = useMdf();
 
   const [width, setWidth] = useState(10);
   const [height, setHeight] = useState(10);
 
+  console.log('InputsMDF props')
   console.log(props)
 
   // function handleRemoveInput() {

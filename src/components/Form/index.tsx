@@ -38,7 +38,8 @@ export default function Form() {
     // console.log(document.getElementById(`width_${createMdfBox[0].id}`).value);
     // console.log(document.getElementById(`length_${createMdfBox[0].id}`).value);
 
-    console.log(group3)
+    console.log('createMdfBox');
+    console.log(createMdfBox);
 
     // let inputValuesMDF: inputValuesMDFProps[] = [];
   
