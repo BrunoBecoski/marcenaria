@@ -1,16 +1,27 @@
-import { Container } from './styles';
+import { useState } from 'react';
+import { Container, Content } from './styles';
 
-export default function MdfCreate() {
+type ModalCreateInputBoxProps = {
+  onClose: () => void;
+}
+
+export function ModalCreateInputBox({ onClose }: ModalCreateInputBoxProps) {
+
+  const [selectType, setSelectType] = useState('mdf')
 
   function handleCreate() {
     console.log('submit');
-  }
-
+ }
+ 
   return (
     <Container>
-      <form onSubmit={handleCreate}>
-        <button type="submit">Criar</button>
-      </form>
+      <Content>
+        <button onClick={onClose}>Fechar Modal</button>
+        <form onSubmit={handleCreate}>
+          <h2>Mdf</h2>
+          <button type="submit">Criar</button>
+        </form>
+      </Content>
     </Container >
   );
 }
