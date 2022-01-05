@@ -8,9 +8,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :root { 
-    --primary-color: #BE1621;
-    --font-color: whitesmoke;
-    --color-background: #121214;
+    --primary_200: #BB86FC;
+    --primary_500: #6200EE;
+    --primary_700: #3700B3;
+    --secondary: #03DAC6;
+    --secondary-variant: #018786;
+    --background: #FFFFFF;
+    --surface: #FFFFFF;
+    --error: #B00020;
+    --on-primary: #FFFFFF;
+    --on-secondary: #000000;
+    --on-background: #000000;
+    --on-surface: #000000;
+    --on-error: #FFFFFF;
   }
   
   * {
