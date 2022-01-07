@@ -17,13 +17,13 @@ export function InputRadio({ value, setThickness, ...props}: InputRadioProps) {
           type="radio" 
           {...props} 
           onChange={(event) => setThickness(event.target.value)}   
-        />     
+        />   
         <div className="background">
           <div className="outer-circle"></div>
           <div className="inner-circle"></div>
         </div>
         <div className="ripple"></div>        
-       </Radio> 
+      </Radio> 
       <Label htmlFor={value}>{value}</Label>
     </Field>
   );
