@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, Radio, Label } from "./styles";
+import { Radio, Label } from "./styles";
 
 type InputRadioProps =  {
 	name: string;
@@ -9,8 +9,8 @@ type InputRadioProps =  {
 
 export function InputRadio({ value, setThickness, ...props}: InputRadioProps) {
   return(
-    <Field>
-      <Radio>
+    <Label htmlFor={value}>
+      <Radio checked={props.checked}>
         <input 
           id={value}
           value={value} 
@@ -24,7 +24,7 @@ export function InputRadio({ value, setThickness, ...props}: InputRadioProps) {
         </div>
         <div className="ripple"></div>        
       </Radio> 
-      <Label htmlFor={value}>{value}</Label>
-    </Field>
+      {value}
+    </Label>
   );
 }
