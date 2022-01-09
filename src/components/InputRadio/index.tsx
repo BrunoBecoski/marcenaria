@@ -4,10 +4,10 @@ import { Radio, Label } from "./styles";
 type InputRadioProps =  {
 	name: string;
   value: string;
-  setThickness: (value: string) => void
+  handleChange: (value: string) => void
 }  &  React.InputHTMLAttributes<HTMLInputElement>
 
-export function InputRadio({ value, setThickness, ...props}: InputRadioProps) {
+export function InputRadio({ value, handleChange, ...props}: InputRadioProps) {
   return(
     <Label htmlFor={value}>
       <Radio checked={props.checked}>
@@ -16,13 +16,13 @@ export function InputRadio({ value, setThickness, ...props}: InputRadioProps) {
           value={value} 
           type="radio" 
           {...props} 
-          onChange={(event) => setThickness(event.target.value)}   
+          onChange={(event) => handleChange(event.target.value)}   
         />   
         <div className="background">
+          <div className="ripple"></div>        
           <div className="outer-circle"></div>
           <div className="inner-circle"></div>
         </div>
-        <div className="ripple"></div>        
       </Radio> 
       {value}
     </Label>

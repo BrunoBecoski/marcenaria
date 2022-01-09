@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 export const Label = styled.label`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  width: auto;
-  /* cursor: pointer; */
+  flex-wrap: wrap;
+  padding: 8px;
 
-  & + & {
-    margin-top: 6px;
-  }
+  /* cursor: pointer; */
 `;
 
 type RadioProps = {
@@ -26,6 +24,8 @@ export const Radio = styled.div<RadioProps>`
 
   border-radius: 50%;
 
+  position: relative;
+
   input {
     display: none;     
    }
@@ -42,6 +42,25 @@ export const Radio = styled.div<RadioProps>`
     height: ${(props) => props.checked ? '32px' : '0'};
     
     transition: width .2s, height .2s;
+
+    .ripple {    
+      position: relative;     
+      border-radius: 50%;
+      background: var(--primary_100);
+
+      animation: ${props => props.checked ? 'ripple' : ''} .2s;
+
+      @keyframes ripple {
+        from {
+          width: 0;
+          height: 0; 
+        }
+        to {
+          width: 30px;
+          height: 30px; 
+        }
+      }
+    }
     
     .outer-circle {
       width: 20px;
@@ -62,6 +81,6 @@ export const Radio = styled.div<RadioProps>`
       height: ${(props) => props.checked ? '10px' : '0'};
 
       transition: width .2s, height .2s;
-    }
+    } 
   } 
 `;

@@ -45,38 +45,46 @@ export function ModalCreateInputBox({ onClose }: ModalCreateInputBoxProps) {
                 <InputRadio
                   value="3mm"
                   name="thickness"
-                  setThickness={setThickness}
+                  handleChange={setThickness}
                   checked={thickness === '3mm' ? true : false}
                 />
 
                 <InputRadio
                   value="6mm"
                   name="thickness"
-                  setThickness={setThickness}
+                  handleChange={setThickness}
                   checked={thickness === '6mm' ? true : false}
                 />
                 
                 <InputRadio
                   value="9mm"
                   name="thickness"                  
-                  setThickness={setThickness}
+                  handleChange={setThickness}
                   checked={thickness === '9mm' ? true : false}
                 />
 
                 <InputRadio
                   value="12mm"
                   name="thickness"
-                  setThickness={setThickness}
+                  handleChange={setThickness}
                   checked={thickness === '12mm' ? true : false}
                 />
 
                 <InputRadio
                   value="15mm"
                   name="thickness"
-                  setThickness={setThickness}
+                  handleChange={setThickness}
                   checked={thickness === '15mm' ? true : false}
                 />
               </div>
+
+              <label>
+                Comprimento
+                <input />
+              </label><label>
+                Largura
+                <input />
+              </label>
 
               <label>
                 Quantidade
