@@ -1,4 +1,4 @@
-import Form from '../components/Form';
+import Link from 'next/link';
 
 import { Container } from '../styles/Home-styles';
 
@@ -6,9 +6,9 @@ export default function Home() {
 
   return (
     <Container>
-      <main>
-        <Form />
-      </main>
+
+      <h1>Home</h1>
+      <Link href="./create">Cálculo</Link>
     </Container>
   )
 }

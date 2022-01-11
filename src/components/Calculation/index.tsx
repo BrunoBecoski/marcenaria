@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
-import { MdClose } from 'react-icons/md';
    
 import { Container, Header,  Main, NavBar, Content, Background } from './styles';
 import { InputRadio } from '../InputRadio';
 
-type ModalCreateInputBoxProps = {
-  onClose: () => void;
-}
 
-export function ModalCreateInputBox({ onClose }: ModalCreateInputBoxProps) {
-  const [selectType, setSelectType] = useState('mdf');
+export function Calculation() {
   const [thickness, setThickness] = useState('12mm');
 
   function handleCreate() {
@@ -26,9 +21,6 @@ export function ModalCreateInputBox({ onClose }: ModalCreateInputBoxProps) {
       <Container>
         <Header>
           <h2>Criar - Mdf</h2>
-          <button onClick={onClose}>
-            <MdClose size='2rem'/>
-          </button>
         </Header>
     
         <Main>
