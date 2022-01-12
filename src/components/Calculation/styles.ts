@@ -1,48 +1,30 @@
 import styled from 'styled-components';
 
-export const Background = styled.div`
-  background-color: rgba(0, 0, 0, .9);
-
-  width: 100%;
-  height: 100%;
-  position: fixed;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const Container = styled.div`
-  width: 50vw;
-  height: 50vh;
+  width: 100vw;
+  height: 100vh;
+
+  .background {
+    width: 100%;
+    height: 100%;
+    background: var(--on-surface_medium);
+    position: fixed;
+  }
 `;
 
 export const Header = styled.header`
   background: var(--primary_500);
-
-  display: flex;
-  justify-content: space-between;
+  padding: 1rem;
 
   h2 {
-    color: var(--on-primary)
-  }
-
-  button {
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background:  var(--error);
-    font-weight: bold;
-
-    color:  var(--on-error);   
+    color: var(--on-primary);
   }
 `;
 
 export const Main  =  styled.main`
   background: var(--background);
 
-  display:   flex;
+  display: flex;
   align-items: space-around;
 `;
 
@@ -56,4 +38,39 @@ export const NavBar = styled.nav`
 
 export const Content = styled.div`
   background: var(--background);
+`;
+
+export const AddOptions = styled.span`  
+  right: 25px;
+  bottom: 25px;
+  position: fixed;
+
+  display: flex;
+  flex-direction: column;
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    
+    button {
+      border: none;
+      background: transparent;
+      color: var(--primary_400);
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    button + button {
+      margin-top: .5rem;
+    }
+  }
+
+  svg {
+    margin-top: 1rem;
+    color: var(--primary_400);
+
+    &:focus, &:active {
+      color: var(--primary_500);
+    }
+  }
 `;

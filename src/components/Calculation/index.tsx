@@ -1,94 +1,52 @@
 import { useEffect, useState } from 'react';
-   
-import { Container, Header,  Main, NavBar, Content, Background } from './styles';
-import { InputRadio } from '../InputRadio';
+import { MdAddCircle } from 'react-icons/md'
 
+import { Container, Header, Main, NavBar, Content, AddOptions } from './styles';
 
 export function Calculation() {
-  const [thickness, setThickness] = useState('12mm');
+  const [showOptionsAddVisible, setShowOptionsAddVisible] = useState(false);
 
-  function handleCreate() {
-    console.log('submit');
+  function handleAddOptions() {
+    setShowOptionsAddVisible(!showOptionsAddVisible);
   }
-
   useEffect(() => {
-    console.log(thickness)
-  }, [thickness]) 
-  
+    console.log(showOptionsAddVisible)
+  }, [showOptionsAddVisible])
+
   return (
-    <Background>
+    <Container>
+      {showOptionsAddVisible && 
+        <div className="background" onClick={handleAddOptions}></div>
+      }
+      <Header>
+        <h2>Criar - Mdf</h2>
+      </Header>
 
-      <Container>
-        <Header>
-          <h2>Criar - Mdf</h2>
-        </Header>
-    
-        <Main>
+      <Main>
 
-          <NavBar>
-            <h3 className="selected">Mdf</h3>
-            <h3>Madeira</h3>
-          </NavBar>
+        <NavBar>
+          <h3 className="selected">Mdf</h3>
+          <h3>Madeira</h3>
+        </NavBar>
 
-          <Content>
-            <form onSubmit={handleCreate}>
-              <div>
-                Espessura
-                <InputRadio
-                  value="3mm"
-                  name="thickness"
-                  handleChange={setThickness}
-                  checked={thickness === '3mm' ? true : false}
-                />
+        <Content>
 
-                <InputRadio
-                  value="6mm"
-                  name="thickness"
-                  handleChange={setThickness}
-                  checked={thickness === '6mm' ? true : false}
-                />
-                
-                <InputRadio
-                  value="9mm"
-                  name="thickness"                  
-                  handleChange={setThickness}
-                  checked={thickness === '9mm' ? true : false}
-                />
+        </Content>
 
-                <InputRadio
-                  value="12mm"
-                  name="thickness"
-                  handleChange={setThickness}
-                  checked={thickness === '12mm' ? true : false}
-                />
-
-                <InputRadio
-                  value="15mm"
-                  name="thickness"
-                  handleChange={setThickness}
-                  checked={thickness === '15mm' ? true : false}
-                />
-              </div>
-
-              <label>
-                Comprimento
-                <input />
-              </label><label>
-                Largura
-                <input />
-              </label>
-
-              <label>
-                Quantidade
-                <input />
-              </label>
-
-              <button type="submit">Criar</button>
-            </form>
-          </Content>
-
-        </Main>
-      </Container >
-    </Background>
+      </Main>
+      
+      <AddOptions>
+        {showOptionsAddVisible &&
+          <div className='options'>
+            <button>3mm</button>
+            <button>6mm</button>
+            <button>9mm</button>
+            <button>12mm</button>
+            <button>15mm</button>
+          </div>
+        }
+        <MdAddCircle size={'80px'} onClick={handleAddOptions} />
+      </AddOptions>
+    </Container>
   );
 }
