@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react';
 import { MdAddCircle } from 'react-icons/md'
 
-import { Container, Header, Main, NavBar, Content, AddOptions } from './styles';
+import { Container, Header, Main, NavBar, Content, AddOptions, OptionsAddModal } from './styles';
 
 export function Calculation() {
-  const [showOptionsAddVisible, setShowOptionsAddVisible] = useState(false);
+  const [optionsAddModalIsOpen, setOptionsAddModalIsOpen] = useState(false);
 
   function handleAddOptions() {
-    setShowOptionsAddVisible(!showOptionsAddVisible);
+    setOptionsAddModalIsOpen(!optionsAddModalIsOpen);
   }
-  useEffect(() => {
-    console.log(showOptionsAddVisible)
-  }, [showOptionsAddVisible])
+
 
   return (
     <Container>
-      {showOptionsAddVisible && 
+      {optionsAddModalIsOpen &&
+        <OptionsAddModal>
+          <button>3mm</button>
+          <button>6mm</button>
+          <button>9mm</button>
+          <button>12mm</button>
+          <button>15mm</button>
+        </OptionsAddModal>
+      }
+      {optionsAddModalIsOpen && 
         <div className="background" onClick={handleAddOptions}></div>
       }
       <Header>
@@ -35,16 +42,8 @@ export function Calculation() {
 
       </Main>
       
+ 
       <AddOptions>
-        {showOptionsAddVisible &&
-          <div className='options'>
-            <button>3mm</button>
-            <button>6mm</button>
-            <button>9mm</button>
-            <button>12mm</button>
-            <button>15mm</button>
-          </div>
-        }
         <MdAddCircle size={'80px'} onClick={handleAddOptions} />
       </AddOptions>
     </Container>

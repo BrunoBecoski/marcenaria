@@ -47,24 +47,7 @@ export const AddOptions = styled.span`
 
   display: flex;
   flex-direction: column;
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    
-    button {
-      border: none;
-      background: transparent;
-      color: var(--primary_400);
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-
-    button + button {
-      margin-top: .5rem;
-    }
-  }
-
+  
   svg {
     margin-top: 1rem;
     color: var(--primary_400);
@@ -72,5 +55,25 @@ export const AddOptions = styled.span`
     &:focus, &:active {
       color: var(--primary_500);
     }
+  }
+`;
+
+export const OptionsAddModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+
+  z-index: 2;
+
+  button {
+    border: none;
+    background: transparent;
+    color: var(--secondary_200);
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  button + button {
+    margin-top: .5rem;
   }
 `;
