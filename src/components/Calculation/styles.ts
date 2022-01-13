@@ -4,11 +4,20 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
 
-  .background {
+  .overlay-modal {
+    position: fixed;
+
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     height: 100%;
-    background: var(--on-surface_medium);
-    position: fixed;
+
+    .overlay {
+      width: 100%;
+      height: 100%;
+      background: var(--on-surface_medium);
+    }    
   }
 `;
 

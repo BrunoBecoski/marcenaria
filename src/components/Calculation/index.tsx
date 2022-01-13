@@ -1,29 +1,30 @@
 import { useEffect, useState } from 'react';
 import { MdAddCircle } from 'react-icons/md'
 
+import { ModalOptionsCreate } from '../ModalOptionsCreate';
+
 import { Container, Header, Main, NavBar, Content, AddOptions, OptionsAddModal } from './styles';
 
 export function Calculation() {
-  const [optionsAddModalIsOpen, setOptionsAddModalIsOpen] = useState(false);
+  const [modalOptionsCreateIsOpen, setModalOptionsCreateIsOpen] = useState(false);
 
-  function handleAddOptions() {
-    setOptionsAddModalIsOpen(!optionsAddModalIsOpen);
+  function handleOpenModalOptionsCreate() {
+    setModalOptionsCreateIsOpen(true);
   }
 
+  function handleCloseModalOptionsCreate() {
+    setModalOptionsCreateIsOpen(false);
+  }
 
   return (
     <Container>
-      {optionsAddModalIsOpen &&
-        <OptionsAddModal>
-          <button>3mm</button>
-          <button>6mm</button>
-          <button>9mm</button>
-          <button>12mm</button>
-          <button>15mm</button>
-        </OptionsAddModal>
-      }
-      {optionsAddModalIsOpen && 
-        <div className="background" onClick={handleAddOptions}></div>
+      {modalOptionsCreateIsOpen &&
+      <div className="overlay-modal">
+        <div className="overlay" onClick={handleCloseModalOptionsCreate} />
+        <ModalOptionsCreate
+          handleClose={handleCloseModalOptionsCreate}
+        /> 
+      </div> 
       }
       <Header>
         <h2>Criar - Mdf</h2>
@@ -44,7 +45,7 @@ export function Calculation() {
       
  
       <AddOptions>
-        <MdAddCircle size={'80px'} onClick={handleAddOptions} />
+        <MdAddCircle size={'80px'} onClick={handleOpenModalOptionsCreate} />
       </AddOptions>
     </Container>
   );
