@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Container, Content, Footer } from './style';
 import { InputRadio } from '../InputRadio';
+import { InputRange } from '../InputRange';
 
 type ModalOptionsCreateProps = {
   handleClose: () => void;
@@ -13,6 +14,10 @@ export function ModalOptionsCreate({ handleClose }: ModalOptionsCreateProps) {
 
   function handleSetThickness(value: string) {
     setThickness(value);
+  }
+
+  function handleSetQuantity(value: number) {
+    setQuantity(value)
   }
 
   function handleCreate() {
@@ -58,11 +63,12 @@ export function ModalOptionsCreate({ handleClose }: ModalOptionsCreateProps) {
         </div>
 
         <div className="range">
-          <input 
+          <InputRange
             type="range" 
+            step="1"
             min="1" 
             max="10"
-            onChange={(props) => setQuantity(Number(props.target.value))}
+            handleChange={handleSetQuantity}
             value={quantity}
           />
         </div>

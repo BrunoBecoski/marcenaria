@@ -13,16 +13,13 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  display: flex;
-  align-items: center;
-
   padding: 1rem;
   
   .radio {
   }
 
   .range {
-    transform: rotate(-90deg);
+
   }
 `;
 
