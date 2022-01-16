@@ -10,7 +10,7 @@ type ModalOptionsCreateProps = {
 
 export function ModalOptionsCreate({ handleClose }: ModalOptionsCreateProps) {
   const [thickness, setThickness] = useState('12mm');
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(4);
 
   function handleSetThickness(value: string) {
     setThickness(value);
@@ -64,10 +64,9 @@ export function ModalOptionsCreate({ handleClose }: ModalOptionsCreateProps) {
 
         <div className="range">
           <InputRange
-            type="range" 
-            step="1"
-            min="1" 
-            max="10"
+            min="0" 
+            max="10" 
+            step="1" 
             handleChange={handleSetQuantity}
             value={quantity}
           />
