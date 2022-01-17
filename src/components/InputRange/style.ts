@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-
 `;
 
 type SliderProps = {
@@ -10,27 +9,40 @@ type SliderProps = {
 
 export const Slider = styled.div<SliderProps>`
   input {
+    width: 100%;
+    -webkit-appearance: none;
+    z-index: 1;
+    position: relative;
+    top: 20px;
+    background: transparent;
 
+    // firefox
     ::-moz-range-thumb {
-    background: var(--primary_400);
-    border-radius: 50%;
-    border: none;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+      border: none;
+      width: 20px;
+      height: 20px;
+      cursor: ew-resize;
+      border-radius: 50%;
+      background: var(--primary_400);
+    } 
+
+    // chromium
+    ::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      cursor: ew-resize;
+      border-radius: 50%;
+      background: var(--primary_400);
+    }
   }
-  
-  ::-moz-range-track {
-    
-  }
-}
 
   .track {
-    border-radius: 6px;
-    width: 100%;
+    width: 99%;
     height: 12px;
     position: relative;
 
+    border-radius: 6px;
     display: flex;
     align-items: center;
     
@@ -47,7 +59,8 @@ export const Slider = styled.div<SliderProps>`
       height: 12px;
       background: var(--primary_400);
       position: absolute;
-      border-radius: 6px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
 
     }
   }
