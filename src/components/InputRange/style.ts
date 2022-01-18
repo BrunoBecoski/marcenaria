@@ -11,7 +11,7 @@ export const Slider = styled.div<SliderProps>`
   input {
     width: 100%;
     -webkit-appearance: none;
-    z-index: 1;
+    z-index: 2;
     position: relative;
     top: 20px;
     background: transparent;
@@ -34,6 +34,17 @@ export const Slider = styled.div<SliderProps>`
       cursor: ew-resize;
       border-radius: 50%;
       background: var(--primary_400);
+
+      border: 20px solid transparent;
+      
+      
+    }
+    &:hover {
+      ::-webkit-slider-thumb {
+        border: 20px solid red;
+
+    }
+
     }
   }
 
