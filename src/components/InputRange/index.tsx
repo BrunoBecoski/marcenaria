@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container, Slider } from "./style";
 
 type InputRangeProps = {
@@ -5,6 +6,42 @@ type InputRangeProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 export function InputRange({ handleChange, ...props }: InputRangeProps) {
+
+    let sliderValue = 0;
+
+    switch (props.value) {
+      case 1:
+        sliderValue = 1
+        break;
+      case 2:
+        sliderValue = 12
+        break;
+      case 3: 
+        sliderValue = 23
+        break;
+      case 4:
+        sliderValue = 34
+        break;
+      case 5:
+        sliderValue = 45
+        break;
+      case 6: 
+        sliderValue = 56      
+        break;
+      case 7:
+        sliderValue = 67
+        break;
+      case 8:
+        sliderValue = 78
+        break;
+      case 9: 
+        sliderValue = 89
+        break;
+      case 10:
+        sliderValue = 100
+        break;
+    }
+
   return(
     <Container>
       {/* <input 
@@ -28,7 +65,7 @@ export function InputRange({ handleChange, ...props }: InputRangeProps) {
       </datalist> */}
 
       <Slider
-        value={Number(props.value)}
+        value={sliderValue}
       >
         <input 
           type="range" 
@@ -37,15 +74,16 @@ export function InputRange({ handleChange, ...props }: InputRangeProps) {
           {...props}
         />
         <div className="track">
-          <div className="inactive"></div>
           <div className="active"></div>
+         
           <div className="tick-marks">
             <div className="tick-mark-active"></div>
             <div className="tick-mark-active"></div>
             <div className="tick-mark-active"></div>
-            <div className="tick-mark-active"></div>
-            <div className="tick-mark-active"></div>
-            <div className="tick-mark-active"></div>
+            <div className="tick-mark-active">
+              <div className="thumb" onDrag={(event => console.log(event))} />
+            </div>
+            <div className="tick-mark-inactive"></div>
             <div className="tick-mark-inactive"></div>
             <div className="tick-mark-inactive"></div>
             <div className="tick-mark-inactive"></div>

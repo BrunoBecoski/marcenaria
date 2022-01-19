@@ -9,70 +9,67 @@ type SliderProps = {
 
 export const Slider = styled.div<SliderProps>`
   input {
-    width: 100%;
-    -webkit-appearance: none;
-    z-index: 2;
-    position: relative;
-    top: 20px;
-    background: transparent;
-
-    // firefox
-    ::-moz-range-thumb {
-      border: none;
-      width: 20px;
-      height: 20px;
-      cursor: ew-resize;
-      border-radius: 50%;
-      background: var(--primary_400);
-    } 
-
-    // chromium
-    ::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      cursor: ew-resize;
-      border-radius: 50%;
-      background: var(--primary_400);
-
-      border: 20px solid transparent;
-      
-      
-    }
-    &:hover {
-      ::-webkit-slider-thumb {
-        border: 20px solid red;
-
-    }
-
-    }
+    /* display: none; */
   }
 
   .track {
-    width: 99%;
-    height: 12px;
+    width:100%;
+    height: 8px;
     position: relative;
 
     border-radius: 6px;
     display: flex;
     align-items: center;
+  
+    background: var(--primary_200);
+
     
-    .inactive {
-      background: var(--primary_200);
-      width: 100%;
-      height: 8px;
-      position: absolute;
-      border-radius: 6px;
-    }
-    
-    .active {
-      width: ${(props) => `${props.value}0%`};
+    > .active {
+      width: ${(props) => `${props.value}%`};
       height: 12px;
       background: var(--primary_400);
       position: absolute;
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
+    }
 
+    .tick-marks {
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      padding: 0 4px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary_400);
+
+        position: absolute;
+      }
+
+      .tick-mark-active, 
+      .tick-mark-inactive {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .tick-mark-active {
+        background: var(--primary_200);
+      }
+
+      .tick-mark-inactive {
+        background: var(--primary_400);
+      }
     }
   }
 

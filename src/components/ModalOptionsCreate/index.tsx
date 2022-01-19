@@ -64,7 +64,7 @@ export function ModalOptionsCreate({ handleClose }: ModalOptionsCreateProps) {
 
         <div className="range">
           <InputRange
-            min="0" 
+            min="1" 
             max="10" 
             step="1" 
             handleChange={handleSetQuantity}
