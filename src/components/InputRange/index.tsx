@@ -7,35 +7,37 @@ type InputRangeProps = {
 
 export function InputRange({ handleChange, ...props }: InputRangeProps) {
 
+    const value = Number(props.value);
+
     let sliderValue = 0;
 
-    switch (props.value) {
+    switch (value) {
       case 1:
         sliderValue = 1
         break;
       case 2:
-        sliderValue = 12
+        sliderValue = 9
         break;
       case 3: 
-        sliderValue = 23
+        sliderValue = 21
         break;
       case 4:
-        sliderValue = 34
+        sliderValue = 33
         break;
       case 5:
         sliderValue = 45
         break;
       case 6: 
-        sliderValue = 56      
+        sliderValue = 57      
         break;
       case 7:
-        sliderValue = 67
+        sliderValue = 68
         break;
       case 8:
-        sliderValue = 78
+        sliderValue = 80
         break;
       case 9: 
-        sliderValue = 89
+        sliderValue = 92
         break;
       case 10:
         sliderValue = 100
@@ -44,26 +46,6 @@ export function InputRange({ handleChange, ...props }: InputRangeProps) {
 
   return(
     <Container>
-      {/* <input 
-        type="range" 
-        onChange={(event) => handleChange(Number(event.target.value))} 
-        list="tickmarks"
-        {...props}
-      />
-
-      <datalist id="tickmarks">
-        <option value="1" label="1" >1</option>
-        <option value="2" label="2" >2</option>
-        <option value="3" label="3" >3</option>
-        <option value="4" label="4" >4</option>
-        <option value="5" label="5" >5</option>
-        <option value="6" label="6" >6</option>
-        <option value="7" label="7" >7</option>
-        <option value="8" label="8" >8</option>
-        <option value="9" label="9" >9</option>
-        <option value="10" label="10" >10</option>
-      </datalist> */}
-
       <Slider
         value={sliderValue}
       >
@@ -77,25 +59,82 @@ export function InputRange({ handleChange, ...props }: InputRangeProps) {
           <div className="active"></div>
          
           <div className="tick-marks">
-            <div className="tick-mark-active"></div>
-            <div className="tick-mark-active"></div>
-            <div className="tick-mark-active"></div>
-            <div className="tick-mark-active">
-              <div className="thumb" onDrag={(event => console.log(event))} />
+            <div 
+              onClick={() => handleChange(1)} 
+              className={value > 1 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 1 && <div className="thumb"/>} 
             </div>
-            <div className="tick-mark-inactive"></div>
-            <div className="tick-mark-inactive"></div>
-            <div className="tick-mark-inactive"></div>
-            <div className="tick-mark-inactive"></div>
-            <div className="tick-mark-inactive"></div>
-            <div className="tick-mark-inactive"></div>
+
+            <div 
+              onClick={() => handleChange(2)}
+              className={value > 2 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 2 && <div className="thumb"/>} 
+            </div>
+
+            <div 
+              onClick={() => handleChange(3)}
+              className={value > 3 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 3 && <div className="thumb"/>} 
+            </div>
+
+            <div 
+              onClick={() => handleChange(4)}
+              className={value > 4 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 4 && <div className="thumb"/>}             
+            </div>
+
+            <div 
+              onClick={() => handleChange(5)}
+              className={value > 5 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 5 && <div className="thumb"/>} 
+            </div>
+
+            <div 
+              onClick={() => handleChange(6)}
+              className={value > 6 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 6 && <div className="thumb"/>}
+            </div>
+
+            <div 
+              onClick={() => handleChange(7)}
+              className={value > 7 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 7 && <div className="thumb"/>}   
+            </div>
+
+            <div 
+              onClick={() => handleChange(8)}
+              className={value > 8 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 8 && <div className="thumb"/>} 
+            </div>
+
+            <div 
+              onClick={() => handleChange(9)}
+              className={value > 9 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 9 && <div className="thumb"/>} 
+            </div>
+
+            <div 
+              onClick={() => handleChange(10)}
+              className={value > 10 ? "tick-mark-active" : "tick-mark-inactive"}
+            >
+              {value === 10 && <div className="thumb"/>} 
+            </div>
           </div>
         </div>
         <div className="thumb">
           <div className="value-indicator-container" aria-hidden="true">
             <div className="value-indicator">
               <span className="value-indicator-text">
-                {props.value}
+                {value}
               </span>
             </div>
           </div>

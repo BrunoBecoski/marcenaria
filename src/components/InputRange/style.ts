@@ -9,7 +9,7 @@ type SliderProps = {
 
 export const Slider = styled.div<SliderProps>`
   input {
-    /* display: none; */
+    display: none;
   }
 
   .track {
@@ -24,13 +24,14 @@ export const Slider = styled.div<SliderProps>`
     background: var(--primary_200);
 
     
-    > .active {
+    .active {
       width: ${(props) => `${props.value}%`};
       height: 12px;
-      background: var(--primary_400);
+      background: var(--primary_500);
       position: absolute;
       border-top-left-radius: 6px;
       border-bottom-left-radius: 6px;
+      border-radius: 6px;
     }
 
     .tick-marks {
@@ -42,37 +43,60 @@ export const Slider = styled.div<SliderProps>`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      
 
-      .thumb {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: var(--primary_400);
-
-        position: absolute;
-      }
 
       .tick-mark-active, 
       .tick-mark-inactive {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
+        width: 8%;
+        height: 12px;
+
+        position: relative;
 
         display: flex;
         align-items: center;
         justify-content: center;
+
+        border: 1px solid yellow;
+
+        &:first-child {
+          width: 1%;
+        }
+
+        &:last-child {
+          width: 1%;
+        }
+
+        &::before {
+          content: "";
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          left: 100px;
+        }
+
+        .thumb {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: var(--primary_600);
+          background: rgba(0,75,0, .5);
+
+          position: absolute;
+        }
+
       }
       
-      .tick-mark-active {
+      .tick-mark-active::before {
         background: var(--primary_200);
       }
 
-      .tick-mark-inactive {
-        background: var(--primary_400);
-      }
+      .tick-mark-inactive:before {
+        background: var(--primary_600);
     }
   }
 
   input {
+    
   }
 `;
