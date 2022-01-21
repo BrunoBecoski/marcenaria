@@ -41,15 +41,16 @@ export const Slider = styled.div<SliderProps>`
       padding: 0 4px;
 
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       
 
 
       .tick-mark-active, 
       .tick-mark-inactive {
-        width: 8%;
-        height: 12px;
+        height: 20px;
+
+        padding: 0 calc(5% - 2.5px);
 
         position: relative;
 
@@ -57,14 +58,14 @@ export const Slider = styled.div<SliderProps>`
         align-items: center;
         justify-content: center;
 
-        border: 1px solid yellow;
+        /* border: 1px solid yellow; */
 
-        &:first-child {
-          width: 1%;
+        &:first-child{
+          padding-left: 0;
         }
 
         &:last-child {
-          width: 1%;
+          padding-right: 0;
         }
 
         &::before {
@@ -73,6 +74,8 @@ export const Slider = styled.div<SliderProps>`
           height: 5px;
           border-radius: 50%;
           left: 100px;
+
+
         }
 
         .thumb {
@@ -80,7 +83,7 @@ export const Slider = styled.div<SliderProps>`
           height: 20px;
           border-radius: 50%;
           background: var(--primary_600);
-          background: rgba(0,75,0, .5);
+          /* background: rgba(0,75,0, .5); */
 
           position: absolute;
         }

@@ -5,39 +5,94 @@ type InputRangeProps = {
   handleChange: (value: number) => void;
 } & React.InputHTMLAttributes<HTMLInputElement>
 
+type TrackProps = {
+  handleChange: (value: number) => void;
+  currentValue: number;
+  quantity: number;
+}
+
+type MarkProps ={
+  position: number;
+}
+
+function Track({ handleChange, currentValue, quantity }: TrackProps) {
+  let array:number[];
+
+  function loop() {
+    for (let index = 1; index <= quantity; index++) {
+      array.push(index)     
+    }
+  }
+
+  loop();
+
+  function Mark({ position }: MarkProps) {
+    return (
+      <div 
+       onClick={() => handleChange(position)} 
+       className={currentValue > position ? "tick-mark-active" : "tick-mark-inactive"}
+     >
+       {currentValue === position && <div className="thumb"/>} 
+     </div>
+   );
+  }
+
+  return (
+    <div className="track">
+      <div className="active" />
+      <div className="tick-marks">
+        {array.map((position) =>  <Mark key={position} position={position} /> )}
+        {/* <Mark position={1} />
+        <Mark position={2} />
+        <Mark position={3} />
+        <Mark position={4} />
+        <Mark position={5} />
+        <Mark position={6} />
+        <Mark position={7} />
+        <Mark position={8} />
+        <Mark position={9} />
+        <Mark position={10} /> */}
+      </div>
+      
+    </div>
+  );
+}
+
+
+
 export function InputRange({ handleChange, ...props }: InputRangeProps) {
 
-    const value = Number(props.value);
+    const currentValue = Number(props.value);
 
     let sliderValue = 0;
 
-    switch (value) {
+    switch (currentValue) {
       case 1:
-        sliderValue = 1
+        sliderValue = 2
         break;
       case 2:
-        sliderValue = 9
+        sliderValue = 13
         break;
       case 3: 
-        sliderValue = 21
+        sliderValue = 24
         break;
       case 4:
-        sliderValue = 33
+        sliderValue = 35
         break;
       case 5:
-        sliderValue = 45
+        sliderValue = 46
         break;
       case 6: 
-        sliderValue = 57      
+        sliderValue = 56    
         break;
       case 7:
-        sliderValue = 68
+        sliderValue = 67
         break;
       case 8:
-        sliderValue = 80
+        sliderValue = 78
         break;
       case 9: 
-        sliderValue = 92
+        sliderValue = 89
         break;
       case 10:
         sliderValue = 100
@@ -55,86 +110,92 @@ export function InputRange({ handleChange, ...props }: InputRangeProps) {
           onChange={(event) => handleChange(Number(event.target.value))}
           {...props}
         />
-        <div className="track">
+        <Track 
+          currentValue={currentValue}
+          quantity={10}
+          handleChange={handleChange}
+        />
+        {/* <div className="track">
           <div className="active"></div>
          
           <div className="tick-marks">
             <div 
-              onClick={() => handleChange(1)} 
-              className={value > 1 ? "tick-mark-active" : "tick-mark-inactive"}
+              onClick={() => handleChange(1)}
+              className={currentValue > 1 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 1 && <div className="thumb"/>} 
+              {currentValue === 1 && <div className="thumb"/>} 
             </div>
 
             <div 
               onClick={() => handleChange(2)}
-              className={value > 2 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 2 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 2 && <div className="thumb"/>} 
+              {currentValue === 2 && <div className="thumb"/>} 
             </div>
 
             <div 
               onClick={() => handleChange(3)}
-              className={value > 3 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 3 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 3 && <div className="thumb"/>} 
+              {currentValue === 3 && <div className="thumb"/>} 
             </div>
 
             <div 
               onClick={() => handleChange(4)}
-              className={value > 4 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 4 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 4 && <div className="thumb"/>}             
+              {currentValue === 4 && <div className="thumb"/>}             
             </div>
 
             <div 
               onClick={() => handleChange(5)}
-              className={value > 5 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 5 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 5 && <div className="thumb"/>} 
+              {currentValue === 5 && <div className="thumb"/>} 
             </div>
 
             <div 
               onClick={() => handleChange(6)}
-              className={value > 6 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 6 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 6 && <div className="thumb"/>}
+              {currentValue === 6 && <div className="thumb"/>}
             </div>
 
             <div 
               onClick={() => handleChange(7)}
-              className={value > 7 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 7 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 7 && <div className="thumb"/>}   
+              {currentValue === 7 && <div className="thumb"/>}   
             </div>
 
             <div 
               onClick={() => handleChange(8)}
-              className={value > 8 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 8 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 8 && <div className="thumb"/>} 
+              {currentValue === 8 && <div className="thumb"/>} 
             </div>
 
             <div 
               onClick={() => handleChange(9)}
-              className={value > 9 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 9 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 9 && <div className="thumb"/>} 
+              {currentValue === 9 && <div className="thumb"/>} 
             </div>
 
             <div 
               onClick={() => handleChange(10)}
-              className={value > 10 ? "tick-mark-active" : "tick-mark-inactive"}
+              className={currentValue > 10 ? "tick-mark-active" : "tick-mark-inactive"}
             >
-              {value === 10 && <div className="thumb"/>} 
+              {currentValue === 10 && <div className="thumb"/>} 
             </div>
           </div>
-        </div>
+        </div> */}
+
         <div className="thumb">
           <div className="value-indicator-container" aria-hidden="true">
             <div className="value-indicator">
               <span className="value-indicator-text">
-                {value}
+                {currentValue}
               </span>
             </div>
           </div>
