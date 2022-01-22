@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container, Slider } from "./style";
 
 type InputRangeProps = {
@@ -16,7 +16,7 @@ type MarkProps ={
 }
 
 function Track({ handleChange, currentValue, quantity }: TrackProps) {
-  let array:number[];
+  let array:number[] = [];
 
   function loop() {
     for (let index = 1; index <= quantity; index++) {
@@ -25,14 +25,30 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
   }
 
   loop();
-
+  
   function Mark({ position }: MarkProps) {
+    const [dragX, setDragX] = useState<any>();
+
+    useEffect(() => {
+      console.log(dragX)
+    }, [dragX])
+ 
+     
     return (
       <div 
-       onClick={() => handleChange(position)} 
-       className={currentValue > position ? "tick-mark-active" : "tick-mark-inactive"}
-     >
-       {currentValue === position && <div className="thumb"/>} 
+        id={String(position)}
+        onClick={() => handleChange(position)} 
+        className={currentValue > position ? "tick-mark-active" : "tick-mark-inactive"}
+      >
+       {currentValue === position && 
+          <div 
+            className="thumb" 
+            onDrag={(event) => setDragX(event.clientX)}
+            style={{
+              left: dragX
+            }}
+          />
+        } 
      </div>
    );
   }

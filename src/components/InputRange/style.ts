@@ -85,7 +85,7 @@ export const Slider = styled.div<SliderProps>`
           background: var(--primary_600);
           /* background: rgba(0,75,0, .5); */
 
-          position: absolute;
+          position: fixed;
         }
 
       }
