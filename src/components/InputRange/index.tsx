@@ -25,15 +25,56 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
   }
 
   loop();
-  
-  function Mark({ position }: MarkProps) {
-    const [dragX, setDragX] = useState<any>();
 
-    useEffect(() => {
-      console.log(dragX)
-    }, [dragX])
- 
-     
+  
+
+  function Mark({ position }: MarkProps) {
+    const [dragX, setDragX] = useState<number>();
+
+    // useEffect(() => {
+    //   console.log(dragX);
+    // }, [dragX]);
+
+
+    function handleDrag(clientX: number) {
+      console.clear();
+
+      setDragX(clientX);
+      console.log('dragX')
+      console.log(dragX);
+
+      const onePosition = (Math.round(document.getElementById("1").getBoundingClientRect().left));
+      const twoPosition = (Math.round(document.getElementById("2").getBoundingClientRect().left));
+      const threePosition = (Math.round(document.getElementById("3").getBoundingClientRect().left));
+      const fourPosition = (Math.round(document.getElementById("4").getBoundingClientRect().left));
+      const fivePosition = (Math.round(document.getElementById("5").getBoundingClientRect().left));
+      const sixPosition = (Math.round(document.getElementById("6").getBoundingClientRect().left));
+      const sevenPosition = (Math.round(document.getElementById("7").getBoundingClientRect().left));
+      const eightPosition = (Math.round(document.getElementById("8").getBoundingClientRect().left));
+      const ninePosition = (Math.round(document.getElementById("9").getBoundingClientRect().left));
+      const teenPosition = (Math.round(document.getElementById("10").getBoundingClientRect().left));
+
+      console.log(twoPosition - 54)
+      console.log(twoPosition + 54)
+
+      const thumb = document.getElementById("thumb");
+      console.log(thumb)
+      switch (dragX) {
+        case onePosition + 54:
+          handleChange(1);    
+             
+        break;
+
+      case twoPosition + 54: 
+      case twoPosition - 54:
+        handleChange(2);        
+        break;
+
+      default:
+        break;
+    }
+    }
+
     return (
       <div 
         id={String(position)}
@@ -42,8 +83,9 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
       >
        {currentValue === position && 
           <div 
+            id="thumb"
             className="thumb" 
-            onDrag={(event) => setDragX(event.clientX)}
+            onDrag={(event) => handleDrag(event.clientX)}
             style={{
               left: dragX
             }}
@@ -51,6 +93,10 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
         } 
      </div>
    );
+
+
+    
+
   }
 
   return (
