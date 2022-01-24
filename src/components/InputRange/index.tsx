@@ -24,56 +24,37 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
     }
   }
 
-  loop();
-
-  
+  loop();  
 
   function Mark({ position }: MarkProps) {
-    const [dragX, setDragX] = useState<number>();
+    const [dragX, setDragX] = useState();
 
-    // useEffect(() => {
-    //   console.log(dragX);
-    // }, [dragX]);
+    function handleDrag(event: any) {
+      console.log(event.type)
 
+      if(event.type === 'touchmove') {
+        setDragX(Math.round(event.touches[0].clientX));
+      }
 
-    function handleDrag(clientX: number) {
-      console.clear();
+      if(event.type === 'drag') {
+        setDragX(event.clientX);
+      }
 
-      setDragX(clientX);
-      console.log('dragX')
-      console.log(dragX);
+      const element = document.getElementById('thumb')?.parentNode;
+      const elementWidth = element.offsetWidth;      
+      const elementPosition = Math.round(element.getBoundingClientRect().left);
+      
+      const left = elementPosition;
+      const right = elementWidth + elementPosition;
 
-      const onePosition = (Math.round(document.getElementById("1").getBoundingClientRect().left));
-      const twoPosition = (Math.round(document.getElementById("2").getBoundingClientRect().left));
-      const threePosition = (Math.round(document.getElementById("3").getBoundingClientRect().left));
-      const fourPosition = (Math.round(document.getElementById("4").getBoundingClientRect().left));
-      const fivePosition = (Math.round(document.getElementById("5").getBoundingClientRect().left));
-      const sixPosition = (Math.round(document.getElementById("6").getBoundingClientRect().left));
-      const sevenPosition = (Math.round(document.getElementById("7").getBoundingClientRect().left));
-      const eightPosition = (Math.round(document.getElementById("8").getBoundingClientRect().left));
-      const ninePosition = (Math.round(document.getElementById("9").getBoundingClientRect().left));
-      const teenPosition = (Math.round(document.getElementById("10").getBoundingClientRect().left));
+      if(dragX < left) {
+        handleChange(position - 1);
+      }
 
-      console.log(twoPosition - 54)
-      console.log(twoPosition + 54)
-
-      const thumb = document.getElementById("thumb");
-      console.log(thumb)
-      switch (dragX) {
-        case onePosition + 54:
-          handleChange(1);    
-             
-        break;
-
-      case twoPosition + 54: 
-      case twoPosition - 54:
-        handleChange(2);        
-        break;
-
-      default:
-        break;
-    }
-    }
+      if(dragX > right) {
+        handleChange(position + 1);
+      }
+    }  
 
     return (
       <div 
@@ -85,18 +66,12 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
           <div 
             id="thumb"
             className="thumb" 
-            onDrag={(event) => handleDrag(event.clientX)}
-            style={{
-              left: dragX
-            }}
+            onDrag={(event) => handleDrag(event)}
+            onTouchMove={(event) => handleDrag(event)}
           />
         } 
      </div>
    );
-
-
-    
-
   }
 
   return (
@@ -104,18 +79,7 @@ function Track({ handleChange, currentValue, quantity }: TrackProps) {
       <div className="active" />
       <div className="tick-marks">
         {array.map((position) =>  <Mark key={position} position={position} /> )}
-        {/* <Mark position={1} />
-        <Mark position={2} />
-        <Mark position={3} />
-        <Mark position={4} />
-        <Mark position={5} />
-        <Mark position={6} />
-        <Mark position={7} />
-        <Mark position={8} />
-        <Mark position={9} />
-        <Mark position={10} /> */}
       </div>
-      
     </div>
   );
 }
@@ -177,82 +141,6 @@ export function InputRange({ handleChange, ...props }: InputRangeProps) {
           quantity={10}
           handleChange={handleChange}
         />
-        {/* <div className="track">
-          <div className="active"></div>
-         
-          <div className="tick-marks">
-            <div 
-              onClick={() => handleChange(1)}
-              className={currentValue > 1 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 1 && <div className="thumb"/>} 
-            </div>
-
-            <div 
-              onClick={() => handleChange(2)}
-              className={currentValue > 2 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 2 && <div className="thumb"/>} 
-            </div>
-
-            <div 
-              onClick={() => handleChange(3)}
-              className={currentValue > 3 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 3 && <div className="thumb"/>} 
-            </div>
-
-            <div 
-              onClick={() => handleChange(4)}
-              className={currentValue > 4 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 4 && <div className="thumb"/>}             
-            </div>
-
-            <div 
-              onClick={() => handleChange(5)}
-              className={currentValue > 5 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 5 && <div className="thumb"/>} 
-            </div>
-
-            <div 
-              onClick={() => handleChange(6)}
-              className={currentValue > 6 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 6 && <div className="thumb"/>}
-            </div>
-
-            <div 
-              onClick={() => handleChange(7)}
-              className={currentValue > 7 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 7 && <div className="thumb"/>}   
-            </div>
-
-            <div 
-              onClick={() => handleChange(8)}
-              className={currentValue > 8 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 8 && <div className="thumb"/>} 
-            </div>
-
-            <div 
-              onClick={() => handleChange(9)}
-              className={currentValue > 9 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 9 && <div className="thumb"/>} 
-            </div>
-
-            <div 
-              onClick={() => handleChange(10)}
-              className={currentValue > 10 ? "tick-mark-active" : "tick-mark-inactive"}
-            >
-              {currentValue === 10 && <div className="thumb"/>} 
-            </div>
-          </div>
-        </div> */}
-
         <div className="thumb">
           <div className="value-indicator-container" aria-hidden="true">
             <div className="value-indicator">

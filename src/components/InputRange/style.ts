@@ -10,7 +10,6 @@ type SliderProps = {
 export const Slider = styled.div<SliderProps>`
   input {
     display: none;
-    /* width:100%; */
   }
 
   .track {
@@ -80,8 +79,8 @@ export const Slider = styled.div<SliderProps>`
         }
 
         .thumb {
-          width: 30px;
-          height: 30px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           background: var(--primary_600);
           /* background: rgba(0,75,0, .5); */
