@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MdAddCircle } from 'react-icons/md'
+// import { MdAddCircle } from 'react-icons/md'
 
 import { ModalOptionsCreate } from '../ModalOptionsCreate';
 
@@ -45,7 +45,8 @@ export function Calculation() {
       
  
       <AddOptions>
-        <MdAddCircle size={'80px'} onClick={handleOpenModalOptionsCreate} />
+        Add
+        {/* <MdAddCircle size={'80px'} onClick={handleOpenModalOptionsCreate} /> */}
       </AddOptions>
     </Container>
   );
