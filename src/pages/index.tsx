@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 import { api } from '../services/api';
@@ -7,6 +7,15 @@ import { Input } from '../components/Input';
 import { TextArea } from '../components/TextArea';
 import { Button } from '../components/Button';
 
+interface OrderResponseProps {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  date: string;
+  client: string;
+}
+
 export default function Home() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -14,8 +23,10 @@ export default function Home() {
   const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [client, setClient] = useState('');
 
+  const [ordersData, setOrdersData] = useState<OrderResponseProps[]>([]);
+
   async function handleAddOrder() {
-    api.post('/orders', {
+    const response = await api.post('/orders', {
       name,
       description,
       price: new Intl.NumberFormat(
@@ -25,6 +36,8 @@ export default function Home() {
       client
     });
 
+    setOrdersData(oldState => [...oldState, response.data]);
+
     setName('');
     setDescription('');
     setPrice('');
@@ -32,7 +45,15 @@ export default function Home() {
     setClient('');
   }
 
+  useEffect(() => {
+    async function request() {
+      const response = await api.get('/orders');
+      setOrdersData(response.data);
+    }
 
+    request();
+  }, []);
+  
   return (
     <main>
       <h1>Home</h1>
@@ -65,12 +86,33 @@ export default function Home() {
           onChange={event => setClient(event.target.value)}
         />
 
-
         <Button 
           title="Cadastrar Pedido"
           onClick={handleAddOrder}
         />
       </div>
+
+      <table>
+          <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Data</th>
+            <th>Cliente</th>
+          </tr>
+        {
+          ordersData &&
+          ordersData.map((order) => (
+            <tr key={order.id}>
+              <td>{order.name}</td>
+              <td>{order.description}</td>
+              <td>{order.price}</td>
+              <td>{order.date}</td>
+              <td>{order.client}</td>
+            </tr>
+          ))
+        }
+      </table>
 
     </main>
     );
