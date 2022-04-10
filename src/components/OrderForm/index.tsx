@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { format } from 'date-fns';
 
 import { api } from '../../services/api';
@@ -38,11 +38,6 @@ export function OrderForm() {
     setDate(format(new Date(), 'yyyy-MM-dd'));
     setClient('');
   }
-
-  useEffect(() => {
-    console.log(type)
-    console.log('type')
-  }, [type]);
 
   return (
     <Container>

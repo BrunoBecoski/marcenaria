@@ -18,6 +18,18 @@ export default function Home() {
     request();
   }, []);
   
+  // Fix Error: Hydration failed because the initial UI 
+  // does not match what was rendered on the server.
+  const [showChild, setShowChild] = useState(false);
+
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
+
   return (
     <main>
       <h1>Home</h1>
