@@ -9,5 +9,5 @@ export function Label({ children, ...rest }: LabelProps) {
     >
       {children}
     </Container>
-  )
+  );
 }

@@ -14,5 +14,5 @@ export function Button({
     >
       {title}
     </Container>
-  )
+  );
 }

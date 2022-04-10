@@ -11,7 +11,7 @@ export function InputRadioBox({ name, options, setState }: InputRadioBox) {
     <Container>
       {
         options.map(option => (
-          <div onClick={() => setState(option)}>
+          <div key={option} onClick={() => setState(option)}>
             <InputRadio
               name={name}
               id={option}

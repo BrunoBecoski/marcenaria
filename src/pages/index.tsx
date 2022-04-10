@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '../services/api';
+import { OrderData } from '../types/OrderData';
 
 import { OrderForm } from '../components/OrderForm'; 
-
-interface OrderResponseProps {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  date: string;
-  client: string;
-}
+import { Table } from '../components/Table';
 
 export default function Home() {
-  const [ordersData, setOrdersData] = useState<OrderResponseProps[]>([]);
+  const [ordersData, setOrdersData] = useState<OrderData[]>([]);
 
   useEffect(() => {
     async function request() {
@@ -32,27 +25,7 @@ export default function Home() {
 
       <OrderForm />
 
-      <table>
-          <tr>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Data</th>
-            <th>Cliente</th>
-          </tr>
-        {
-          ordersData &&
-          ordersData.map((order) => (
-            <tr key={order.id}>
-              <td>{order.name}</td>
-              <td>{order.description}</td>
-              <td>{order.price}</td>
-              <td>{order.date}</td>
-              <td>{order.client}</td>
-            </tr>
-          ))
-        }
-      </table>
+      <Table ordersData={ordersData} />
 
     </main>
     );

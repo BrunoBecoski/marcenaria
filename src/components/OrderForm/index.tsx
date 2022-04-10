@@ -12,7 +12,7 @@ import { Button } from '../Button';
 import { Container } from './styles';
 
 export function OrderForm() {
-  const [type, setType] = useState('')
+  const [type, setType] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -21,6 +21,7 @@ export function OrderForm() {
 
   async function handleAddOrder() {
     await api.post('/orders', {
+      type,
       name,
       description,
       price: new Intl.NumberFormat(
@@ -30,13 +31,13 @@ export function OrderForm() {
       client
     });
 
+    setType('');
     setName('');
     setDescription('');
     setPrice('');
     setDate(format(new Date(), 'yyyy-MM-dd'));
     setClient('');
   }
-
 
   useEffect(() => {
     console.log(type)
@@ -49,7 +50,7 @@ export function OrderForm() {
         Tipo
         <InputRadioBox
           name="types"
-          options={["Novo", "Reforma"]}
+          options={["Novo", "Reformado"]}
           setState={setType}
         />
       </Label>
@@ -101,4 +102,4 @@ export function OrderForm() {
       />
     </Container>
   );
-}
+} 
