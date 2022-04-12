@@ -31,7 +31,12 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <main
+      style={{
+        margin: 'auto',
+        maxWidth: 500,
+      }}
+    >
       <h1>Home</h1>
       <h2>Formulário de Encomenda</h2>
 
