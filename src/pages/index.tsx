@@ -4,6 +4,7 @@ import { api } from '../services/api';
 import { OrderData } from '../types/OrderData';
 
 import { OrderForm } from '../components/OrderForm'; 
+import { ClientForm } from '../components/ClientForm';
 import { Table } from '../components/Table';
 
 export default function Home() {
@@ -41,6 +42,8 @@ export default function Home() {
       <h2>Formulário de Encomenda</h2>
 
       <OrderForm />
+
+      <ClientForm />
 
       <Table ordersData={ordersData} />
 
