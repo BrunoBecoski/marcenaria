@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 import { api } from '../../services/api';
+import { ClientData } from '../../types/ClientData';
 
 import { InputRadioBox } from '../InputRadioBox';
 import { Label } from '../Label';
 import { Input } from '../Input';
 import { TextArea } from '../TextArea';
+import { DataList } from '../DataList';
 import { Button } from '../Button';
 
 import { Container } from './styles';
@@ -18,6 +20,8 @@ export function OrderForm() {
   const [price, setPrice] = useState('');
   const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'))
   const [client, setClient] = useState('');
+  const [clientNamesList, setClientNamesList] = useState<string[]>([]);
+
 
   async function handleAddOrder() {
     await api.post('/orders', {
@@ -38,6 +42,17 @@ export function OrderForm() {
     setDate(format(new Date(), 'yyyy-MM-dd'));
     setClient('');
   }
+
+  useEffect(() => {
+    async function requestClient() {
+      const { data } = await api.get<ClientData[]>('/clients');
+      const clientsNames = data.map(client => client.firstName);
+
+      setClientNamesList(clientsNames);
+    }
+
+    requestClient();
+  }, [])
 
   return (
     <Container>
@@ -82,14 +97,17 @@ export function OrderForm() {
           onChange={event => setDate(event.target.value)}
         />
       </Label>
+
       <Label>
         Cliente
-        <Input 
-          placeholder="Cliente"
-          value={client}
-          onChange={event => setClient(event.target.value)}
+        <Input list="clients"/>
+        <DataList 
+          id="clients"
+          options={clientNamesList}
         />
       </Label>
+      
+
 
       <Button 
         title="Cadastrar Pedido"
