@@ -8,7 +8,7 @@ import { InputRadioBox } from '../InputRadioBox';
 import { Label } from '../Label';
 import { Input } from '../Input';
 import { TextArea } from '../TextArea';
-import { DataList } from '../DataList';
+import { Select } from '../Select';
 import { Button } from '../Button';
 
 import { Container } from './styles';
@@ -19,9 +19,8 @@ export function OrderForm() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'))
-  const [client, setClient] = useState('');
-  const [clientNamesList, setClientNamesList] = useState<string[]>([]);
-
+  const [clientId, setClientId] = useState('');
+  const [clientNamesList, setClientNamesList] = useState<{value: string, label: string}[]>([]);
 
   async function handleAddOrder() {
     await api.post('/orders', {
@@ -32,7 +31,7 @@ export function OrderForm() {
         'pt-BR', { style: 'currency', currency: 'BRL'}
       ).format(Number(price)),
       date,
-      client
+      clientId
     });
 
     setType('');
@@ -40,19 +39,24 @@ export function OrderForm() {
     setDescription('');
     setPrice('');
     setDate(format(new Date(), 'yyyy-MM-dd'));
-    setClient('');
+    setClientId('');
   }
 
   useEffect(() => {
     async function requestClient() {
       const { data } = await api.get<ClientData[]>('/clients');
-      const clientsNames = data.map(client => client.firstName);
+      const clientsNames = data.map(client => (
+        {
+          value: client.id,  
+          label: `${client.firstName} ${client.lastName}`
+        }
+      ));
 
       setClientNamesList(clientsNames);
     }
 
     requestClient();
-  }, [])
+  }, []);
 
   return (
     <Container>
@@ -97,18 +101,15 @@ export function OrderForm() {
           onChange={event => setDate(event.target.value)}
         />
       </Label>
-
       <Label>
         Cliente
-        <Input list="clients"/>
-        <DataList 
-          id="clients"
+        <Select 
+          name="clientNamesList"
           options={clientNamesList}
+          onChange={event => setClientId(event.target.value)}
         />
       </Label>
       
-
-
       <Button 
         title="Cadastrar Pedido"
         onClick={handleAddOrder}
