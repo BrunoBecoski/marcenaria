@@ -4,12 +4,12 @@ import { format } from 'date-fns';
 import { api } from '../../services/api';
 import { ClientData } from '../../types/ClientData';
 
-import { InputRadioBox } from '../InputRadioBox';
-import { Label } from '../Label';
-import { Input } from '../Input';
-import { TextArea } from '../TextArea';
-import { Select } from '../Select';
-import { Button } from '../Button';
+import { InputRadioBox } from '../Form/InputRadioBox';
+import { Label } from '../Form/Label';
+import { Input } from '../Form/Input';
+import { TextArea } from '../Form/TextArea';
+import { Select } from '../Form/Select';
+import { Button } from '../Form/Button';
 
 import { Container } from './styles';
 

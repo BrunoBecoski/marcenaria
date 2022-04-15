@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { api } from '../../services/api';
 
-import { Label } from '../Label';
-import { Input } from '../Input';
-import { Button } from '../Button';
+import { Label } from '../Form/Label';
+import { Input } from '../Form/Input';
+import { Button } from '../Form/Button';
 
 import { Container } from './styles';
 
