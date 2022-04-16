@@ -1,7 +1,12 @@
 import { Container, Option } from './styles';
 
+export interface SelectOptionsProps {
+  value: string, 
+  label: string
+}
+
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement>{
-  options: {value: string, label: string}[];
+  options: SelectOptionsProps[];
 }
 
 export function Select({ options, ...rest }: SelectProps) {

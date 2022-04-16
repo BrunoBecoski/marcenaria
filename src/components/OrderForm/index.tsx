@@ -8,7 +8,7 @@ import { InputRadioBox } from '../Form/InputRadioBox';
 import { Label } from '../Form/Label';
 import { Input } from '../Form/Input';
 import { TextArea } from '../Form/TextArea';
-import { Select } from '../Form/Select';
+import { Select, SelectOptionsProps } from '../Form/Select';
 import { Button } from '../Form/Button';
 
 import { Container } from './styles';
@@ -20,10 +20,10 @@ export function OrderForm() {
   const [price, setPrice] = useState('');
   const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'))
   const [clientId, setClientId] = useState('');
-  const [clientNamesList, setClientNamesList] = useState<{value: string, label: string}[]>([]);
+  const [clientNamesList, setClientNamesList] = useState<SelectOptionsProps[]>([]);
 
   async function handleAddOrder() {
-    await api.post('/orders', {
+    const { data } = await api.post('/orders', {
       type,
       name,
       description,
@@ -32,6 +32,10 @@ export function OrderForm() {
       ).format(Number(price)),
       date,
       clientId
+    });
+
+    await api.patch(`/clients/${clientId}`, {
+      ordersIds: [data.id]
     });
 
     setType('');

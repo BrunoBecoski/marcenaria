@@ -17,7 +17,8 @@ export function ClientForm() {
     await api.post('/clients', {
       firstName,
       lastName,
-      telephone
+      telephone,
+      ordersIds: []
     });
 
     setFirstName('');
