@@ -12,6 +12,12 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement>{
 export function Select({ options, ...rest }: SelectProps) {
   return (
     <Container {...rest }>
+      <Option
+        disabled
+        selected
+      >
+        Selecione o Cliente
+      </Option>
       {
         options.map(option => (
           <Option key={option.value} value={option.value}>

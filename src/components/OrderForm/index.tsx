@@ -34,16 +34,19 @@ export function OrderForm() {
       clientId
     });
 
+    const clienteResponse = await api.get<ClientData>(`/clients/${clientId}`);
+
     await api.patch(`/clients/${clientId}`, {
-      ordersIds: [data.id]
+      ordersIds: [
+        ...clienteResponse.data.ordersIds,
+        data.id
+      ]
     });
 
     setType('');
     setName('');
     setDescription('');
     setPrice('');
-    setDate(format(new Date(), 'yyyy-MM-dd'));
-    setClientId('');
   }
 
   useEffect(() => {
