@@ -7,16 +7,17 @@ export interface SelectOptionsProps {
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement>{
   options: SelectOptionsProps[];
+  placeholder: string;
 }
 
-export function Select({ options, ...rest }: SelectProps) {
+export function Select({ options, placeholder, ...rest }: SelectProps) {
   return (
     <Container {...rest }>
       <Option
         disabled
         selected
       >
-        Selecione o Cliente
+        {placeholder}
       </Option>
       {
         options.map(option => (

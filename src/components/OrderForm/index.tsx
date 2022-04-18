@@ -114,6 +114,7 @@ export function OrderForm() {
           name="clientNamesList"
           options={clientNamesList}
           onChange={event => setClientId(event.target.value)}
+          placeholder="Selecione um cliente"
         />
       </Label>
       

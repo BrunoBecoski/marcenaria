@@ -2,22 +2,36 @@ import { useEffect, useState } from 'react';
 
 import { api } from '../services/api';
 import { OrderData } from '../types/OrderData';
+import { ClientData } from '../types/ClientData';
 
 import { OrderForm } from '../components/OrderForm'; 
 import { ClientForm } from '../components/ClientForm';
 import { Table } from '../components/Table';
+import { Select, SelectOptionsProps } from '../components/Form/Select';
 
 export default function Home() {
   const [ordersData, setOrdersData] = useState<OrderData[]>([]);
+  const [clientNameList, setClientNameList] = useState<SelectOptionsProps[]>([]);
 
   useEffect(() => {
-    async function request() {
-      const response = await api.get('/orders');
-      setOrdersData(response.data);
+    async function requestClients() {
+      const { data } = await api.get<ClientData[]>('/clients');
+
+      setClientNameList(data.map(client => (
+        {
+          value: client.id,  
+          label: `${client.firstName} ${client.lastName}`
+        }
+      )));
     }
 
-    request();
+    requestClients();
   }, []);
+
+  async function requestOrders(id: string) {
+    const response = await api.get(`/orders?clientId=${id}`);
+    setOrdersData(response.data);
+  }
   
   // Fix Error: Hydration failed because the initial UI 
   // does not match what was rendered on the server.
@@ -44,6 +58,13 @@ export default function Home() {
       <OrderForm />
 
       <ClientForm />
+
+      <Select 
+        name="clientNameList"
+        options={clientNameList}
+        onChange={event => requestOrders(event.target.value)}
+        placeholder="Selecione algum cliente"
+      />
 
       <Table ordersData={ordersData} />
 
