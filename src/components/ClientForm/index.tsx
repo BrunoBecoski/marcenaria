@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import * as Yup from 'yup';
 
 import { api } from '../../services/api';
 
@@ -13,17 +14,35 @@ export function ClientForm() {
   const [lastName, setLastName] = useState('');
   const [telephone, setTelephone] = useState('');
 
-  async function handleAddClient() {
-    await api.post('/clients', {
-      firstName,
-      lastName,
-      telephone,
-      ordersIds: []
-    });
+  const clientSchema = Yup.object().shape({
+    telephone: Yup.string().required('Campo telefone é obrigatório'),
+    lastName: Yup.string().required('Campo sobrenome é obrigatório'),
+    firstName: Yup.string().required('Campo nome é obrigatório')
+  });
 
-    setFirstName('');
-    setLastName('');
-    setTelephone('');
+  async function handleAddClient() {
+    try {
+      await clientSchema
+        .validate({
+          firstName,
+          lastName,
+          telephone
+        });
+    } catch (err) {
+      alert(err.message);
+
+      // await api.post('/clients', {
+      //   firstName,
+      //   lastName,
+      //   telephone,
+      //   ordersIds: []
+      // });
+  
+      // setFirstName('');
+      // setLastName('');
+      // setTelephone('');
+      
+    } 
   }
 
   return (
