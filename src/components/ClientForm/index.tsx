@@ -9,12 +9,20 @@ import { Button } from '../Form/Button';
 
 import { Container, SpanError } from './styles';
 
+interface InputError {
+  path: string;
+  message: string;
+}
+
 export function ClientForm() {  
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [telephone, setTelephone] = useState('');
 
-  const [inputError, setInputError] = useState({});
+  const [firstNameErrorMessage, setFirstNameErrorMessage] = useState('');
+  const [lastNameErrorMessage, setLastNameErrorMessage] = useState('');
+  const [telephoneErrorMessage, setTelephoneErrorMessage] = useState('');
+
 
   const clientSchema = Yup.object().shape({
     telephone: Yup.string().required('Campo telefone é obrigatório'),
@@ -22,14 +30,21 @@ export function ClientForm() {
     firstName: Yup.string().required('Campo nome é obrigatório')
   });
 
-  async function handleAddClient() {    
+  async function handleAddClient() {
+    setFirstNameErrorMessage('');
+    setLastNameErrorMessage('');
+    setTelephoneErrorMessage('');
+    
     try {
       await clientSchema
         .validate({
           firstName,
           lastName,
-            telephone
-          });
+          telephone
+        }, 
+        {
+          abortEarly: false
+        });
    
       await api.post('/clients', {
         firstName,
@@ -41,13 +56,21 @@ export function ClientForm() {
       setFirstName('');
       setLastName('');
       setTelephone('');
-      setInputError({});
     } catch(err) {
-      console.log(JSON.stringify({err}, null, '\t'));
+      // console.log(JSON.stringify({err}, null, '\t'));
 
-      setInputError({
-        input: err.path,
-        message: err.errors[0]
+      err.inner.forEach(element => {
+        if(element.path === 'firstName') {
+          setFirstNameErrorMessage(element.message);
+        }
+
+        if(element.path === 'lastName') {
+          setLastNameErrorMessage(element.message);
+        }
+        
+        if(element.path === 'telephone') {
+          setTelephoneErrorMessage(element.message);
+        } 
       });
     }   
   }
@@ -60,11 +83,10 @@ export function ClientForm() {
           placeholder="Nome"
           value={firstName}
           onChange={event => setFirstName(event.target.value)}
-       />
-       {
-         inputError.input === 'firstName' &&
-         <SpanError>{inputError.message}</SpanError>
-       }
+        />
+          <SpanError>
+            {firstNameErrorMessage}
+          </SpanError>
       </Label>
 
       <Label>
@@ -75,9 +97,10 @@ export function ClientForm() {
           onChange={event => setLastName(event.target.value)}
         />
         {
-          inputError.input === 'lastName' &&
-          <SpanError>{inputError.message}</SpanError>
-        }
+          <SpanError>
+            {lastNameErrorMessage}
+          </SpanError>
+        } 
       </Label>
 
       <Label>
@@ -89,8 +112,9 @@ export function ClientForm() {
           onChange={event => setTelephone(event.target.value)}
         />
         {
-          inputError.input === 'telephone' &&
-          <SpanError>{inputError.message}</SpanError>
+          <SpanError>
+            {telephoneErrorMessage}
+          </SpanError>
         }
       </Label>
       
