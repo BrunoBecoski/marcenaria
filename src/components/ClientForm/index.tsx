@@ -18,11 +18,7 @@ export function ClientForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [telephone, setTelephone] = useState('');
-
-  const [firstNameErrorMessage, setFirstNameErrorMessage] = useState('');
-  const [lastNameErrorMessage, setLastNameErrorMessage] = useState('');
-  const [telephoneErrorMessage, setTelephoneErrorMessage] = useState('');
-
+  const [inputsErrors, setInputsErrors] = useState<InputError[]>([]);
 
   const clientSchema = Yup.object().shape({
     telephone: Yup.string().required('Campo telefone é obrigatório'),
@@ -31,10 +27,6 @@ export function ClientForm() {
   });
 
   async function handleAddClient() {
-    setFirstNameErrorMessage('');
-    setLastNameErrorMessage('');
-    setTelephoneErrorMessage('');
-    
     try {
       await clientSchema
         .validate({
@@ -56,22 +48,14 @@ export function ClientForm() {
       setFirstName('');
       setLastName('');
       setTelephone('');
+      setInputsErrors([]);
     } catch(err) {
-      // console.log(JSON.stringify({err}, null, '\t'));
-
-      err.inner.forEach(element => {
-        if(element.path === 'firstName') {
-          setFirstNameErrorMessage(element.message);
-        }
-
-        if(element.path === 'lastName') {
-          setLastNameErrorMessage(element.message);
-        }
-        
-        if(element.path === 'telephone') {
-          setTelephoneErrorMessage(element.message);
-        } 
-      });
+      const inputErrors = err.inner.map(input => ({
+        path: input.path,
+        message: input.message
+      }));
+      
+      setInputsErrors(inputErrors);
     }   
   }
 
@@ -84,9 +68,9 @@ export function ClientForm() {
           value={firstName}
           onChange={event => setFirstName(event.target.value)}
         />
-          <SpanError>
-            {firstNameErrorMessage}
-          </SpanError>
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'firstName')?.message}
+        </SpanError>
       </Label>
 
       <Label>
@@ -96,11 +80,9 @@ export function ClientForm() {
           value={lastName}
           onChange={event => setLastName(event.target.value)}
         />
-        {
-          <SpanError>
-            {lastNameErrorMessage}
-          </SpanError>
-        } 
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'lastName')?.message}
+        </SpanError>
       </Label>
 
       <Label>
@@ -111,14 +93,12 @@ export function ClientForm() {
           value={telephone}
           onChange={event => setTelephone(event.target.value)}
         />
-        {
-          <SpanError>
-            {telephoneErrorMessage}
-          </SpanError>
-        }
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'telephone')?.message}
+        </SpanError>
       </Label>
       
-      <Button 
+      <Button
         title="Cadastrar Cliente" 
         onClick={handleAddClient}     
       />
