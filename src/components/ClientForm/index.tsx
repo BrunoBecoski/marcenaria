@@ -19,6 +19,7 @@ export function ClientForm() {
   const [lastName, setLastName] = useState('');
   const [telephone, setTelephone] = useState('');
   const [inputsErrors, setInputsErrors] = useState<InputError[]>([]);
+  const [isActiveAutoValidateForm, setIsActiveAutoValidateForm] = useState(false);
 
   const clientSchema = Yup.object().shape({
     telephone: Yup.string().required('Campo telefone é obrigatório'),
@@ -27,6 +28,29 @@ export function ClientForm() {
   });
 
   async function handleAddClient() {
+    setIsActiveAutoValidateForm(true);
+    const isValid = await validateForm();
+
+    if(isValid) {
+      try {
+        await api.post('/clients', {
+          firstName,
+          lastName,
+          telephone,
+          ordersIds: []
+        });
+        
+        setFirstName('');
+        setLastName('');
+        setTelephone('');
+        setIsActiveAutoValidateForm(false);
+      } catch {
+        alert('Não foi possível cadastrar o cliente.');
+      }
+    }
+  }
+
+  async function validateForm() {
     try {
       await clientSchema
         .validate({
@@ -37,18 +61,10 @@ export function ClientForm() {
         {
           abortEarly: false
         });
-   
-      await api.post('/clients', {
-        firstName,
-        lastName,
-        telephone,
-        ordersIds: []
-      });
-  
-      setFirstName('');
-      setLastName('');
-      setTelephone('');
+
       setInputsErrors([]);
+
+      return true;
     } catch(err) {
       const inputErrors = err.inner.map(input => ({
         path: input.path,
@@ -56,8 +72,17 @@ export function ClientForm() {
       }));
       
       setInputsErrors(inputErrors);
-    }   
+
+      return false;
+    } 
   }
+
+  useEffect(() => {
+    if(isActiveAutoValidateForm) {
+      const timeOutId = setTimeout(() => validateForm(), 500);
+      return () => clearTimeout(timeOutId);
+    }
+  }, [firstName, lastName, telephone]);
 
   return (
     <Container>
