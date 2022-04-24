@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import * as Yup from 'yup';
 
 import { api } from '../../services/api';
 import { ClientData } from '../../types/ClientData';
@@ -11,7 +12,12 @@ import { TextArea } from '../Form/TextArea';
 import { Select, SelectOptionsProps } from '../Form/Select';
 import { Button } from '../Form/Button';
 
-import { Container } from './styles';
+import { Container, SpanError } from './styles';
+
+interface InputError {
+  path: string;
+  message: string;
+}
 
 export function OrderForm() {
   const [type, setType] = useState('');
@@ -21,32 +27,80 @@ export function OrderForm() {
   const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'))
   const [clientId, setClientId] = useState('');
   const [clientNamesList, setClientNamesList] = useState<SelectOptionsProps[]>([]);
+  const [inputsErrors, setInputsErrors] = useState<InputError[]>([]);
+
+  const orderSchema = Yup.object().shape({
+    type: Yup.string().required('Selecione um tipo'),
+    name: Yup.string().required('Campo nome é obrigatório'),
+    description: Yup.string().required('Campo descrição é obrigatório'),
+    price: Yup.string().required('Campo preço é obrigatório'),
+    date: Yup.string().required('Campo data é obrigatório'),
+    clientId: Yup.string().required('Selecione um cliente')
+  });
 
   async function handleAddOrder() {
-    const { data } = await api.post('/orders', {
-      type,
-      name,
-      description,
-      price: new Intl.NumberFormat(
-        'pt-BR', { style: 'currency', currency: 'BRL'}
-      ).format(Number(price)),
-      date,
-      clientId
-    });
+    const isValid = await validateForm();
 
-    const clienteResponse = await api.get<ClientData>(`/clients/${clientId}`);
+    if (isValid) {
+      try {
+        const { data } = await api.post('/orders', {
+          type,
+          name,
+          description,
+          price: new Intl.NumberFormat(
+            'pt-BR', { style: 'currency', currency: 'BRL'}
+          ).format(Number(price)),
+          date,
+          clientId
+        });
+    
+        const clienteResponse = await api.get<ClientData>(`/clients/${clientId}`);
+    
+        await api.patch(`/clients/${clientId}`, {
+          ordersIds: [
+            ...clienteResponse.data.ordersIds,
+            data.id
+          ]
+        });
 
-    await api.patch(`/clients/${clientId}`, {
-      ordersIds: [
-        ...clienteResponse.data.ordersIds,
-        data.id
-      ]
-    });
+        setName('');
+        setDescription('');
+        setPrice('');
+      } catch {
+        alert('Não foi possível cadastrar o pedido.');
+      }
+    }
+  }
 
-    setType('');
-    setName('');
-    setDescription('');
-    setPrice('');
+  async function validateForm() {
+    try {
+      await orderSchema.validate({
+        type,
+        name,
+        description,
+        price,
+        date,
+        clientId
+      },
+      {
+        abortEarly: false
+      });
+
+      setInputsErrors([]);
+
+      return true;
+    } catch(err) {
+      console.log(JSON.stringify({err}, null, '\t'));
+
+      const inputErrors = err.inner.map(input => ({
+        path: input.path,
+        message: input.message
+      }));
+
+      setInputsErrors(inputErrors);
+
+      return false;
+    }
   }
 
   useEffect(() => {
@@ -70,10 +124,13 @@ export function OrderForm() {
       <Label>
         Tipo
         <InputRadioBox
-          name="types"
+          name="type"
           options={["Novo", "Reformado"]}
           setState={setType}
         />
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'type')?.message}
+        </SpanError>
       </Label>
 
       <Label>
@@ -83,6 +140,9 @@ export function OrderForm() {
           value={name}
           onChange={event => setName(event.target.value)}
         />
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'name')?.message}
+        </SpanError>
       </Label>
       <Label>
         Descrição
@@ -91,6 +151,9 @@ export function OrderForm() {
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'description')?.message}
+        </SpanError>
       </Label>
       <Label>
         Preço
@@ -99,6 +162,9 @@ export function OrderForm() {
           value={price}
           onChange={event => setPrice(event.target.value)}
         />
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'price')?.message}
+        </SpanError>
       </Label>
       <Label>
         Data
@@ -107,6 +173,9 @@ export function OrderForm() {
           defaultValue={date}
           onChange={event => setDate(event.target.value)}
         />
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'date')?.message}
+        </SpanError>
       </Label>
       <Label>
         Cliente
@@ -116,6 +185,9 @@ export function OrderForm() {
           onChange={event => setClientId(event.target.value)}
           placeholder="Selecione um cliente"
         />
+        <SpanError>
+          {inputsErrors.find(input => input.path === 'clientId')?.message}
+        </SpanError>
       </Label>
       
       <Button 
