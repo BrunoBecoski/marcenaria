@@ -28,6 +28,7 @@ export function OrderForm() {
   const [clientId, setClientId] = useState('');
   const [clientNamesList, setClientNamesList] = useState<SelectOptionsProps[]>([]);
   const [inputsErrors, setInputsErrors] = useState<InputError[]>([]);
+  const [isActiveAutoValidateForm, setIsActiveAutoValidateForm] = useState(false);
 
   const orderSchema = Yup.object().shape({
     type: Yup.string().required('Selecione um tipo'),
@@ -39,6 +40,7 @@ export function OrderForm() {
   });
 
   async function handleAddOrder() {
+    setIsActiveAutoValidateForm(true);
     const isValid = await validateForm();
 
     if (isValid) {
@@ -66,6 +68,7 @@ export function OrderForm() {
         setName('');
         setDescription('');
         setPrice('');
+        setIsActiveAutoValidateForm(false);
       } catch {
         alert('Não foi possível cadastrar o pedido.');
       }
@@ -90,16 +93,16 @@ export function OrderForm() {
 
       return true;
     } catch(err) {
-      console.log(JSON.stringify({err}, null, '\t'));
-
-      const inputErrors = err.inner.map(input => ({
-        path: input.path,
-        message: input.message
-      }));
-
-      setInputsErrors(inputErrors);
-
-      return false;
+      if (err instanceof Yup.ValidationError) {        
+        const inputErrors = err.inner.map(({ path, message }) => ({
+          path,
+          message
+        }));
+        
+        setInputsErrors(inputErrors as InputError[]);
+        
+        return false;
+      }
     }
   }
 
@@ -118,6 +121,13 @@ export function OrderForm() {
 
     requestClient();
   }, []);
+
+  useEffect(() => {
+    if (isActiveAutoValidateForm) {
+      const timeOutId = setTimeout(() => validateForm(), 500);
+      return () => clearTimeout(timeOutId);
+    }
+  }, [type, name, description, price, date, clientId]);
 
   return (
     <Container>

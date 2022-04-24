@@ -31,7 +31,7 @@ export function ClientForm() {
     setIsActiveAutoValidateForm(true);
     const isValid = await validateForm();
 
-    if(isValid) {
+    if (isValid) {
       try {
         await api.post('/clients', {
           firstName,
@@ -66,19 +66,21 @@ export function ClientForm() {
 
       return true;
     } catch(err) {
-      const inputErrors = err.inner.map(input => ({
-        path: input.path,
-        message: input.message
-      }));
-      
-      setInputsErrors(inputErrors);
-
-      return false;
+      if (err instanceof Yup.ValidationError) {
+        const inputErrors = err.inner.map(({ path, message }) => ({
+          path,
+          message
+        }));
+        
+        setInputsErrors(inputErrors as InputError[]);
+        
+        return false;
+      }
     } 
   }
 
   useEffect(() => {
-    if(isActiveAutoValidateForm) {
+    if (isActiveAutoValidateForm) {
       const timeOutId = setTimeout(() => validateForm(), 500);
       return () => clearTimeout(timeOutId);
     }

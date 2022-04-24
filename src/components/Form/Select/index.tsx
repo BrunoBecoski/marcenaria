@@ -12,10 +12,13 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement>{
 
 export function Select({ options, placeholder, ...rest }: SelectProps) {
   return (
-    <Container {...rest }>
+    <Container 
+      defaultValue={'DEFAULT'}
+      {...rest }
+    >
       <Option
         disabled
-        selected
+        value={'DEFAULT'}
       >
         {placeholder}
       </Option>
