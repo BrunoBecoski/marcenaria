@@ -5,5 +5,5 @@ export interface OrderData {
   description: string;
   price: string;
   date: string;
-  client: string;
+  clientId: string;
 }

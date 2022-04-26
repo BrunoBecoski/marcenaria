@@ -16,7 +16,6 @@ export function Table({ ordersData }: TableProps) {
           <th>Descrição</th>
           <th>Preço</th>
           <th>Data</th>
-          <th>Cliente</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +27,6 @@ export function Table({ ordersData }: TableProps) {
               <td>{order.description}</td>
               <td>{order.price}</td>
               <td>{order.date}</td>
-              <td>{order.client}</td>
             </tr>
           ))
         }
