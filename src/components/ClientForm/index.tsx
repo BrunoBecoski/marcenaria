@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
-import { api } from '../../services/api';
+import { supabase } from '../../services/supabaseClient';
 
 import { Label } from '../Form/Label';
 import { Input } from '../Form/Input';
@@ -33,11 +33,11 @@ export function ClientForm() {
 
     if (isValid) {
       try {
-        await api.post('/clients', {
-          firstName,
-          lastName,
+        await supabase.from('clients').insert({
+          first_name: firstName,
+          last_name: lastName,
           telephone,
-          ordersIds: []
+          orders_ids: []
         });
         
         setFirstName('');
