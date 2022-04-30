@@ -1,7 +1,7 @@
 export interface ClientData {
   id: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   telephone: string;
-  ordersIds: string[];
+  orders_ids: string[];
 }

@@ -33,13 +33,17 @@ export function ClientForm() {
 
     if (isValid) {
       try {
-        await supabase.from('clients').insert({
+        const { error } = await supabase.from('clients').insert({
           first_name: firstName,
           last_name: lastName,
           telephone,
           orders_ids: []
         });
         
+        if(error) {
+          throw new Error();
+        }
+
         setFirstName('');
         setLastName('');
         setTelephone('');

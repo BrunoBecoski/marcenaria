@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import * as Yup from 'yup';
 
-import { api } from '../../services/api';
+import { supabase } from '../../services/supabaseClient';
 import { ClientData } from '../../types/ClientData';
 
 import { InputRadioBox } from '../Form/InputRadioBox';
@@ -45,30 +45,42 @@ export function OrderForm() {
 
     if (isValid) {
       try {
-        const { data } = await api.post('/orders', {
+        const { error } = await supabase.from('/orders').insert({
           type,
           name,
           description,
-          price: new Intl.NumberFormat(
-            'pt-BR', { style: 'currency', currency: 'BRL'}
-          ).format(Number(price)),
+          price,
           date,
-          clientId
+          client_id: clientId
         });
-    
-        const clienteResponse = await api.get<ClientData>(`/clients/${clientId}`);
-    
-        await api.patch(`/clients/${clientId}`, {
-          ordersIds: [
-            ...clienteResponse.data.ordersIds,
-            data.id
-          ]
-        });
+        
+        if(error) {
+          throw new Error();
+        } else {
+          // const response = await supabase
+          //   .from<ClientData>('/clients')
+          //   .select()
+          // console.log(response)
 
-        setName('');
-        setDescription('');
-        setPrice('');
-        setIsActiveAutoValidateForm(false);
+          // if(error) {
+          //   throw new Error();
+          // } else {
+
+          //   data[0].
+
+          //   await api.patch(`/clients/${clientId}`, {
+          //     ordersIds: [
+          //       ...data.orders_ids,
+          //       data.id
+          //     ]
+          //   });
+    
+          //   setName('');
+          //   setDescription('');
+          //   setPrice('');
+          //   setIsActiveAutoValidateForm(false);
+          // }
+        }    
       } catch {
         alert('Não foi possível cadastrar o pedido.');
       }
@@ -108,17 +120,28 @@ export function OrderForm() {
 
   useEffect(() => {
     async function requestClient() {
-      const { data } = await api.get<ClientData[]>('/clients');
-      const clientsNames = data.map(client => (
-        {
-          value: client.id,  
-          label: `${client.firstName} ${client.lastName}`
+      try {
+        const { data, error } = await supabase
+          .from<ClientData>('/clients')
+          .select('id, first_name, last_name');
+          
+        if(error) { 
+          throw new Error();
+        } else {            
+          const clientsNames = data.map(client => (
+            {
+              value: client.id,  
+              label: `${client.first_name} ${client.last_name}`
+            }
+          ));
+            
+          setClientNamesList(clientsNames);
         }
-      ));
-
-      setClientNamesList(clientsNames);
+      } catch {
+        alert('Não foi possível buscar os clientes cadastrados')
+      }
     }
-
+      
     requestClient();
   }, []);
 
@@ -167,7 +190,8 @@ export function OrderForm() {
       </Label>
       <Label>
         Preço
-        <Input 
+        <Input
+          type="number" 
           placeholder="Preço"
           value={price}
           onChange={event => setPrice(event.target.value)}
