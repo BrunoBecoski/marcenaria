@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 import { supabase } from '../../services/supabaseClient';
 import { ClientData } from '../../types/ClientData';
+import { OrderData } from '../../types/OrderData';
 
 import { InputRadioBox } from '../Form/InputRadioBox';
 import { Label } from '../Form/Label';
@@ -45,7 +46,7 @@ export function OrderForm() {
 
     if (isValid) {
       try {
-        const { error } = await supabase.from('/orders').insert({
+        const { data, error } = await supabase.from<OrderData>('/orders').insert({
           type,
           name,
           description,
@@ -55,31 +56,29 @@ export function OrderForm() {
         });
         
         if(error) {
+          console.log('1º error')
+          console.log(JSON.stringify({error}, null, '\t'));
           throw new Error();
         } else {
-          // const response = await supabase
-          //   .from<ClientData>('/clients')
-          //   .select()
-          // console.log(response)
+          
+          const { error } = await supabase
+            .from<ClientData>('/clients')
+            .update(
+              { orders_ids: [data[0].id]}
+            )
+            .match({id: clientId})
 
-          // if(error) {
-          //   throw new Error();
-          // } else {
+          if(error) {
+              console.log('2º error')
+          console.log(JSON.stringify({error}, null, '\t'));
 
-          //   data[0].
-
-          //   await api.patch(`/clients/${clientId}`, {
-          //     ordersIds: [
-          //       ...data.orders_ids,
-          //       data.id
-          //     ]
-          //   });
-    
-          //   setName('');
-          //   setDescription('');
-          //   setPrice('');
-          //   setIsActiveAutoValidateForm(false);
-          // }
+            throw new Error();
+          } else {
+            setName('');
+            setDescription('');
+            setPrice('');
+            setIsActiveAutoValidateForm(false);
+          }
         }    
       } catch {
         alert('Não foi possível cadastrar o pedido.');
