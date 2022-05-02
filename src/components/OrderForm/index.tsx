@@ -60,28 +60,39 @@ export function OrderForm() {
           console.log(JSON.stringify({error}, null, '\t'));
           throw new Error();
         } else {
-          
-          const { error } = await supabase
-            .from<ClientData>('/clients')
-            .update(
-              { orders_ids: [data[0].id]}
-            )
-            .match({id: clientId})
 
-          if(error) {
-              console.log('2º error')
-          console.log(JSON.stringify({error}, null, '\t'));
+          const response = await supabase.from('/clients');
+
+          if(response.error) {
+            console.log('2º error')
+            console.log(response.error);
 
             throw new Error();
           } else {
-            setName('');
-            setDescription('');
-            setPrice('');
-            setIsActiveAutoValidateForm(false);
+            const { error } = await supabase
+              .from<ClientData>('/clients')
+              .update(
+                { orders_ids: [...response.data[0].orders_id, [data[0].id]]}
+              )
+              .match({id: clientId});
+            
+            
+            if(error) {
+              console.log('3º error')
+              console.log(JSON.stringify({error}, null, '\t'));
+              
+              throw new Error();
+            } else {
+              setName('');
+              setDescription('');
+              setPrice('');
+              setIsActiveAutoValidateForm(false);
+            }
           }
         }    
-      } catch {
+      } catch(error) {
         alert('Não foi possível cadastrar o pedido.');
+        console.log(JSON.stringify({error}, null, '\t'));
       }
     }
   }
