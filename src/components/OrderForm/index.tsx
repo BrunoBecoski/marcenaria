@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import * as Yup from 'yup';
 
-import { supabase } from '../../services/supabaseClient';
 import { ClientData } from '../../types/ClientData';
 import { OrderData } from '../../types/OrderData';
 
@@ -46,50 +45,50 @@ export function OrderForm() {
 
     if (isValid) {
       try {
-        const { data, error } = await supabase.from<OrderData>('/orders').insert({
-          type,
-          name,
-          description,
-          price,
-          date,
-          client_id: clientId
-        });
+        // const { data, error } = await supabase.from<OrderData>('/orders').insert({
+        //   type,
+        //   name,
+        //   description,
+        //   price,
+        //   date,
+        //   client_id: clientId
+        // });
         
-        if(error) {
-          console.log('1º error')
-          console.log(JSON.stringify({error}, null, '\t'));
-          throw new Error();
-        } else {
+        // if(error) {
+        //   console.log('1º error')
+        //   console.log(JSON.stringify({error}, null, '\t'));
+        //   throw new Error();
+        // } else {
 
-          const response = await supabase.from('/clients');
+        //   const response = await supabase.from('/clients');
 
-          if(response.error) {
-            console.log('2º error')
-            console.log(response.error);
+        //   if(response.error) {
+        //     console.log('2º error')
+        //     console.log(response.error);
 
-            throw new Error();
-          } else {
-            const { error } = await supabase
-              .from<ClientData>('/clients')
-              .update(
-                { orders_ids: [...response.data[0].orders_id, [data[0].id]]}
-              )
-              .match({id: clientId});
+        //     throw new Error();
+        //   } else {
+        //     const { error } = await supabase
+        //       .from<ClientData>('/clients')
+        //       .update(
+        //         { orders_ids: [...response.data[0].orders_id, [data[0].id]]}
+        //       )
+        //       .match({id: clientId});
             
             
-            if(error) {
-              console.log('3º error')
-              console.log(JSON.stringify({error}, null, '\t'));
+        //     if(error) {
+        //       console.log('3º error')
+        //       console.log(JSON.stringify({error}, null, '\t'));
               
-              throw new Error();
-            } else {
-              setName('');
-              setDescription('');
-              setPrice('');
-              setIsActiveAutoValidateForm(false);
-            }
-          }
-        }    
+        //       throw new Error();
+        //     } else {
+        //       setName('');
+        //       setDescription('');
+        //       setPrice('');
+        //       setIsActiveAutoValidateForm(false);
+        //     }
+        //   }
+        // }    
       } catch(error) {
         alert('Não foi possível cadastrar o pedido.');
         console.log(JSON.stringify({error}, null, '\t'));
@@ -131,22 +130,22 @@ export function OrderForm() {
   useEffect(() => {
     async function requestClient() {
       try {
-        const { data, error } = await supabase
-          .from<ClientData>('/clients')
-          .select('id, first_name, last_name');
+        // const { data, error } = await supabase
+        //   .from<ClientData>('/clients')
+        //   .select('id, first_name, last_name');
           
-        if(error) { 
-          throw new Error();
-        } else {            
-          const clientsNames = data.map(client => (
-            {
-              value: client.id,  
-              label: `${client.first_name} ${client.last_name}`
-            }
-          ));
+        // if(error) { 
+        //   throw new Error();
+        // } else {            
+        //   const clientsNames = data.map(client => (
+        //     {
+        //       value: client.id,  
+        //       label: `${client.first_name} ${client.last_name}`
+        //     }
+        //   ));
             
-          setClientNamesList(clientsNames);
-        }
+        //   setClientNamesList(clientsNames);
+        // }
       } catch {
         alert('Não foi possível buscar os clientes cadastrados')
       }
