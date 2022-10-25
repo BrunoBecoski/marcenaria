@@ -1,9 +1,17 @@
-import { light } from './tokens/light'
+import { light } from './tokens/light' 
 import { font } from './tokens/font'
+import { radio } from './tokens/radio'
+import { space } from './tokens/space'
 
-export const theme = {
+const theme = {
   colors: light,
-  font,
 } as const
 
 export type ThemeInterface = typeof theme
+
+export {
+  theme,
+  font,
+  radio,
+  space,
+}

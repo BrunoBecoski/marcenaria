@@ -1,4 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
+
+import { font, radio, space } from './theme'
 
 export const GlobalStyle = createGlobalStyle` 
   * {
@@ -7,13 +9,15 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html {
-    font-size: 16px;   
-    font-family: 'Roboto', sans-serif;
+  :root {
+    ${font}
+    ${radio}
+    ${space}
   }
 
   body {
-    margin: 25px;
+    font-family:  var(--family_default);
+    background: ${({ theme }) => theme.colors.background};
   }
 
   button {
