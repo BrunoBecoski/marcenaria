@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { TextField } from '../components/TextField';
 
 const HomeContainer = styled.div`
   width: 100vw;
@@ -7,12 +8,16 @@ const HomeContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 export default function Home() {
   return (
     <HomeContainer>
-       <h1>My page</h1>
+      <TextField name="name" label="Name" />
+      <TextField name="email" label="Email" />
+      <TextField name="number" />
     </HomeContainer>
   )
 }
