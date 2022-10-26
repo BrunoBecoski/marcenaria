@@ -1,5 +1,7 @@
 import styled from 'styled-components'
-import { TextField } from '../components/TextField';
+
+import { Button } from '../components/Button'
+import { TextField } from '../components/TextField'
 
 const HomeContainer = styled.div`
   width: 100vw;
@@ -18,6 +20,9 @@ export default function Home() {
       <TextField name="name" label="Name" />
       <TextField name="email" label="Email" />
       <TextField name="number" />
+      <Button>
+        Send
+      </Button>
     </HomeContainer>
   )
 }
