@@ -32,6 +32,8 @@ export const TextFieldContainer = styled.div`
 `;
 
 export const Label = styled.label`
+  cursor: text;
+
   position: absolute;
   top: var(--space_16);
   padding-inline: var(--space_4);

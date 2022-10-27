@@ -1,20 +1,23 @@
-import { TextFieldContainer, Label, Input } from "./styles";
+import { InputHTMLAttributes } from 'react'
 
-interface TextFieldProps {
+import { TextFieldContainer, Label, Input } from './styles';
+
+interface TextFieldProps extends  InputHTMLAttributes<HTMLInputElement>{
   label?: string;
   name: string;
 }
 
-export function TextField({ label, name }: TextFieldProps) {
+export function TextField({ label, name, ...props }: TextFieldProps) {
   return (
     <TextFieldContainer onClick={() => document.getElementById(name)?.focus()}>
-      <Label>
+      <Label htmlFor={name}>
         {label}
       </Label>
 
       <Input
         id={name}
         placeholder=" "
+        {...props}
       />
     </TextFieldContainer>
   )
