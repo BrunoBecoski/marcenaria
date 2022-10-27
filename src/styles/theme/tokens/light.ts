@@ -1,3 +1,5 @@
+import { mix } from 'polished'
+
 import { primary } from './colors/primary'
 import { secondary } from './colors/secondary'
 import { tertiary } from './colors/tertiary'
@@ -9,7 +11,7 @@ export const light = {
   primary: primary[40],
   onPrimary: primary[100],
   primaryContainer: primary[90],
-  onPrimary_Container: primary[10],
+  onPrimaryContainer: primary[10],
 
   secondary: secondary[40],
   onSecondary: secondary[100],
@@ -28,8 +30,14 @@ export const light = {
 
   background: neutral[99],
   onBackground: neutral[10],
-  surface: neutral[99],
   onSurface: neutral[10],
+  
+  surface: neutral[99],
+  surface1: mix(0.05, primary[40], neutral[99]),
+  surface2: mix(0.08, primary[40], neutral[99]),
+  surface3: mix(0.11, primary[40], neutral[99]),
+  surface4: mix(0.12, primary[40], neutral[99]),
+  surface5: mix(0.14, primary[40], neutral[99]),
 
   surfaceVariant: neutralVariant[90],
   onSurfaceVariant: neutralVariant[30],

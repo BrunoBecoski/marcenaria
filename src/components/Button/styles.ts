@@ -4,7 +4,6 @@ export const ButtonContainer = styled.button`
   padding: var(--space_10) var(--space_24);
     
   outline: none;
-  -webkit-tap-highlight-color: transparent;
   border: none;
   border-radius: var(--radio_full);
   font-weight: var(--weight_md);

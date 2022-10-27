@@ -23,5 +23,6 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     font-family:  var(--family_default);
+    -webkit-tap-highlight-color: transparent;
   }
 `;
