@@ -1,24 +1,33 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, MutableRefObject, useRef } from 'react';
 
-import { TextFieldContainer, Label, Input } from './styles';
+import { TextFieldContainer, Border, Label, Input, Span } from './styles';
 
 interface TextFieldProps extends  InputHTMLAttributes<HTMLInputElement>{
   label?: string;
   name: string;
+  errorMessage?: string | undefined ;
 }
 
-export function TextField({ label, name, ...props }: TextFieldProps) {
-  return (
-    <TextFieldContainer onClick={() => document.getElementById(name)?.focus()}>
-      <Label htmlFor={name}>
-        {label}
-      </Label>
+export function TextField({ label, name, errorMessage, ...props }: TextFieldProps) {
+  const inputRef = useRef() as  MutableRefObject<HTMLInputElement>
 
-      <Input
-        id={name}
-        placeholder=" "
-        {...props}
-      />
+  return (
+    <TextFieldContainer >
+      <Border onClick={() => inputRef.current.focus()}>
+        <Label htmlFor={name}>
+          {label}
+        </Label>
+
+        <Input
+          ref={inputRef}
+          id={name}
+          placeholder=" "
+          {...props}
+          data-invalid={!!errorMessage}   
+        />
+      </Border>
+
+      <Span>{errorMessage}</Span> 
     </TextFieldContainer>
   )
 }
