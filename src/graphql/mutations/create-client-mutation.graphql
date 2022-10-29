@@ -1,0 +1,5 @@
+mutation CreateClient ($name: String!, $phoneNumber: String!) {
+  createClient(data: {name: $name, phoneNumber: $phoneNumber}) {
+    id
+  }
+}

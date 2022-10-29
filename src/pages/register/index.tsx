@@ -2,11 +2,13 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { useCreateClientMutation } from '../../graphql/generated';
+
 import { TextField } from '../../components/TextField';
 import { Button } from '../../components/Button';
+import { Layout } from '../../components/Layout';
 
 import { RegisterContainer, Form } from './styles';
-import { Layout } from '../../components/Layout';
 
 interface IFormInputs {
   name: string;
@@ -27,8 +29,19 @@ export default function Register() {
     }
   });
 
-  function onSubmit(data: IFormInputs) {
-    console.log(data)
+  const [createClient] = useCreateClientMutation();
+
+  async function onSubmit(data: IFormInputs) {
+    try {
+      await createClient({
+        variables: {
+          name: data.name,
+          phoneNumber: data.phoneNumber,
+        }
+      })
+    } catch (error) {
+      console.log(JSON.stringify(error, null, ' '))
+    }
   }
 
   return (
