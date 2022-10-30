@@ -1,0 +1,7 @@
+query GetClients {
+  clients {
+    id
+    name
+    phoneNumber
+  }
+}

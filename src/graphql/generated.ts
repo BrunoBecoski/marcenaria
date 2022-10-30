@@ -4733,6 +4733,11 @@ export type CreateClientMutationVariables = Exact<{
 
 export type CreateClientMutation = { __typename?: 'Mutation', createClient?: { __typename?: 'Client', id: string } | null };
 
+export type GetClientsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetClientsQuery = { __typename?: 'Query', clients: Array<{ __typename?: 'Client', id: string, name: string, phoneNumber?: string | null }> };
+
 
 export const CreateClientDocument = gql`
     mutation CreateClient($name: String!, $phoneNumber: String!) {
@@ -4768,3 +4773,39 @@ export function useCreateClientMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateClientMutationHookResult = ReturnType<typeof useCreateClientMutation>;
 export type CreateClientMutationResult = Apollo.MutationResult<CreateClientMutation>;
 export type CreateClientMutationOptions = Apollo.BaseMutationOptions<CreateClientMutation, CreateClientMutationVariables>;
+export const GetClientsDocument = gql`
+    query GetClients {
+  clients {
+    id
+    name
+    phoneNumber
+  }
+}
+    `;
+
+/**
+ * __useGetClientsQuery__
+ *
+ * To run a query within a React component, call `useGetClientsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetClientsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetClientsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetClientsQuery(baseOptions?: Apollo.QueryHookOptions<GetClientsQuery, GetClientsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetClientsQuery, GetClientsQueryVariables>(GetClientsDocument, options);
+      }
+export function useGetClientsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetClientsQuery, GetClientsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetClientsQuery, GetClientsQueryVariables>(GetClientsDocument, options);
+        }
+export type GetClientsQueryHookResult = ReturnType<typeof useGetClientsQuery>;
+export type GetClientsLazyQueryHookResult = ReturnType<typeof useGetClientsLazyQuery>;
+export type GetClientsQueryResult = Apollo.QueryResult<GetClientsQuery, GetClientsQueryVariables>;
