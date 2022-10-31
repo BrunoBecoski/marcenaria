@@ -1,9 +1,11 @@
 import { useForm, Controller } from 'react-hook-form';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { useCreateClientMutation } from '../../graphql/generated';
 
+import { Tabs } from '../../components/Tabs';
 import { TextField } from '../../components/TextField';
 import { Button } from '../../components/Button';
 import { Layout } from '../../components/Layout';
@@ -21,6 +23,7 @@ const schema = yup.object({
 })
 
 export default function Register() {
+  const [tabActive, setTabActive ] = useState('Cliente');
   const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -44,9 +47,16 @@ export default function Register() {
     }
   }
 
+
   return (
     <Layout>
       <RegisterContainer>
+        <Tabs
+          tabs={[{label: 'Cliente'}, {label: 'Produto'}]}
+          tabActive={tabActive}
+          setTabActive={setTabActive}
+        />
+
         <h1>Cadastrar cliente</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Controller
