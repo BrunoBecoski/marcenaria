@@ -2,6 +2,7 @@ import { TabsContainer, Tab } from "./styles";
 
 interface TabsProps {
   tabs: {
+    id: string;
     label: string;
   }[]
   tabActive: string;
@@ -13,9 +14,10 @@ export function Tabs({ tabs, tabActive, setTabActive }: TabsProps) {
     <TabsContainer>
       {
         tabs.map(tab => (
-            <Tab 
-              onClick={() => setTabActive(tab.label)}
-              data-active={tabActive === tab.label}
+            <Tab
+              key={tab.id}
+              onClick={() => setTabActive(tab.id)}
+              data-active={tabActive === tab.id}
             >
               <span>{tab.label}</span>
             </Tab>

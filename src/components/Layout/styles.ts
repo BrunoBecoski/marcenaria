@@ -13,7 +13,7 @@ export const NavBar = styled.nav`
   margin-inline: auto;
   width: 100%;
    
-  background: ${({ theme }) => theme.colors.surface2};
+  background: ${({ theme }) => theme.colors.surfaceAt_2};
   border-radius: var(--radio_full);
 `;
 

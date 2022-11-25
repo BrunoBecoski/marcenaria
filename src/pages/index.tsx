@@ -12,7 +12,7 @@ const HomeContainer = styled.div`
   gap: 1rem;
   margin-top: var(--space_40);
 
-  background: ${({ theme }) => theme.colors.surface1};
+  background: ${({ theme }) => theme.colors.surfaceAt_1};
 `;
 
 export default function Home() {

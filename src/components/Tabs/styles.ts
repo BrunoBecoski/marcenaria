@@ -20,7 +20,7 @@ export const Tab = styled.button`
   color: ${({ theme }) => theme.colors.onSurfaceVariant};
 
   :active {
-    background: ${({ theme }) => theme.colors.surface1};  
+    background: ${({ theme }) => theme.colors.surfaceAt_1};  
   }
   
   &[data-active="true"] {
