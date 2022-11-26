@@ -9,14 +9,20 @@ export const RadioBoxContainer = styled.div`
 export const Button = styled.label`
   cursor: pointer;
 
+
   width: fit-content;
 
   display: flex;
   align-items: center;
+  outline: deeppink;
+
+  -webkit-tap-highlight-color: transparent;
+
   
   input {
     opacity: 0;
-    width: var(--space_16) ;
+    cursor: pointer;
+    width: var(--space_16);
   }
 
   
@@ -53,10 +59,8 @@ export const Button = styled.label`
       border-color: ${({ theme }) => theme.colors.primary};
 
       span {
-        transform: scale(10);
-        opacity: 1;
-
-        transition: all .2s;
+        transform: scale(1);
+        transition: all .1s linear;
       }
     }
   }
@@ -88,11 +92,21 @@ export const Icon = styled.div`
 
 
   span {
-    width: 1px;
-    height: 1px;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    margin-top: calc(var(--space_5) * -1);
+    margin-left: calc(var(--space_5) * -1);
+
+    transform: scale(0);
+
+
+    width: var(--space_10);
+    height: var(--space_10);
     border-radius: var(--radio_full);
     background: ${({ theme }) => theme.colors.primary};
-    opacity: 0;
   }
 `;
 

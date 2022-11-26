@@ -2,6 +2,7 @@ import { css } from 'styled-components'
 
 export const space = css`
   --space_4: 0.25rem;   /* 4px */
+  --space_5: 0.3125rem; /* 5px */  
   --space_8: 0.5rem;    /* 8px */
   --space_10: 0.652rem; /* 10px */
   --space_12: 0.75rem;  /* 12px */
