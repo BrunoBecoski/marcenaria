@@ -1,11 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import {  useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 import { Button } from '../Button';
 import { RadioBox } from '../RadioBox';
-import { TextField } from '../TextField';
+import { TextField, TextFieldCurrency } from '../TextField';
 
 import { Form } from './styles';
 
@@ -20,33 +19,16 @@ interface IFormInputs {
 const schema = yup.object({
   name: yup.string().required('Nome obrigatório.'),
   description: yup.string().notRequired(),
-  price: yup.number().negative('Valor negativo.'),
+  price: yup.number().positive('Valor negativo.'),
   date: yup.string().notRequired(),
   type: yup.string().notRequired(),
 })
 
 
 export function ProductForm() {
-  const [price, setPrice] = useState('');
-
   const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   })
-
-  function handlePrice(value: string) {
-    const valueFormatted = Number(value.replace('R$', '').replace('.', '').replace(',', '.'));
-
-    if(isNaN(valueFormatted)){
-      return;
-    }
-
-    const priceFormatted = Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(valueFormatted)
-
-    setPrice(priceFormatted)
-  }
 
   async function onSubmit(data: IFormInputs) {
     console.log(data);
@@ -54,7 +36,6 @@ export function ProductForm() {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-
       <Controller
         control={control}
         name="name"
@@ -84,7 +65,7 @@ export function ProductForm() {
             name={name}
             value={value}
             onChange={onChange}
-            errorMessage={errors.name?.message}     
+            errorMessage={errors.description?.message}     
           />
         )}
       />
@@ -93,37 +74,18 @@ export function ProductForm() {
         control={control}
         name="price"
         render={({
-          field: { name },
+          field: { name, onChange, value },
           formState: { errors }
         }) => (
-          <TextField
+          <TextFieldCurrency
             label="Preço"
-            name={name}
-            value={price}
-            onChange={event => handlePrice(event.target.value)}
-            errorMessage={errors.name?.message}     
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="date"
-        render={({
-          field: { name, onChange, value},
-          formState: { errors }
-        }) => (
-          <TextField
-            label="Data"
-            type="date"
             name={name}
             value={value}
             onChange={onChange}
-            errorMessage={errors.name?.message}     
+            errorMessage={errors.price?.message}     
           />
         )}
       />
-
 
       <Controller
         control={control}
@@ -140,7 +102,7 @@ export function ProductForm() {
             ]}
             name={name}
             onChange={onChange}
-            errorMessage={errors.name?.message}     
+            errorMessage={errors.type?.message}     
           />
         )}
       />  
