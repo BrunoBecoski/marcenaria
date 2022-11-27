@@ -6,6 +6,8 @@ export const RadioBoxContainer = styled.div`
   gap: var(--space_20);
 `;
 
+export const Title = styled.p``;
+
 export const Button = styled.label`
   cursor: pointer;
 
