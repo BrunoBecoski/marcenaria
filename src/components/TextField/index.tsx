@@ -5,7 +5,7 @@ import { TextFieldContainer, Border, Label, Input, Span } from './styles';
 interface TextFieldProps extends  InputHTMLAttributes<HTMLInputElement>{
   label?: string;
   name: string;
-  errorMessage?: string | undefined ;
+  errorMessage?: string | undefined;
 }
 
 export function TextField({ label, name, errorMessage, ...props }: TextFieldProps) {
@@ -36,15 +36,15 @@ export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextF
   const [price, setPrice] = useState('');
 
   const inputRef = useRef() as  MutableRefObject<HTMLInputElement>
-  
+
   function formatPrice(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
-
+    
     const valueInt = value
-      .replace(/[R$,\.a-zA-z]+/g, '')
-      .replace(/\b0+/g, '')
-      .trim()
-
+    .replace(/[R$,\.a-zA-z]+/g, '')
+    .replace(/\b0+/g, '')
+    .trim()
+    
     let valueFormatted = ''
 
     const valueIntLenght = valueInt.length
@@ -53,13 +53,12 @@ export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextF
       case 0:
         valueFormatted = ''
         break;
+
       case 1:
-        console.log('um')
         valueFormatted = valueInt
         break;
       
       case 2:
-        console.log('dois')
         valueFormatted = valueInt
         break;
         
@@ -70,7 +69,7 @@ export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextF
           valueInt.substring(valueIntLenght-2)
         }`
         break;
-      } 
+    } 
 
     setPrice(`R$ ${valueFormatted}`)
   }
@@ -87,10 +86,14 @@ export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextF
           id={name}
           placeholder=" "
           inputMode="numeric"
-          {...props}
           data-invalid={!!errorMessage}
           onChange={formatPrice}
           value={price}
+        />
+
+        <input
+          style={{ display: 'none' }}
+          {...props}
         />
       </Border>
       <Span>{errorMessage}</Span> 

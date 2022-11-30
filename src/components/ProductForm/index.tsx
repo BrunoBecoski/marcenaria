@@ -40,7 +40,7 @@ export function ProductForm() {
         control={control}
         name="name"
         render={({
-          field: { name, onChange, value},
+          field: { name, onChange, value },
           formState: { errors }
         }) => (
           <TextField
@@ -57,7 +57,7 @@ export function ProductForm() {
         control={control}
         name="description"
         render={({
-          field: { name, onChange, value},
+          field: { name, onChange, value },
           formState: { errors }
         }) => (
           <TextField
@@ -82,7 +82,7 @@ export function ProductForm() {
             name={name}
             value={value}
             onChange={onChange}
-            errorMessage={errors.price?.message}     
+            errorMessage={errors.price?.message}
           />
         )}
       />
