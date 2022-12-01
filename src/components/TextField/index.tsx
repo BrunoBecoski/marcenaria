@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, MutableRefObject, useRef, useState } from 'react';
+import { ChangeEvent, InputHTMLAttributes, MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import { TextFieldContainer, Border, Label, Input, Span } from './styles';
 
@@ -6,6 +6,7 @@ interface TextFieldProps extends  InputHTMLAttributes<HTMLInputElement>{
   label?: string;
   name: string;
   errorMessage?: string | undefined;
+  setValue?: any;
 }
 
 export function TextField({ label, name, errorMessage, ...props }: TextFieldProps) {
@@ -32,8 +33,9 @@ export function TextField({ label, name, errorMessage, ...props }: TextFieldProp
   )
 }
 
-export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextFieldProps) { 
+export function TextFieldCurrency({ label, name, errorMessage, setValue, ...props }: TextFieldProps) { 
   const [price, setPrice] = useState('');
+  const [inputValue, setInputValue] = useState(0)
 
   const inputRef = useRef() as  MutableRefObject<HTMLInputElement>
 
@@ -45,6 +47,8 @@ export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextF
     .replace(/\b0+/g, '')
     .trim()
     
+    setInputValue(Number(valueInt))
+
     let valueFormatted = ''
 
     const valueIntLenght = valueInt.length
@@ -73,6 +77,10 @@ export function TextFieldCurrency({ label, name, errorMessage, ...props }: TextF
 
     setPrice(`R$ ${valueFormatted}`)
   }
+
+  useEffect(() => {
+      setValue('price', inputValue)
+  }, [inputValue])
 
   return (
     <TextFieldContainer>

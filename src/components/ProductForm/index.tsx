@@ -26,7 +26,7 @@ const schema = yup.object({
 
 
 export function ProductForm() {
-  const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
+  const { handleSubmit, control, setValue, formState: { errors } } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   })
 
@@ -78,6 +78,7 @@ export function ProductForm() {
           formState: { errors }
         }) => (
           <TextFieldCurrency
+            setValue={setValue}
             label="Preço"
             name={name}
             value={value}
