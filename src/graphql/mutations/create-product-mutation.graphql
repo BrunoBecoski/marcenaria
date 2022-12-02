@@ -1,0 +1,10 @@
+enum ProductType {
+  NEW,
+  REFORM,
+}
+
+mutation CreateProduct($name: String!, $description: String!, $price: Int!, $date: Date!, $type: ProductType!) {
+  createProduct( data: { name: $name, description: $description, price: $price,date: $date, type: $type } ) {
+    id
+  }
+}

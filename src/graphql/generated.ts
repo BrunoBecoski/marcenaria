@@ -1157,8 +1157,8 @@ export type Client = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   name: Scalars['String'];
-  orders: Array<Order>;
   phoneNumber?: Maybe<Scalars['String']>;
+  products: Array<Product>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1197,15 +1197,15 @@ export type ClientHistoryArgs = {
 };
 
 
-export type ClientOrdersArgs = {
+export type ClientProductsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: InputMaybe<Array<Locale>>;
-  orderBy?: InputMaybe<OrderOrderByInput>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<OrderWhereInput>;
+  where?: InputMaybe<ProductWhereInput>;
 };
 
 
@@ -1250,8 +1250,8 @@ export type ClientCreateInput = {
   address?: InputMaybe<AddressCreateOneInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  orders?: InputMaybe<OrderCreateManyInlineInput>;
   phoneNumber?: InputMaybe<Scalars['String']>;
+  products?: InputMaybe<ProductCreateManyInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -1346,9 +1346,6 @@ export type ClientManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  orders_every?: InputMaybe<OrderWhereInput>;
-  orders_none?: InputMaybe<OrderWhereInput>;
-  orders_some?: InputMaybe<OrderWhereInput>;
   phoneNumber?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   phoneNumber_contains?: InputMaybe<Scalars['String']>;
@@ -1368,6 +1365,9 @@ export type ClientManyWhereInput = {
   phoneNumber_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   phoneNumber_starts_with?: InputMaybe<Scalars['String']>;
+  products_every?: InputMaybe<ProductWhereInput>;
+  products_none?: InputMaybe<ProductWhereInput>;
+  products_some?: InputMaybe<ProductWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1423,8 +1423,8 @@ export enum ClientOrderByInput {
 export type ClientUpdateInput = {
   address?: InputMaybe<AddressUpdateOneInlineInput>;
   name?: InputMaybe<Scalars['String']>;
-  orders?: InputMaybe<OrderUpdateManyInlineInput>;
   phoneNumber?: InputMaybe<Scalars['String']>;
+  products?: InputMaybe<ProductUpdateManyInlineInput>;
 };
 
 export type ClientUpdateManyInlineInput = {
@@ -1566,9 +1566,6 @@ export type ClientWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  orders_every?: InputMaybe<OrderWhereInput>;
-  orders_none?: InputMaybe<OrderWhereInput>;
-  orders_some?: InputMaybe<OrderWhereInput>;
   phoneNumber?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   phoneNumber_contains?: InputMaybe<Scalars['String']>;
@@ -1588,6 +1585,9 @@ export type ClientWhereInput = {
   phoneNumber_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   phoneNumber_starts_with?: InputMaybe<Scalars['String']>;
+  products_every?: InputMaybe<ProductWhereInput>;
+  products_none?: InputMaybe<ProductWhereInput>;
+  products_some?: InputMaybe<ProductWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1794,8 +1794,8 @@ export type Mutation = {
   createAsset?: Maybe<Asset>;
   /** Create one client */
   createClient?: Maybe<Client>;
-  /** Create one order */
-  createOrder?: Maybe<Order>;
+  /** Create one product */
+  createProduct?: Maybe<Product>;
   /** Create one scheduledRelease */
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
@@ -1817,14 +1817,14 @@ export type Mutation = {
   /** Delete many Client documents, return deleted documents */
   deleteManyClientsConnection: ClientConnection;
   /**
-   * Delete many Order documents
-   * @deprecated Please use the new paginated many mutation (deleteManyOrdersConnection)
+   * Delete many Product documents
+   * @deprecated Please use the new paginated many mutation (deleteManyProductsConnection)
    */
-  deleteManyOrders: BatchPayload;
-  /** Delete many Order documents, return deleted documents */
-  deleteManyOrdersConnection: OrderConnection;
-  /** Delete one order from _all_ existing stages. Returns deleted document. */
-  deleteOrder?: Maybe<Order>;
+  deleteManyProducts: BatchPayload;
+  /** Delete many Product documents, return deleted documents */
+  deleteManyProductsConnection: ProductConnection;
+  /** Delete one product from _all_ existing stages. Returns deleted document. */
+  deleteProduct?: Maybe<Product>;
   /** Delete and return scheduled operation */
   deleteScheduledOperation?: Maybe<ScheduledOperation>;
   /** Delete one scheduledRelease from _all_ existing stages. Returns deleted document. */
@@ -1848,26 +1848,26 @@ export type Mutation = {
   /** Publish many Client documents */
   publishManyClientsConnection: ClientConnection;
   /**
-   * Publish many Order documents
-   * @deprecated Please use the new paginated many mutation (publishManyOrdersConnection)
+   * Publish many Product documents
+   * @deprecated Please use the new paginated many mutation (publishManyProductsConnection)
    */
-  publishManyOrders: BatchPayload;
-  /** Publish many Order documents */
-  publishManyOrdersConnection: OrderConnection;
-  /** Publish one order */
-  publishOrder?: Maybe<Order>;
+  publishManyProducts: BatchPayload;
+  /** Publish many Product documents */
+  publishManyProductsConnection: ProductConnection;
+  /** Publish one product */
+  publishProduct?: Maybe<Product>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one client */
   schedulePublishClient?: Maybe<Client>;
-  /** Schedule to publish one order */
-  schedulePublishOrder?: Maybe<Order>;
+  /** Schedule to publish one product */
+  schedulePublishProduct?: Maybe<Product>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one client from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishClient?: Maybe<Client>;
-  /** Unpublish one order from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  scheduleUnpublishOrder?: Maybe<Order>;
+  /** Unpublish one product from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishProduct?: Maybe<Product>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one client from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -1887,14 +1887,14 @@ export type Mutation = {
   /** Find many Client documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyClientsConnection: ClientConnection;
   /**
-   * Unpublish many Order documents
-   * @deprecated Please use the new paginated many mutation (unpublishManyOrdersConnection)
+   * Unpublish many Product documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyProductsConnection)
    */
-  unpublishManyOrders: BatchPayload;
-  /** Find many Order documents that match criteria in specified stage and unpublish from target stages */
-  unpublishManyOrdersConnection: OrderConnection;
-  /** Unpublish one order from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
-  unpublishOrder?: Maybe<Order>;
+  unpublishManyProducts: BatchPayload;
+  /** Find many Product documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyProductsConnection: ProductConnection;
+  /** Unpublish one product from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishProduct?: Maybe<Product>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
   /** Update one client */
@@ -1914,22 +1914,22 @@ export type Mutation = {
   /** Update many Client documents */
   updateManyClientsConnection: ClientConnection;
   /**
-   * Update many orders
-   * @deprecated Please use the new paginated many mutation (updateManyOrdersConnection)
+   * Update many products
+   * @deprecated Please use the new paginated many mutation (updateManyProductsConnection)
    */
-  updateManyOrders: BatchPayload;
-  /** Update many Order documents */
-  updateManyOrdersConnection: OrderConnection;
-  /** Update one order */
-  updateOrder?: Maybe<Order>;
+  updateManyProducts: BatchPayload;
+  /** Update many Product documents */
+  updateManyProductsConnection: ProductConnection;
+  /** Update one product */
+  updateProduct?: Maybe<Product>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
   /** Upsert one client */
   upsertClient?: Maybe<Client>;
-  /** Upsert one order */
-  upsertOrder?: Maybe<Order>;
+  /** Upsert one product */
+  upsertProduct?: Maybe<Product>;
 };
 
 
@@ -1943,8 +1943,8 @@ export type MutationCreateClientArgs = {
 };
 
 
-export type MutationCreateOrderArgs = {
-  data: OrderCreateInput;
+export type MutationCreateProductArgs = {
+  data: ProductCreateInput;
 };
 
 
@@ -1993,23 +1993,23 @@ export type MutationDeleteManyClientsConnectionArgs = {
 };
 
 
-export type MutationDeleteManyOrdersArgs = {
-  where?: InputMaybe<OrderManyWhereInput>;
+export type MutationDeleteManyProductsArgs = {
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationDeleteManyOrdersConnectionArgs = {
+export type MutationDeleteManyProductsConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<OrderManyWhereInput>;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationDeleteOrderArgs = {
-  where: OrderWhereUniqueInput;
+export type MutationDeleteProductArgs = {
+  where: ProductWhereUniqueInput;
 };
 
 
@@ -2080,13 +2080,13 @@ export type MutationPublishManyClientsConnectionArgs = {
 };
 
 
-export type MutationPublishManyOrdersArgs = {
+export type MutationPublishManyProductsArgs = {
   to?: Array<Stage>;
-  where?: InputMaybe<OrderManyWhereInput>;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationPublishManyOrdersConnectionArgs = {
+export type MutationPublishManyProductsConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2094,13 +2094,13 @@ export type MutationPublishManyOrdersConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   to?: Array<Stage>;
-  where?: InputMaybe<OrderManyWhereInput>;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationPublishOrderArgs = {
+export type MutationPublishProductArgs = {
   to?: Array<Stage>;
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 
@@ -2123,11 +2123,11 @@ export type MutationSchedulePublishClientArgs = {
 };
 
 
-export type MutationSchedulePublishOrderArgs = {
+export type MutationSchedulePublishProductArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   to?: Array<Stage>;
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 
@@ -2149,11 +2149,11 @@ export type MutationScheduleUnpublishClientArgs = {
 };
 
 
-export type MutationScheduleUnpublishOrderArgs = {
+export type MutationScheduleUnpublishProductArgs = {
   from?: Array<Stage>;
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 
@@ -2211,13 +2211,13 @@ export type MutationUnpublishManyClientsConnectionArgs = {
 };
 
 
-export type MutationUnpublishManyOrdersArgs = {
+export type MutationUnpublishManyProductsArgs = {
   from?: Array<Stage>;
-  where?: InputMaybe<OrderManyWhereInput>;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationUnpublishManyOrdersConnectionArgs = {
+export type MutationUnpublishManyProductsConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2225,13 +2225,13 @@ export type MutationUnpublishManyOrdersConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   stage?: InputMaybe<Stage>;
-  where?: InputMaybe<OrderManyWhereInput>;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationUnpublishOrderArgs = {
+export type MutationUnpublishProductArgs = {
   from?: Array<Stage>;
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 
@@ -2281,26 +2281,26 @@ export type MutationUpdateManyClientsConnectionArgs = {
 };
 
 
-export type MutationUpdateManyOrdersArgs = {
-  data: OrderUpdateManyInput;
-  where?: InputMaybe<OrderManyWhereInput>;
+export type MutationUpdateManyProductsArgs = {
+  data: ProductUpdateManyInput;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationUpdateManyOrdersConnectionArgs = {
+export type MutationUpdateManyProductsConnectionArgs = {
   after?: InputMaybe<Scalars['ID']>;
   before?: InputMaybe<Scalars['ID']>;
-  data: OrderUpdateManyInput;
+  data: ProductUpdateManyInput;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<OrderManyWhereInput>;
+  where?: InputMaybe<ProductManyWhereInput>;
 };
 
 
-export type MutationUpdateOrderArgs = {
-  data: OrderUpdateInput;
-  where: OrderWhereUniqueInput;
+export type MutationUpdateProductArgs = {
+  data: ProductUpdateInput;
+  where: ProductWhereUniqueInput;
 };
 
 
@@ -2322,9 +2322,9 @@ export type MutationUpsertClientArgs = {
 };
 
 
-export type MutationUpsertOrderArgs = {
-  upsert: OrderUpsertInput;
-  where: OrderWhereUniqueInput;
+export type MutationUpsertProductArgs = {
+  upsert: ProductUpsertInput;
+  where: ProductWhereUniqueInput;
 };
 
 /** An object with an ID */
@@ -2335,8 +2335,23 @@ export type Node = {
   stage: Stage;
 };
 
-export type Order = Node & {
-  __typename?: 'Order';
+/** Information about pagination in a connection. */
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean'];
+  /** Number of items in the current page. */
+  pageSize?: Maybe<Scalars['Int']>;
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']>;
+};
+
+export type Product = Node & {
+  __typename?: 'Product';
   client?: Maybe<Client>;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -2345,13 +2360,13 @@ export type Order = Node & {
   date?: Maybe<Scalars['Date']>;
   description?: Maybe<Scalars['String']>;
   /** Get the document in other stages */
-  documentInStages: Array<Order>;
-  /** List of Order versions */
+  documentInStages: Array<Product>;
+  /** List of Product versions */
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Float']>;
+  price?: Maybe<Scalars['Int']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -2359,7 +2374,7 @@ export type Order = Node & {
   scheduledIn: Array<ScheduledOperation>;
   /** System stage field */
   stage: Stage;
-  type?: Maybe<OrderType>;
+  type?: Maybe<ProductType>;
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
@@ -2367,36 +2382,36 @@ export type Order = Node & {
 };
 
 
-export type OrderClientArgs = {
+export type ProductClientArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
-export type OrderCreatedByArgs = {
+export type ProductCreatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
-export type OrderDocumentInStagesArgs = {
+export type ProductDocumentInStagesArgs = {
   includeCurrent?: Scalars['Boolean'];
   inheritLocale?: Scalars['Boolean'];
   stages?: Array<Stage>;
 };
 
 
-export type OrderHistoryArgs = {
+export type ProductHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
 };
 
 
-export type OrderPublishedByArgs = {
+export type ProductPublishedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
 
-export type OrderScheduledInArgs = {
+export type ProductScheduledInArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -2407,69 +2422,69 @@ export type OrderScheduledInArgs = {
 };
 
 
-export type OrderUpdatedByArgs = {
+export type ProductUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type OrderConnectInput = {
+export type ProductConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
   position?: InputMaybe<ConnectPositionInput>;
   /** Document to connect */
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 /** A connection to a list of items. */
-export type OrderConnection = {
-  __typename?: 'OrderConnection';
+export type ProductConnection = {
+  __typename?: 'ProductConnection';
   aggregate: Aggregate;
   /** A list of edges. */
-  edges: Array<OrderEdge>;
+  edges: Array<ProductEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
 };
 
-export type OrderCreateInput = {
+export type ProductCreateInput = {
   client?: InputMaybe<ClientCreateOneInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   date?: InputMaybe<Scalars['Date']>;
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Float']>;
-  type?: InputMaybe<OrderType>;
+  price?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<ProductType>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type OrderCreateManyInlineInput = {
-  /** Connect multiple existing Order documents */
-  connect?: InputMaybe<Array<OrderWhereUniqueInput>>;
-  /** Create and connect multiple existing Order documents */
-  create?: InputMaybe<Array<OrderCreateInput>>;
+export type ProductCreateManyInlineInput = {
+  /** Connect multiple existing Product documents */
+  connect?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  /** Create and connect multiple existing Product documents */
+  create?: InputMaybe<Array<ProductCreateInput>>;
 };
 
-export type OrderCreateOneInlineInput = {
-  /** Connect one existing Order document */
-  connect?: InputMaybe<OrderWhereUniqueInput>;
-  /** Create and connect one Order document */
-  create?: InputMaybe<OrderCreateInput>;
+export type ProductCreateOneInlineInput = {
+  /** Connect one existing Product document */
+  connect?: InputMaybe<ProductWhereUniqueInput>;
+  /** Create and connect one Product document */
+  create?: InputMaybe<ProductCreateInput>;
 };
 
 /** An edge in a connection. */
-export type OrderEdge = {
-  __typename?: 'OrderEdge';
+export type ProductEdge = {
+  __typename?: 'ProductEdge';
   /** A cursor for use in pagination. */
   cursor: Scalars['String'];
   /** The item at the end of the edge. */
-  node: Order;
+  node: Product;
 };
 
 /** Identifies documents */
-export type OrderManyWhereInput = {
+export type ProductManyWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<OrderWhereInput>>;
+  AND?: InputMaybe<Array<ProductWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<OrderWhereInput>>;
+  NOT?: InputMaybe<Array<ProductWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<OrderWhereInput>>;
+  OR?: InputMaybe<Array<ProductWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
   client?: InputMaybe<ClientWhereInput>;
@@ -2523,9 +2538,9 @@ export type OrderManyWhereInput = {
   description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   description_starts_with?: InputMaybe<Scalars['String']>;
-  documentInStages_every?: InputMaybe<OrderWhereStageInput>;
-  documentInStages_none?: InputMaybe<OrderWhereStageInput>;
-  documentInStages_some?: InputMaybe<OrderWhereStageInput>;
+  documentInStages_every?: InputMaybe<ProductWhereStageInput>;
+  documentInStages_none?: InputMaybe<ProductWhereStageInput>;
+  documentInStages_some?: InputMaybe<ProductWhereStageInput>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -2564,21 +2579,21 @@ export type OrderManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Float']>;
+  price?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
-  price_gt?: InputMaybe<Scalars['Float']>;
+  price_gt?: InputMaybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
-  price_gte?: InputMaybe<Scalars['Float']>;
+  price_gte?: InputMaybe<Scalars['Int']>;
   /** All values that are contained in given list. */
-  price_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  price_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** All values less than the given value. */
-  price_lt?: InputMaybe<Scalars['Float']>;
+  price_lt?: InputMaybe<Scalars['Int']>;
   /** All values less than or equal the given value. */
-  price_lte?: InputMaybe<Scalars['Float']>;
+  price_lte?: InputMaybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
-  price_not?: InputMaybe<Scalars['Float']>;
+  price_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
-  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2598,13 +2613,13 @@ export type OrderManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  type?: InputMaybe<OrderType>;
+  type?: InputMaybe<ProductType>;
   /** All values that are contained in given list. */
-  type_in?: InputMaybe<Array<InputMaybe<OrderType>>>;
+  type_in?: InputMaybe<Array<InputMaybe<ProductType>>>;
   /** All values that are not equal to given value. */
-  type_not?: InputMaybe<OrderType>;
+  type_not?: InputMaybe<ProductType>;
   /** All values that are not contained in given list. */
-  type_not_in?: InputMaybe<Array<InputMaybe<OrderType>>>;
+  type_not_in?: InputMaybe<Array<InputMaybe<ProductType>>>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2623,7 +2638,7 @@ export type OrderManyWhereInput = {
   updatedBy?: InputMaybe<UserWhereInput>;
 };
 
-export enum OrderOrderByInput {
+export enum ProductOrderByInput {
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
   DateAsc = 'date_ASC',
@@ -2644,102 +2659,102 @@ export enum OrderOrderByInput {
   UpdatedAtDesc = 'updatedAt_DESC'
 }
 
-export enum OrderType {
-  New = 'new',
-  Renovation = 'renovation'
+export enum ProductType {
+  New = 'NEW',
+  Reform = 'REFORM'
 }
 
-export type OrderUpdateInput = {
+export type ProductUpdateInput = {
   client?: InputMaybe<ClientUpdateOneInlineInput>;
   date?: InputMaybe<Scalars['Date']>;
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Float']>;
-  type?: InputMaybe<OrderType>;
+  price?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<ProductType>;
 };
 
-export type OrderUpdateManyInlineInput = {
-  /** Connect multiple existing Order documents */
-  connect?: InputMaybe<Array<OrderConnectInput>>;
-  /** Create and connect multiple Order documents */
-  create?: InputMaybe<Array<OrderCreateInput>>;
-  /** Delete multiple Order documents */
-  delete?: InputMaybe<Array<OrderWhereUniqueInput>>;
-  /** Disconnect multiple Order documents */
-  disconnect?: InputMaybe<Array<OrderWhereUniqueInput>>;
-  /** Override currently-connected documents with multiple existing Order documents */
-  set?: InputMaybe<Array<OrderWhereUniqueInput>>;
-  /** Update multiple Order documents */
-  update?: InputMaybe<Array<OrderUpdateWithNestedWhereUniqueInput>>;
-  /** Upsert multiple Order documents */
-  upsert?: InputMaybe<Array<OrderUpsertWithNestedWhereUniqueInput>>;
+export type ProductUpdateManyInlineInput = {
+  /** Connect multiple existing Product documents */
+  connect?: InputMaybe<Array<ProductConnectInput>>;
+  /** Create and connect multiple Product documents */
+  create?: InputMaybe<Array<ProductCreateInput>>;
+  /** Delete multiple Product documents */
+  delete?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  /** Disconnect multiple Product documents */
+  disconnect?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Product documents */
+  set?: InputMaybe<Array<ProductWhereUniqueInput>>;
+  /** Update multiple Product documents */
+  update?: InputMaybe<Array<ProductUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Product documents */
+  upsert?: InputMaybe<Array<ProductUpsertWithNestedWhereUniqueInput>>;
 };
 
-export type OrderUpdateManyInput = {
+export type ProductUpdateManyInput = {
   date?: InputMaybe<Scalars['Date']>;
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Float']>;
-  type?: InputMaybe<OrderType>;
+  price?: InputMaybe<Scalars['Int']>;
+  type?: InputMaybe<ProductType>;
 };
 
-export type OrderUpdateManyWithNestedWhereInput = {
+export type ProductUpdateManyWithNestedWhereInput = {
   /** Update many input */
-  data: OrderUpdateManyInput;
+  data: ProductUpdateManyInput;
   /** Document search */
-  where: OrderWhereInput;
+  where: ProductWhereInput;
 };
 
-export type OrderUpdateOneInlineInput = {
-  /** Connect existing Order document */
-  connect?: InputMaybe<OrderWhereUniqueInput>;
-  /** Create and connect one Order document */
-  create?: InputMaybe<OrderCreateInput>;
-  /** Delete currently connected Order document */
+export type ProductUpdateOneInlineInput = {
+  /** Connect existing Product document */
+  connect?: InputMaybe<ProductWhereUniqueInput>;
+  /** Create and connect one Product document */
+  create?: InputMaybe<ProductCreateInput>;
+  /** Delete currently connected Product document */
   delete?: InputMaybe<Scalars['Boolean']>;
-  /** Disconnect currently connected Order document */
+  /** Disconnect currently connected Product document */
   disconnect?: InputMaybe<Scalars['Boolean']>;
-  /** Update single Order document */
-  update?: InputMaybe<OrderUpdateWithNestedWhereUniqueInput>;
-  /** Upsert single Order document */
-  upsert?: InputMaybe<OrderUpsertWithNestedWhereUniqueInput>;
+  /** Update single Product document */
+  update?: InputMaybe<ProductUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Product document */
+  upsert?: InputMaybe<ProductUpsertWithNestedWhereUniqueInput>;
 };
 
-export type OrderUpdateWithNestedWhereUniqueInput = {
+export type ProductUpdateWithNestedWhereUniqueInput = {
   /** Document to update */
-  data: OrderUpdateInput;
+  data: ProductUpdateInput;
   /** Unique document search */
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
-export type OrderUpsertInput = {
+export type ProductUpsertInput = {
   /** Create document if it didn't exist */
-  create: OrderCreateInput;
+  create: ProductCreateInput;
   /** Update document if it exists */
-  update: OrderUpdateInput;
+  update: ProductUpdateInput;
 };
 
-export type OrderUpsertWithNestedWhereUniqueInput = {
+export type ProductUpsertWithNestedWhereUniqueInput = {
   /** Upsert data */
-  data: OrderUpsertInput;
+  data: ProductUpsertInput;
   /** Unique document search */
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 /** This contains a set of filters that can be used to compare values internally */
-export type OrderWhereComparatorInput = {
+export type ProductWhereComparatorInput = {
   /** This field can be used to request to check if the entry is outdated by internal comparison */
   outdated_to?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Identifies documents */
-export type OrderWhereInput = {
+export type ProductWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<OrderWhereInput>>;
+  AND?: InputMaybe<Array<ProductWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<OrderWhereInput>>;
+  NOT?: InputMaybe<Array<ProductWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<OrderWhereInput>>;
+  OR?: InputMaybe<Array<ProductWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
   client?: InputMaybe<ClientWhereInput>;
@@ -2793,9 +2808,9 @@ export type OrderWhereInput = {
   description_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   description_starts_with?: InputMaybe<Scalars['String']>;
-  documentInStages_every?: InputMaybe<OrderWhereStageInput>;
-  documentInStages_none?: InputMaybe<OrderWhereStageInput>;
-  documentInStages_some?: InputMaybe<OrderWhereStageInput>;
+  documentInStages_every?: InputMaybe<ProductWhereStageInput>;
+  documentInStages_none?: InputMaybe<ProductWhereStageInput>;
+  documentInStages_some?: InputMaybe<ProductWhereStageInput>;
   id?: InputMaybe<Scalars['ID']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']>;
@@ -2834,21 +2849,21 @@ export type OrderWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
-  price?: InputMaybe<Scalars['Float']>;
+  price?: InputMaybe<Scalars['Int']>;
   /** All values greater than the given value. */
-  price_gt?: InputMaybe<Scalars['Float']>;
+  price_gt?: InputMaybe<Scalars['Int']>;
   /** All values greater than or equal the given value. */
-  price_gte?: InputMaybe<Scalars['Float']>;
+  price_gte?: InputMaybe<Scalars['Int']>;
   /** All values that are contained in given list. */
-  price_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  price_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   /** All values less than the given value. */
-  price_lt?: InputMaybe<Scalars['Float']>;
+  price_lt?: InputMaybe<Scalars['Int']>;
   /** All values less than or equal the given value. */
-  price_lte?: InputMaybe<Scalars['Float']>;
+  price_lte?: InputMaybe<Scalars['Int']>;
   /** All values that are not equal to given value. */
-  price_not?: InputMaybe<Scalars['Float']>;
+  price_not?: InputMaybe<Scalars['Int']>;
   /** All values that are not contained in given list. */
-  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  price_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2868,13 +2883,13 @@ export type OrderWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
-  type?: InputMaybe<OrderType>;
+  type?: InputMaybe<ProductType>;
   /** All values that are contained in given list. */
-  type_in?: InputMaybe<Array<InputMaybe<OrderType>>>;
+  type_in?: InputMaybe<Array<InputMaybe<ProductType>>>;
   /** All values that are not equal to given value. */
-  type_not?: InputMaybe<OrderType>;
+  type_not?: InputMaybe<ProductType>;
   /** All values that are not contained in given list. */
-  type_not_in?: InputMaybe<Array<InputMaybe<OrderType>>>;
+  type_not_in?: InputMaybe<Array<InputMaybe<ProductType>>>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2894,37 +2909,22 @@ export type OrderWhereInput = {
 };
 
 /** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
-export type OrderWhereStageInput = {
+export type ProductWhereStageInput = {
   /** Logical AND on all given filters. */
-  AND?: InputMaybe<Array<OrderWhereStageInput>>;
+  AND?: InputMaybe<Array<ProductWhereStageInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: InputMaybe<Array<OrderWhereStageInput>>;
+  NOT?: InputMaybe<Array<ProductWhereStageInput>>;
   /** Logical OR on all given filters. */
-  OR?: InputMaybe<Array<OrderWhereStageInput>>;
+  OR?: InputMaybe<Array<ProductWhereStageInput>>;
   /** This field contains fields which can be set as true or false to specify an internal comparison */
-  compareWithParent?: InputMaybe<OrderWhereComparatorInput>;
+  compareWithParent?: InputMaybe<ProductWhereComparatorInput>;
   /** Specify the stage to compare with */
   stage?: InputMaybe<Stage>;
 };
 
-/** References Order record uniquely */
-export type OrderWhereUniqueInput = {
+/** References Product record uniquely */
+export type ProductWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-};
-
-/** Information about pagination in a connection. */
-export type PageInfo = {
-  __typename?: 'PageInfo';
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']>;
-  /** When paginating forwards, are there more items? */
-  hasNextPage: Scalars['Boolean'];
-  /** When paginating backwards, are there more items? */
-  hasPreviousPage: Scalars['Boolean'];
-  /** Number of items in the current page. */
-  pageSize?: Maybe<Scalars['Int']>;
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']>;
 };
 
 export type PublishLocaleInput = {
@@ -2954,14 +2954,14 @@ export type Query = {
   clientsConnection: ClientConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
-  /** Retrieve a single order */
-  order?: Maybe<Order>;
+  /** Retrieve a single product */
+  product?: Maybe<Product>;
   /** Retrieve document version */
-  orderVersion?: Maybe<DocumentVersion>;
-  /** Retrieve multiple orders */
-  orders: Array<Order>;
-  /** Retrieve multiple orders using the Relay connection interface */
-  ordersConnection: OrderConnection;
+  productVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple products */
+  products: Array<Product>;
+  /** Retrieve multiple products using the Relay connection interface */
+  productsConnection: ProductConnection;
   /** Retrieve a single scheduledOperation */
   scheduledOperation?: Maybe<ScheduledOperation>;
   /** Retrieve multiple scheduledOperations */
@@ -3066,41 +3066,41 @@ export type QueryNodeArgs = {
 };
 
 
-export type QueryOrderArgs = {
+export type QueryProductArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
-  where: OrderWhereUniqueInput;
+  where: ProductWhereUniqueInput;
 };
 
 
-export type QueryOrderVersionArgs = {
+export type QueryProductVersionArgs = {
   where: VersionWhereInput;
 };
 
 
-export type QueryOrdersArgs = {
+export type QueryProductsArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: Array<Locale>;
-  orderBy?: InputMaybe<OrderOrderByInput>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
-  where?: InputMaybe<OrderWhereInput>;
+  where?: InputMaybe<ProductWhereInput>;
 };
 
 
-export type QueryOrdersConnectionArgs = {
+export type QueryProductsConnectionArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
   locales?: Array<Locale>;
-  orderBy?: InputMaybe<OrderOrderByInput>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
   stage?: Stage;
-  where?: InputMaybe<OrderWhereInput>;
+  where?: InputMaybe<ProductWhereInput>;
 };
 
 
@@ -3309,7 +3309,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Client | Order;
+export type ScheduledOperationAffectedDocument = Asset | Client | Product;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -4733,6 +4733,17 @@ export type CreateClientMutationVariables = Exact<{
 
 export type CreateClientMutation = { __typename?: 'Mutation', createClient?: { __typename?: 'Client', id: string } | null };
 
+export type CreateProductMutationVariables = Exact<{
+  name: Scalars['String'];
+  description: Scalars['String'];
+  price: Scalars['Int'];
+  date: Scalars['Date'];
+  type: ProductType;
+}>;
+
+
+export type CreateProductMutation = { __typename?: 'Mutation', createProduct?: { __typename?: 'Product', id: string } | null };
+
 export type GetClientsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4773,6 +4784,45 @@ export function useCreateClientMutation(baseOptions?: Apollo.MutationHookOptions
 export type CreateClientMutationHookResult = ReturnType<typeof useCreateClientMutation>;
 export type CreateClientMutationResult = Apollo.MutationResult<CreateClientMutation>;
 export type CreateClientMutationOptions = Apollo.BaseMutationOptions<CreateClientMutation, CreateClientMutationVariables>;
+export const CreateProductDocument = gql`
+    mutation CreateProduct($name: String!, $description: String!, $price: Int!, $date: Date!, $type: ProductType!) {
+  createProduct(
+    data: {name: $name, description: $description, price: $price, date: $date, type: $type}
+  ) {
+    id
+  }
+}
+    `;
+export type CreateProductMutationFn = Apollo.MutationFunction<CreateProductMutation, CreateProductMutationVariables>;
+
+/**
+ * __useCreateProductMutation__
+ *
+ * To run a mutation, you first call `useCreateProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createProductMutation, { data, loading, error }] = useCreateProductMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      price: // value for 'price'
+ *      date: // value for 'date'
+ *      type: // value for 'type'
+ *   },
+ * });
+ */
+export function useCreateProductMutation(baseOptions?: Apollo.MutationHookOptions<CreateProductMutation, CreateProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateProductMutation, CreateProductMutationVariables>(CreateProductDocument, options);
+      }
+export type CreateProductMutationHookResult = ReturnType<typeof useCreateProductMutation>;
+export type CreateProductMutationResult = Apollo.MutationResult<CreateProductMutation>;
+export type CreateProductMutationOptions = Apollo.BaseMutationOptions<CreateProductMutation, CreateProductMutationVariables>;
 export const GetClientsDocument = gql`
     query GetClients {
   clients {

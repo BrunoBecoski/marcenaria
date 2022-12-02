@@ -1,7 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
+
+import { ProductType, useCreateProductMutation } from '../../graphql/generated';
 
 import { Button } from '../Button';
 import { RadioBox } from '../RadioBox';
@@ -14,7 +16,7 @@ interface IFormInputs {
   description: string;
   price: string;
   date: string;
-  type: 'new' | 'reform';
+  type: ProductType;
 }
 
 const schema = yup.object({
@@ -33,13 +35,32 @@ export function ProductForm() {
       description: '',
       price: 'R$ 00,00',
       date: format(new Date(), 'yyyy-MM-dd'),
-      type: 'new',
+      type: ProductType.New,
     }
   })
 
+  const [createProduct] = useCreateProductMutation()
+
   async function onSubmit(data: IFormInputs) {
-    console.log(data);
-    reset()
+    const { name, description, date, price, type } = data;
+
+    const priceFormatted = Number(price.replace(/\D+/g, ''));
+
+    try {
+      await createProduct({
+        variables: {
+          name,
+          description,
+          date,
+          price: priceFormatted,
+          type,
+        }
+      })
+
+      reset()
+    } catch (error) {
+      console.log(JSON.stringify(error, null, ' '))
+    }
   }
 
   return (
@@ -49,14 +70,13 @@ export function ProductForm() {
         name="name"
         render={({
           field: { name, onChange, value },
-          formState: { defaultValues ,errors }
+          formState: { errors }
         }) => (
           <TextField
             label="Nome"
             name={name}
             value={value}
             onChange={onChange}
-            defaultValue={defaultValues?.name}
             errorMessage={errors.name?.message}            
           />
         )}
@@ -67,14 +87,13 @@ export function ProductForm() {
         name="description"
         render={({
           field: { name, onChange, value },
-          formState: { defaultValues ,errors }
+          formState: { errors }
         }) => (
           <TextField
             label="Descrição"
             name={name}
             value={value}
             onChange={onChange}
-            defaultValue={defaultValues?.description}
             errorMessage={errors.description?.message}     
           />
         )}
@@ -85,7 +104,7 @@ export function ProductForm() {
         name="price"
         render={({
           field: { name, onChange, value },
-          formState: { defaultValues, errors }
+          formState: { errors }
         }) => (
           <TextFieldCurrency
             getValues={getValues}
@@ -94,7 +113,6 @@ export function ProductForm() {
             name={name}
             value={value}
             onChange={onChange}
-            defaultValue={defaultValues?.price}
             errorMessage={errors.price?.message}
           />
         )}
@@ -105,10 +123,9 @@ export function ProductForm() {
         name="date"
         render={({
           field: { name, onChange, value },
-          formState: { defaultValues, errors },
+          formState: { errors },
         }) => (
           <TextField
-            defaultValue={defaultValues?.date}
             type="date"
             label="Data"
             name={name}
@@ -124,18 +141,16 @@ export function ProductForm() {
         name="type"
         render={({
           field: { name, value, onChange },
-          formState: { defaultValues },
         }) => (
           <RadioBox
             title="Tipo de trabalho"
             name={name}
             items={[
-              { label: 'Novo', value: 'new' },
-              { label: 'Reforma', value: 'reform' },
+              { label: 'Novo', value: ProductType.New },
+              { label: 'Reforma', value: ProductType.Reform },
             ]}
             value={value}
             onChange={onChange}
-            defaultValue={defaultValues?.type}
           />
         )}
       />  
