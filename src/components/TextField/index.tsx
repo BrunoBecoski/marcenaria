@@ -2,10 +2,11 @@ import { ChangeEvent, InputHTMLAttributes, MutableRefObject, useEffect, useRef, 
 
 import { TextFieldContainer, Border, Label, Input, Span } from './styles';
 
-interface TextFieldProps extends  InputHTMLAttributes<HTMLInputElement>{
+interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement>{
   label?: string;
   name: string;
   errorMessage?: string | undefined;
+  getValues?: any;
   setValue?: any;
 }
 
@@ -33,22 +34,17 @@ export function TextField({ label, name, errorMessage, ...props }: TextFieldProp
   )
 }
 
-export function TextFieldCurrency({ label, name, errorMessage, setValue, ...props }: TextFieldProps) { 
-  const [price, setPrice] = useState('');
-  const [inputValue, setInputValue] = useState(0)
-
+export function TextFieldCurrency({ label, name, errorMessage, getValues, setValue, ...props }: TextFieldProps) { 
   const inputRef = useRef() as  MutableRefObject<HTMLInputElement>
 
   function formatPrice(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
     
     const valueInt = value
-    .replace(/[R$,\.a-zA-z]+/g, '')
+    .replace(/\D+/g, '')
     .replace(/\b0+/g, '')
     .trim()
     
-    setInputValue(Number(valueInt))
-
     let valueFormatted = ''
 
     const valueIntLenght = valueInt.length
@@ -75,12 +71,8 @@ export function TextFieldCurrency({ label, name, errorMessage, setValue, ...prop
         break;
     } 
 
-    setPrice(`R$ ${valueFormatted}`)
+    setValue('price', `R$ ${valueFormatted}`)
   }
-
-  useEffect(() => {
-      setValue('price', inputValue)
-  }, [inputValue])
 
   return (
     <TextFieldContainer>
@@ -95,13 +87,8 @@ export function TextFieldCurrency({ label, name, errorMessage, setValue, ...prop
           placeholder=" "
           inputMode="numeric"
           data-invalid={!!errorMessage}
-          onChange={formatPrice}
-          value={price}
-        />
-
-        <input
-          style={{ display: 'none' }}
           {...props}
+          onChange={formatPrice}
         />
       </Border>
       <Span>{errorMessage}</Span> 

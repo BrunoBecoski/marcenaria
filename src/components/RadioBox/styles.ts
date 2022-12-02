@@ -6,11 +6,13 @@ export const RadioBoxContainer = styled.div`
   gap: var(--space_20);
 `;
 
-export const Title = styled.p``;
+export const Title = styled.p`
+  font-size: var(--body_lg);
+  color: ${({ theme }) => theme.colors.onSurface};
+`;
 
 export const Button = styled.label`
   cursor: pointer;
-
 
   width: fit-content;
 
@@ -19,7 +21,6 @@ export const Button = styled.label`
   outline: deeppink;
 
   -webkit-tap-highlight-color: transparent;
-
   
   input {
     opacity: 0;
@@ -103,7 +104,6 @@ export const Icon = styled.div`
     margin-left: calc(var(--space_5) * -1);
 
     transform: scale(0);
-
 
     width: var(--space_10);
     height: var(--space_10);

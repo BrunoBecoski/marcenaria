@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { format } from 'date-fns'
 
 import { Button } from '../Button';
 import { RadioBox } from '../RadioBox';
@@ -11,27 +12,34 @@ import { Form } from './styles';
 interface IFormInputs {
   name: string;
   description: string;
-  price: number;
+  price: string;
   date: string;
   type: 'new' | 'reform';
 }
 
 const schema = yup.object({
-  name: yup.string().required('Nome obrigatório.'),
-  description: yup.string().notRequired(),
-  price: yup.number().positive('Valor negativo.'),
-  date: yup.string().notRequired(),
-  type: yup.string().notRequired(),
+  name: yup.string(),
+  description: yup.string(),
+  price: yup.string(),
+  date: yup.string(),
+  type: yup.string(),
 })
 
-
 export function ProductForm() {
-  const { handleSubmit, control, setValue, formState: { errors } } = useForm<IFormInputs>({
+  const { handleSubmit, control, getValues, setValue, reset } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
+    defaultValues: {
+      name: '',
+      description: '',
+      price: 'R$ 00,00',
+      date: format(new Date(), 'yyyy-MM-dd'),
+      type: 'new',
+    }
   })
 
   async function onSubmit(data: IFormInputs) {
     console.log(data);
+    reset()
   }
 
   return (
@@ -41,13 +49,14 @@ export function ProductForm() {
         name="name"
         render={({
           field: { name, onChange, value },
-          formState: { errors }
+          formState: { defaultValues ,errors }
         }) => (
           <TextField
             label="Nome"
             name={name}
             value={value}
             onChange={onChange}
+            defaultValue={defaultValues?.name}
             errorMessage={errors.name?.message}            
           />
         )}
@@ -58,13 +67,14 @@ export function ProductForm() {
         name="description"
         render={({
           field: { name, onChange, value },
-          formState: { errors }
+          formState: { defaultValues ,errors }
         }) => (
           <TextField
             label="Descrição"
             name={name}
             value={value}
             onChange={onChange}
+            defaultValue={defaultValues?.description}
             errorMessage={errors.description?.message}     
           />
         )}
@@ -75,15 +85,36 @@ export function ProductForm() {
         name="price"
         render={({
           field: { name, onChange, value },
-          formState: { errors }
+          formState: { defaultValues, errors }
         }) => (
           <TextFieldCurrency
+            getValues={getValues}
             setValue={setValue}
             label="Preço"
             name={name}
             value={value}
             onChange={onChange}
+            defaultValue={defaultValues?.price}
             errorMessage={errors.price?.message}
+          />
+        )}
+      />
+      
+      <Controller
+        control={control}
+        name="date"
+        render={({
+          field: { name, onChange, value },
+          formState: { defaultValues, errors },
+        }) => (
+          <TextField
+            defaultValue={defaultValues?.date}
+            type="date"
+            label="Data"
+            name={name}
+            value={value}
+            onChange={onChange}
+            errorMessage={errors.date?.message}
           />
         )}
       />
@@ -92,18 +123,19 @@ export function ProductForm() {
         control={control}
         name="type"
         render={({
-          field: { name, onChange },
-          formState: { errors }
+          field: { name, value, onChange },
+          formState: { defaultValues },
         }) => (
           <RadioBox
-            title="Tipo de "
+            title="Tipo de trabalho"
+            name={name}
             items={[
               { label: 'Novo', value: 'new' },
               { label: 'Reforma', value: 'reform' },
             ]}
-            name={name}
+            value={value}
             onChange={onChange}
-            errorMessage={errors.type?.message}     
+            defaultValue={defaultValues?.type}
           />
         )}
       />  
