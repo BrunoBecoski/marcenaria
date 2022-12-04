@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { useGetClientsQuery, useGetProductsQuery } from '../graphql/generated';
+import { useGetClientsProductsQuery } from '../graphql/generated';
+
 import { Layout } from '../components/Layout';
 import { List } from '../components/List';
 
@@ -8,48 +9,36 @@ const HomeContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   gap: 1rem;
   margin-top: var(--space_40);
-
   background: ${({ theme }) => theme.colors.surfaceAt_1};
 
-  div {
-    display: flex;
-    gap: 1rem;
-
-    div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  h2 {
+    margin-bottom: 2rem;
   }
 
+  div {
+    margin: 1rem;
+  }
 `;
 
 export default function Home() {
-  const { data: clientsData } = useGetClientsQuery();
-  const { data: productsData } = useGetProductsQuery();
+  const { data } = useGetClientsProductsQuery();
 
-  let clientsFormatted: any[] = [];
-  let productsFormatted: any[] = [];
+  let dataFormatted: any[] = [];
   
-  if(clientsData) {
-    clientsFormatted = clientsData?.clients.map(client => (
+  if(data) {
+    dataFormatted = data.clients.map(client => (
       {
         id: client.id,
-        title: client.name,
-        description: client.phoneNumber,
-      }
-    ))
-  }
-
-  if(productsData) {
-    productsFormatted = productsData?.products.map(produt => (
-      {
-        id: produt.id,
-        title: produt.name,
-        description: produt.description,
+        name: client.name,
+        products: client.products.map(product => (
+          {
+            id: product.id,
+            title: product.name,
+            description: product.description,          
+          }
+        ))
       }
     ))
   }
@@ -57,24 +46,17 @@ export default function Home() {
   return (
     <Layout>
       <HomeContainer>
-        <h1>Home</h1>
-
-        <div>
-          <div>
-            <h2>Clientes</h2>
-            <List 
-              contentList={clientsFormatted}
-            />
-          </div>
-
-          <div>
-            <h2>Produtos</h2>
-
-            <List
-              contentList={productsFormatted}
-            />
-          </div>
-        </div>
+          {
+            dataFormatted.map(client => (
+              <div key={client.id}>
+                <h2>{client.name}</h2>
+                {
+                  client.products &&
+                  <List contentList={client.products} />
+                }
+              </div>
+            ))
+          }
       </HomeContainer>
     </Layout>
   )

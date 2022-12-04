@@ -2365,7 +2365,7 @@ export type Product = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   price?: Maybe<Scalars['Int']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -2448,7 +2448,7 @@ export type ProductCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   date?: InputMaybe<Scalars['Date']>;
   description?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
   price?: InputMaybe<Scalars['Int']>;
   type?: InputMaybe<ProductType>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
@@ -4744,6 +4744,11 @@ export type CreateProductMutationVariables = Exact<{
 
 export type CreateProductMutation = { __typename?: 'Mutation', createProduct?: { __typename?: 'Product', id: string } | null };
 
+export type GetClientsProductsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetClientsProductsQuery = { __typename?: 'Query', clients: Array<{ __typename?: 'Client', id: string, name: string, products: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null }> }> };
+
 export type GetClientsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4752,7 +4757,7 @@ export type GetClientsQuery = { __typename?: 'Query', clients: Array<{ __typenam
 export type GetProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name?: string | null, description?: string | null, date?: any | null, price?: number | null, type?: ProductType | null }> };
+export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, description?: string | null, date?: any | null, price?: number | null, type?: ProductType | null }> };
 
 
 export const CreateClientDocument = gql`
@@ -4828,6 +4833,46 @@ export function useCreateProductMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateProductMutationHookResult = ReturnType<typeof useCreateProductMutation>;
 export type CreateProductMutationResult = Apollo.MutationResult<CreateProductMutation>;
 export type CreateProductMutationOptions = Apollo.BaseMutationOptions<CreateProductMutation, CreateProductMutationVariables>;
+export const GetClientsProductsDocument = gql`
+    query GetClientsProducts {
+  clients {
+    id
+    name
+    products {
+      id
+      name
+      description
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetClientsProductsQuery__
+ *
+ * To run a query within a React component, call `useGetClientsProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetClientsProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetClientsProductsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetClientsProductsQuery(baseOptions?: Apollo.QueryHookOptions<GetClientsProductsQuery, GetClientsProductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetClientsProductsQuery, GetClientsProductsQueryVariables>(GetClientsProductsDocument, options);
+      }
+export function useGetClientsProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetClientsProductsQuery, GetClientsProductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetClientsProductsQuery, GetClientsProductsQueryVariables>(GetClientsProductsDocument, options);
+        }
+export type GetClientsProductsQueryHookResult = ReturnType<typeof useGetClientsProductsQuery>;
+export type GetClientsProductsLazyQueryHookResult = ReturnType<typeof useGetClientsProductsLazyQuery>;
+export type GetClientsProductsQueryResult = Apollo.QueryResult<GetClientsProductsQuery, GetClientsProductsQueryVariables>;
 export const GetClientsDocument = gql`
     query GetClients {
   clients {
