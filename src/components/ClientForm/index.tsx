@@ -4,8 +4,10 @@ import * as yup from 'yup';
 
 import { useCreateClientMutation } from '../../graphql/generated';
 
-import { TextField } from '../TextField';
-import { Button } from '../Button';
+import { 
+  TextField,
+  Button,
+ } from '../MaterialDesign';
 
 import { Form } from './styles';
 

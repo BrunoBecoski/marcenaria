@@ -5,9 +5,12 @@ import { format } from 'date-fns';
 
 import { ProductType, useCreateProductMutation } from '../../graphql/generated';
 
-import { Button } from '../Button';
-import { RadioBox } from '../RadioBox';
-import { TextField, TextFieldCurrency } from '../TextField';
+import { 
+  Button, 
+  RadioBox, 
+  TextField, 
+  TextFieldCurrency
+} from '../MaterialDesign';
 
 import { Form } from './styles';
 

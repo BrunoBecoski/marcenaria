@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { useGetClientsProductsQuery } from '../graphql/generated';
 
 import { Layout } from '../components/Layout';
-import { List } from '../components/List';
+
+import { List } from '../components/MaterialDesign';
 
 const HomeContainer = styled.div`
   display: flex;

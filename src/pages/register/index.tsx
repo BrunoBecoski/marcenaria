@@ -1,13 +1,16 @@
 import { useState } from 'react';
 
-import { Tabs } from '../../components/Tabs';
 import { Layout } from '../../components/Layout';
 import { ClientForm } from '../../components/ClientForm';
 import { ProductForm, ProductData } from '../../components/ProductForm';
 
+import {
+  ProgressIndicator,
+  Button,
+} from '../../components/MaterialDesign'
+
 import { RegisterContainer } from './styles';
-import { Button } from '../../components/Button';
-import { ProgressIndicator } from '../../components/ProgressIndicator';
+
 
 export default function Register() {
   const [tabActive, setTabActive ] = useState('client');
