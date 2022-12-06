@@ -11,7 +11,7 @@ import { TextField, TextFieldCurrency } from '../TextField';
 
 import { Form } from './styles';
 
-interface IFormInputs {
+export interface ProductData {
   name: string;
   description: string;
   price: string;
@@ -27,8 +27,13 @@ const schema = yup.object({
   type: yup.string(),
 })
 
-export function ProductForm() {
-  const { handleSubmit, control, getValues, setValue, reset } = useForm<IFormInputs>({
+interface ProductFormProps {
+  setProductIsSubmit: (value: boolean) => void;
+  setProduct: (data:ProductData) => void;
+}
+
+export function ProductForm({ setProductIsSubmit, setProduct }: ProductFormProps) {
+  const { handleSubmit, control, getValues, setValue, reset } = useForm<ProductData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: '',
@@ -41,26 +46,29 @@ export function ProductForm() {
 
   const [createProduct] = useCreateProductMutation()
 
-  async function onSubmit(data: IFormInputs) {
+  async function onSubmit(data: ProductData) {
     const { name, description, date, price, type } = data;
 
-    const priceFormatted = Number(price.replace(/\D+/g, ''));
+    console.log('submit Product')
+    setProduct(data)
+    setProductIsSubmit(true);
+    // const priceFormatted = Number(price.replace(/\D+/g, ''));
 
-    try {
-      await createProduct({
-        variables: {
-          name,
-          description,
-          date,
-          price: priceFormatted,
-          type,
-        }
-      })
+    // try {
+    //   await createProduct({
+    //     variables: {
+    //       name,
+    //       description,
+    //       date,
+    //       price: priceFormatted,
+    //       type,
+    //     }
+    //   })
 
-      reset()
-    } catch (error) {
-      console.log(JSON.stringify(error, null, ' '))
-    }
+    //   reset()
+    // } catch (error) {
+    //   console.log(JSON.stringify(error, null, ' '))
+    // }
   }
 
   return (
