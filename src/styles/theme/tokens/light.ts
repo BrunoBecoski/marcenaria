@@ -47,6 +47,7 @@ export const light = {
   onSurfaceOpacity_8: transparentize(0.92, neutral[10]),
   onSurfaceOpacity_12: transparentize(0.88, neutral[10]),
   onSurfaceOpacity_16: transparentize(0.84, neutral[10]),
+  onSurfaceOpacity_62: transparentize(0.38, neutral[10]),
 
   surfaceVariant: neutralVariant[90],
   onSurfaceVariant: neutralVariant[30],

@@ -2,16 +2,16 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useCreateClientMutation } from '../../graphql/generated';
+import { useCreateClientMutation } from '../../../../graphql/generated';
 
 import { 
   TextField,
   Button,
- } from '../MaterialDesign';
+ } from '../../../../components/MaterialDesign';
 
 import { Form } from './styles';
 
-interface IFormInputs {
+export interface ClientData {
   name: string;
   phoneNumber: string;
 }
@@ -21,8 +21,8 @@ const schema = yup.object({
   phoneNumber: yup.string(),
 })
 
-export function ClientForm() {
-  const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
+export function NewClient() {
+  const { handleSubmit, control, formState: { errors } } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: '',
@@ -32,7 +32,7 @@ export function ClientForm() {
 
   const [createClient] = useCreateClientMutation();
 
-  async function onSubmit(data: IFormInputs) {
+  async function onSubmit(data: ClientData) {
     try {
       await createClient({
         variables: {

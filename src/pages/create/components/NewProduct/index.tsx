@@ -3,16 +3,17 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { format } from 'date-fns';
 
-import { ProductType, useCreateProductMutation } from '../../graphql/generated';
+import { ProductType } from '../../../../graphql/generated';
 
 import { 
   Button, 
   RadioBox, 
   TextField, 
   TextFieldCurrency
-} from '../MaterialDesign';
+} from '../../../../components/MaterialDesign';
 
 import { Form } from './styles';
+import { useEffect } from 'react';
 
 export interface ProductData {
   name: string;
@@ -23,20 +24,21 @@ export interface ProductData {
 }
 
 const schema = yup.object({
-  name: yup.string(),
-  description: yup.string(),
-  price: yup.string(),
-  date: yup.string(),
-  type: yup.string(),
+  name: yup.string().required('Name obrigatório'),
+  description: yup.string().required('descrição obrigatório'),
+  price: yup.string().required('Preço obrigatório'),
+  date: yup.string().required('Obrigatório'),
+  type: yup.string().required('Obrigatório'),
 })
 
-interface ProductFormProps {
-  setProductIsSubmit: (value: boolean) => void;
-  setProduct: (data:ProductData) => void;
+interface NewProductProps {
+  setProductIsValid: (value: boolean) => void;
+  setProduct: (data: ProductData) => void;
+  submitRef: any;
 }
 
-export function ProductForm({ setProductIsSubmit, setProduct }: ProductFormProps) {
-  const { handleSubmit, control, getValues, setValue, reset } = useForm<ProductData>({
+export function NewProduct({ setProductIsValid, setProduct, submitRef }: NewProductProps) {
+  const { handleSubmit, control, getValues, setValue, reset, formState: { isValid }} = useForm<ProductData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: '',
@@ -47,32 +49,11 @@ export function ProductForm({ setProductIsSubmit, setProduct }: ProductFormProps
     }
   })
 
-  const [createProduct] = useCreateProductMutation()
-
   async function onSubmit(data: ProductData) {
-    const { name, description, date, price, type } = data;
-
-    console.log('submit Product')
     setProduct(data)
-    setProductIsSubmit(true);
-    // const priceFormatted = Number(price.replace(/\D+/g, ''));
-
-    // try {
-    //   await createProduct({
-    //     variables: {
-    //       name,
-    //       description,
-    //       date,
-    //       price: priceFormatted,
-    //       type,
-    //     }
-    //   })
-
-    //   reset()
-    // } catch (error) {
-    //   console.log(JSON.stringify(error, null, ' '))
-    // }
   }
+
+  useEffect(() => { setProductIsValid(isValid) }, [isValid])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -166,9 +147,11 @@ export function ProductForm({ setProductIsSubmit, setProduct }: ProductFormProps
         )}
       />  
 
-      <Button type="submit">
-        Cadastar
-      </Button>      
+      <button
+        ref={submitRef}
+        type="submit"
+        style={{ display: 'none' }}
+      />      
     </Form>
   )
 }

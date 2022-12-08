@@ -11,12 +11,19 @@ export const ButtonContainer = styled.button`
   color: ${({ theme }) => theme.colors.onPrimary};
   background: ${({ theme }) => theme.colors.primary};
 
-  :hover {
+  :disabled {
+    cursor: not-allowed;
+    
+    color: ${({ theme }) => theme.colors.onSurfaceOpacity_62};
+    background: ${({ theme }) => theme.colors.onSurfaceOpacity_12};
+  }
+
+  :has(:not(:disabled)):hover {
     opacity: 0.92;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
   }
 
-  :focus, :active {
+  :has(:not(:disabled)):focus, :active {
     opacity: 0.88;
    }
 `;

@@ -18,7 +18,7 @@ export function Layout({ children }: LayoutContainer) {
           Home
         </NavButton>
 
-        <NavButton onClick={() => push('/register')}  isActive={pathname === '/register'}>
+        <NavButton onClick={() => push('/create')}  isActive={pathname === '/register'}>
             Cadastrar
         </NavButton>
       </NavBar>
