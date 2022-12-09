@@ -17,13 +17,29 @@ export default function Create() {
 
   const [productIsValid, setProductIsValid] = useState(false);
   const [product, setProduct ] = useState<ProductData>({} as ProductData);
+
+  const [clientIsValid, setClientIsValid] = useState(false);
   const [client, setClient] = useState<ClientData>({} as ClientData);
 
   const productSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
+  const clientSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
 
   function nextStep() {
-   productSubmit.current.click()
-   console.log('product: ' + JSON.stringify(product, null, '  '))
+    if(step === 1) {
+      productSubmit.current.click();
+   
+      if (productIsValid) {
+       setStep(prevState => prevState + 1);
+      }
+    }
+
+    if(step === 2) {
+      clientSubmit.current.click();
+
+      if (clientIsValid) {
+        setStep(prevState => prevState + 1);
+       }
+    }
   }
    
   useEffect(() => console.log('isValid: ' + productIsValid), [productIsValid])
@@ -69,7 +85,11 @@ export default function Create() {
 
         {
           step === 2 &&
-            <NewClient />
+            <NewClient
+              submitRef={clientSubmit}
+              setClientIsValid={setClientIsValid}
+              setClient={setClient}
+            />
         }
 
         { step === 3 &&

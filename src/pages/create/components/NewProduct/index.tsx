@@ -1,3 +1,4 @@
+import { MutableRefObject, useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -13,7 +14,6 @@ import {
 } from '../../../../components/MaterialDesign';
 
 import { Form } from './styles';
-import { useEffect } from 'react';
 
 export interface ProductData {
   name: string;
@@ -32,9 +32,9 @@ const schema = yup.object({
 })
 
 interface NewProductProps {
+  submitRef: MutableRefObject<HTMLButtonElement>;
   setProductIsValid: (value: boolean) => void;
   setProduct: (data: ProductData) => void;
-  submitRef: any;
 }
 
 export function NewProduct({ setProductIsValid, setProduct, submitRef }: NewProductProps) {

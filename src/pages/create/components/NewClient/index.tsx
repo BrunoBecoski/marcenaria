@@ -1,12 +1,10 @@
+import { MutableRefObject, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useCreateClientMutation } from '../../../../graphql/generated';
-
 import { 
   TextField,
-  Button,
  } from '../../../../components/MaterialDesign';
 
 import { Form } from './styles';
@@ -21,8 +19,14 @@ const schema = yup.object({
   phoneNumber: yup.string(),
 })
 
-export function NewClient() {
-  const { handleSubmit, control, formState: { errors } } = useForm<ClientData>({
+interface NewClientPros {
+  submitRef: MutableRefObject<HTMLButtonElement>;
+  setClientIsValid: (value: boolean) => void;
+  setClient: (data: ClientData) => void;
+}
+
+export function NewClient({ submitRef, setClientIsValid, setClient }: NewClientPros) {
+  const { handleSubmit, control, formState: { errors, isValid } } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: '',
@@ -30,20 +34,14 @@ export function NewClient() {
     }
   });
 
-  const [createClient] = useCreateClientMutation();
 
   async function onSubmit(data: ClientData) {
-    try {
-      await createClient({
-        variables: {
-          name: data.name,
-          phoneNumber: data.phoneNumber,
-        }
-      })
-    } catch (error) {
-      console.log(JSON.stringify(error, null, ' '))
-    }
+    setClient(data)
   }
+
+  useEffect(() => {
+    setClientIsValid(isValid);
+  }, [isValid])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -81,9 +79,11 @@ export function NewClient() {
         )}
       /> 
 
-      <Button type="submit">
-        Cadastrar
-      </Button>
+      <button
+        ref={submitRef}
+        type="submit"
+        style={{ display: 'none' }}
+      />
     </Form>
   )
 }
