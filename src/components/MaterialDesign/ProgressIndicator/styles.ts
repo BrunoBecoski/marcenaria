@@ -10,7 +10,7 @@ export const ProgressIndicatorContainer = styled.div`
   div {
     width: 100%;
     
-    &[data-isActive=true] {
+    &[data-isactive=true] {
       background: ${({ theme }) => theme.colors.primary};
     }
   }

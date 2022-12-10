@@ -20,22 +20,22 @@ const schema = yup.object({
 })
 
 interface NewClientPros {
+  client: ClientData;
   submitRef: MutableRefObject<HTMLButtonElement>;
   setClientIsValid: (value: boolean) => void;
   setClient: (data: ClientData) => void;
 }
 
-export function NewClient({ submitRef, setClientIsValid, setClient }: NewClientPros) {
+export function NewClient({ client, submitRef, setClientIsValid, setClient }: NewClientPros) {
   const { handleSubmit, control, formState: { errors, isValid } } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: '',
-      phoneNumber: '',
+      name: client.name || '',
+      phoneNumber: client.phoneNumber || '',
     }
   });
 
-
-  async function onSubmit(data: ClientData) {
+  async function onSubmit(data: ClientData) {    
     setClient(data)
   }
 

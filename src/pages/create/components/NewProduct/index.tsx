@@ -32,21 +32,22 @@ const schema = yup.object({
 })
 
 interface NewProductProps {
+  product: ProductData;
   submitRef: MutableRefObject<HTMLButtonElement>;
   setProductIsValid: (value: boolean) => void;
   setProduct: (data: ProductData) => void;
 }
 
-export function NewProduct({ setProductIsValid, setProduct, submitRef }: NewProductProps) {
+export function NewProduct({ product, setProductIsValid, setProduct, submitRef }: NewProductProps) {
   const { handleSubmit, control, getValues, setValue, reset, formState: { isValid }} = useForm<ProductData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      name: '',
-      description: '',
-      price: 'R$ 00,00',
-      date: format(new Date(), 'yyyy-MM-dd'),
-      type: ProductType.New,
-    }
+      name: product.name || '',
+      description: product.description || '',
+      price: product.price || 'R$ 00,00',
+      date: product.date || format(new Date(), 'yyyy-MM-dd'),
+      type: product.type || ProductType.New,
+    },
   })
 
   async function onSubmit(data: ProductData) {

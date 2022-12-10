@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Layout } from '../../components/Layout';
-
 import { NewProduct, ProductData } from './components/NewProduct';
 import { NewClient, ClientData } from './components/NewClient';
 
@@ -41,8 +40,6 @@ export default function Create() {
        }
     }
   }
-   
-  useEffect(() => console.log('isValid: ' + productIsValid), [productIsValid])
 
   return (
     <Layout>
@@ -77,6 +74,7 @@ export default function Create() {
         {
           step === 1 &&
             <NewProduct
+              product={product}
               submitRef={productSubmit}
               setProductIsValid={setProductIsValid}
               setProduct={setProduct}
@@ -86,6 +84,7 @@ export default function Create() {
         {
           step === 2 &&
             <NewClient
+              client={client}
               submitRef={clientSubmit}
               setClientIsValid={setClientIsValid}
               setClient={setClient}
