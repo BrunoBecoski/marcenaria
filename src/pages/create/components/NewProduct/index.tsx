@@ -51,10 +51,13 @@ export function NewProduct({ product, setProductIsValid, setProduct, submitRef }
   })
 
   async function onSubmit(data: ProductData) {
+    setProductIsValid(!!data)
     setProduct(data)
   }
 
-  useEffect(() => { setProductIsValid(isValid) }, [isValid])
+  useEffect(() => { 
+    console.log(isValid)
+  }, [isValid])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

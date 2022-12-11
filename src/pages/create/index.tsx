@@ -24,9 +24,10 @@ export default function Create() {
   const clientSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
 
   function nextStep() {
+    console.log(productIsValid)
     if(step === 1) {
       productSubmit.current.click();
-   
+      
       if (productIsValid) {
        setStep(prevState => prevState + 1);
       }
