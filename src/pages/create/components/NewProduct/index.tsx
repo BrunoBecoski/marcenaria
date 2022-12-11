@@ -1,13 +1,10 @@
-import { MutableRefObject, useEffect } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
+import { MutableRefObject } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 import * as yup from 'yup';
-import { format } from 'date-fns';
 
 import { ProductType } from '../../../../graphql/generated';
 
 import { 
-  Button, 
   RadioBox, 
   TextField, 
   TextFieldCurrency
@@ -23,41 +20,17 @@ export interface ProductData {
   type: ProductType;
 }
 
-const schema = yup.object({
-  name: yup.string().required('Name obrigatório'),
-  description: yup.string().required('descrição obrigatório'),
-  price: yup.string().required('Preço obrigatório'),
-  date: yup.string().required('Obrigatório'),
-  type: yup.string().required('Obrigatório'),
-})
-
 interface NewProductProps {
-  product: ProductData;
   submitRef: MutableRefObject<HTMLButtonElement>;
-  setProductIsValid: (value: boolean) => void;
   setProduct: (data: ProductData) => void;
 }
 
-export function NewProduct({ product, setProductIsValid, setProduct, submitRef }: NewProductProps) {
-  const { handleSubmit, control, getValues, setValue, reset, formState: { isValid }} = useForm<ProductData>({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      name: product.name || '',
-      description: product.description || '',
-      price: product.price || 'R$ 00,00',
-      date: product.date || format(new Date(), 'yyyy-MM-dd'),
-      type: product.type || ProductType.New,
-    },
-  })
+export function NewProduct({ setProduct, submitRef }: NewProductProps) {
+  const { handleSubmit, control, getValues, setValue } = useFormContext<ProductData>()
 
   async function onSubmit(data: ProductData) {
-    setProductIsValid(!!data)
     setProduct(data)
   }
-
-  useEffect(() => { 
-    console.log(isValid)
-  }, [isValid])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
