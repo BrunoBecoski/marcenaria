@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { format } from 'date-fns';
@@ -7,15 +7,25 @@ import { format } from 'date-fns';
 import { ProductType } from '../../graphql/generated';
 
 import { Layout } from '../../components/Layout';
-import { NewProduct, ProductData } from './components/NewProduct';
 import { NewClient, ClientData } from './components/NewClient';
 
 import {
   ProgressIndicator,
   Button,
+  RadioBox,
+  TextField, 
+  TextFieldCurrency,
 } from '../../components/MaterialDesign'
 
 import { CreateContainer } from './styles';
+
+interface ProductData {
+  name: string;
+  description: string;
+  price: string;
+  date: string;
+  type: ProductType;
+}
 
 export default function Create() {
   const [step, setStep] = useState(1)
@@ -28,30 +38,11 @@ export default function Create() {
   const productSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
   const clientSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
 
-  const productSchema = yup.object({
-    name: yup.string().required('Requerido'),
-    description: yup.string(),
-    price: yup.string(),
-    date: yup.string(),
-    type: yup.string(),
-  })
-
-  const productMethods = useForm({
-    resolver: yupResolver(productSchema),
-    defaultValues: {
-      name: product.name || '',
-      description: product.description || '',
-      price: product.price || 'R$ 00,00',
-      date: product.date || format(new Date(), 'yyyy-MM-dd'),
-      type: product.type || ProductType.New,
-    }
-  })
-  
-  function nextStep() {
+  function nextStep() {   
     if(step === 1) {
       productSubmit.current.click();
       
-      if (productMethods.formState.isValid) {
+      if (methodsProduct.formState.isValid) {
        setStep(prevState => prevState + 1);
       }
     }
@@ -64,6 +55,33 @@ export default function Create() {
        }
     }
   }
+
+  const productSchema = yup.object({
+    name: yup.string().required('*Requerido'),
+    description: yup.string(),
+    price: yup.string(),
+    date: yup.string(),
+    type: yup.string(),
+  })
+
+  const methodsProduct = useForm<ProductData>({
+    resolver: yupResolver(productSchema),
+    defaultValues: {
+      name: product.name || '',
+      description: product.description || '',
+      price: product.price || 'R$ 00,00',
+      date: product.date || format(new Date(), 'yyyy-MM-dd'),
+      type: product.type || ProductType.New,
+    }
+  });
+
+  function handleSubmitProduct(data: ProductData) {
+    setProduct(data)
+  }
+
+  useEffect(() => {
+    console.log(methodsProduct.formState.isValid)
+  }, [methodsProduct.formState.isValid])
 
   return (
     <Layout>
@@ -98,12 +116,103 @@ export default function Create() {
 
           {
             step === 1 &&
-            <FormProvider {...productMethods}>
-              <NewProduct
-                submitRef={productSubmit}
-                setProduct={setProduct}
+            <form onSubmit={methodsProduct.handleSubmit(handleSubmitProduct)}>
+              <Controller
+                control={methodsProduct.control}
+                name="name"
+                render={({
+                  field: { name, onChange, value },
+                  formState: { errors }
+                }) => (
+                  <TextField
+                    label="Nome"
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    errorMessage={errors.name?.message}            
+                  />
+                )}
               />
-            </FormProvider>
+        
+              <Controller
+                control={methodsProduct.control}
+                name="description"
+                render={({
+                  field: { name, onChange, value },
+                  formState: { errors }
+                }) => (
+                  <TextField
+                    label="Descrição"
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    errorMessage={errors.description?.message}     
+                  />
+                )}
+              />
+        
+              <Controller
+                control={methodsProduct.control}
+                name="price"
+                render={({
+                  field: { name, onChange, value },
+                  formState: { errors }
+                }) => (
+                  <TextFieldCurrency
+                    getValues={methodsProduct.getValues}
+                    setValue={methodsProduct.setValue}
+                    label="Preço"
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    errorMessage={errors.price?.message}
+                  />
+                )}
+              />
+              
+              <Controller
+                control={methodsProduct.control}
+                name="date"
+                render={({
+                  field: { name, onChange, value },
+                  formState: { errors },
+                }) => (
+                  <TextField
+                    type="date"
+                    label="Data"
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    errorMessage={errors.date?.message}
+                  />
+                )}
+              />
+        
+              <Controller
+                control={methodsProduct.control}
+                name="type"
+                render={({
+                  field: { name, value, onChange },
+                }) => (
+                  <RadioBox
+                    title="Tipo de trabalho"
+                    name={name}
+                    items={[
+                      { label: 'Novo', value: ProductType.New },
+                      { label: 'Reforma', value: ProductType.Reform },
+                    ]}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />  
+          
+              <button
+                ref={productSubmit}
+                type="submit"
+                style={{ display: 'none' }}
+              />      
+          </form>
           }
 
           {
