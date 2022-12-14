@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect } from 'react';
+import { MutableRefObject } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -20,13 +20,13 @@ const schema = yup.object({
 })
 
 interface NewClientPros {
+  setStep: (value: number) => void;
   client: ClientData;
   submitRef: MutableRefObject<HTMLButtonElement>;
-  setClientIsValid: (value: boolean) => void;
   setClient: (data: ClientData) => void;
 }
 
-export function NewClient({ client, submitRef, setClientIsValid, setClient }: NewClientPros) {
+export function NewClient({ client, submitRef, setStep, setClient }: NewClientPros) {
   const { handleSubmit, control, formState: { errors, isValid } } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -36,12 +36,9 @@ export function NewClient({ client, submitRef, setClientIsValid, setClient }: Ne
   });
 
   async function onSubmit(data: ClientData) {    
+    setStep(3)
     setClient(data)
   }
-
-  useEffect(() => {
-    setClientIsValid(isValid);
-  }, [isValid])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
