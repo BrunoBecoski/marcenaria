@@ -30,9 +30,9 @@ interface NewProductProps {
 }
 
 const productSchema = yup.object({
-  name: yup.string().required('* obrigatório'),
-  description: yup.string().required('* obrigatório'),
-  price: yup.string().required('* obrigatório'),
+  name: yup.string().required('Obrigatório'),
+  description: yup.string().required('Obrigatório'),
+  price: yup.string().required('Obrigatório'),
   date: yup.string(),
   type: yup.string(),
 })

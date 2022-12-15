@@ -1,9 +1,12 @@
-import { MutableRefObject } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { useGetClientsQuery } from '../../../../graphql/generated';
+
 import { 
+  Tabs,
   TextField,
  } from '../../../../components/MaterialDesign';
 
@@ -15,7 +18,7 @@ export interface ClientData {
 }
 
 const schema = yup.object({
-  name: yup.string().required('Nome obrigatório.'),
+  name: yup.string().required('Obrigatório'),
   phoneNumber: yup.string(),
 })
 
@@ -27,6 +30,8 @@ interface NewClientPros {
 }
 
 export function NewClient({ client, submitRef, setStep, setClient }: NewClientPros) {
+  const [tabActive, setTabActive] = useState('search');
+
   const { handleSubmit, control, formState: { errors, isValid } } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -40,8 +45,25 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
     setClient(data)
   }
 
+  const { data } = useGetClientsQuery()
+
+  console.log(data)
+
+  useEffect(() => {
+    console.log(tabActive)
+  }, [tabActive])
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      <Tabs
+        tabs={[
+          { id: 'search', label: 'Buscar' },
+          { id: 'new', label: 'Novo' },
+        ]}
+        setTabActive={setTabActive}
+        tabActive={tabActive}
+      />
+
       <Controller
         control={control}
         name="name"
@@ -49,7 +71,8 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
           field: { name, onChange, value},
           formState: { errors },
         }) =>(
-          <TextField 
+          <TextField
+            list="clients"
             label="Nome"
             name={name}
             value={value}

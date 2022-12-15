@@ -15,6 +15,7 @@ export function Tabs({ tabs, tabActive, setTabActive }: TabsProps) {
       {
         tabs.map(tab => (
             <Tab
+              type="button"
               key={tab.id}
               onClick={() => setTabActive(tab.id)}
               data-active={tabActive === tab.id}
