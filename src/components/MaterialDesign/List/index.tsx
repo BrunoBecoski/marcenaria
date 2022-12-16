@@ -1,3 +1,5 @@
+import { Icon } from '../../MaterialDesign';
+
 import { Item, ListContainer } from './styles';
 
 interface ListProps {
@@ -10,7 +12,7 @@ interface ListProps {
 }
 
 export function List({ contentList, type }: ListProps) {
-
+  
   if (!contentList) {
     return (<></>)
   }
@@ -21,12 +23,14 @@ export function List({ contentList, type }: ListProps) {
         {
           contentList.map(content => (
             <Item key={content.id}>
+              <Icon
+                name="person"
+              />
               <span>{content.title}</span>
             </Item>
           ))
         }
     </ListContainer>
-
     )
   }
 
