@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 
-
-import { ProductType } from '../../graphql/generated';
+import { ProductType, useCreateClientMutation, useCreateProductMutation } from '../../graphql/generated';
 
 import { Layout } from '../../components/Layout';
 import { NewClient, ClientData } from './components/NewClient';
@@ -39,6 +38,16 @@ export default function Create() {
     if(step === 2) {
       clientSubmit.current.click();
     }
+
+    if(step === 3) {
+
+    }
+  }
+
+  function handleCreate() {
+    // const { data } = useCreateClientMutation();
+    // const { data } = useCreateProductMutation();
+
   }
 
   return (
@@ -95,6 +104,7 @@ export default function Create() {
             <>
               {JSON.stringify(product)}
               {JSON.stringify(client)}
+              <button onClick={handleCreate}>Criar</button>
             </>
           }
       </CreateContainer>

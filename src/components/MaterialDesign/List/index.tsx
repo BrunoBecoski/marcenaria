@@ -6,13 +6,30 @@ interface ListProps {
     title: string;
     description?: string;
   }[]
+  type?: 'user';
 }
 
-export function List({ contentList }: ListProps) {
+export function List({ contentList, type }: ListProps) {
 
   if (!contentList) {
     return (<></>)
   }
+
+  if(type === 'user') {
+    return (
+      <ListContainer>
+        {
+          contentList.map(content => (
+            <Item key={content.id}>
+              <span>{content.title}</span>
+            </Item>
+          ))
+        }
+    </ListContainer>
+
+    )
+  }
+
 
   return (
     <ListContainer>

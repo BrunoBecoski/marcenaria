@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { useGetClientsQuery } from '../../../../graphql/generated';
 
 import { 
+  List,
   Tabs,
   TextField,
  } from '../../../../components/MaterialDesign';
@@ -19,7 +20,6 @@ export interface ClientData {
 
 const schema = yup.object({
   name: yup.string().required('Obrigatório'),
-  phoneNumber: yup.string(),
 })
 
 interface NewClientPros {
@@ -32,11 +32,10 @@ interface NewClientPros {
 export function NewClient({ client, submitRef, setStep, setClient }: NewClientPros) {
   const [tabActive, setTabActive] = useState('search');
 
-  const { handleSubmit, control, formState: { errors, isValid } } = useForm<ClientData>({
+  const { handleSubmit, control } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
       name: client.name || '',
-      phoneNumber: client.phoneNumber || '',
     }
   });
 
@@ -46,6 +45,13 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
   }
 
   const { data } = useGetClientsQuery()
+
+  const clients = data?.clients.map(client => {
+    return {
+      id: client.id,
+      title: client.name,
+    }
+  })
 
   console.log(data)
 
@@ -64,7 +70,12 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
         tabActive={tabActive}
       />
 
-      <Controller
+      <List
+        contentList={clients}
+        type="user"
+      />
+
+      {/* <Controller
         control={control}
         name="name"
         render={({ 
@@ -81,24 +92,7 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
           />
         )}
       />
-    
-      <Controller
-        control={control}
-        name="phoneNumber"
-        render={({
-            field: { name ,onChange, value },
-          }) =>(
-          <TextField 
-            label="Telefone"
-            type="tel"
-            name={name}
-            value={value}
-            onChange={onChange}
-            errorMessage={errors.phoneNumber?.message}
-          />
-        )}
-      /> 
-
+     */}
       <button
         ref={submitRef}
         type="submit"
