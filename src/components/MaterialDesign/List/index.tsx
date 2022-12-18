@@ -10,21 +10,19 @@ export type ListContentTypes = {
 
 interface ListProps {
   content: ListContentTypes[];
-  icon?: IconNamesTypes;
+  icon?: IconNamesTypes | false;
 }
 
-export function List({ content, icon }: ListProps) {
+export function List({ content, icon = false }: ListProps) {
   return (
     <ListContainer>
-      {
+      { 
         content.map(item => (
           <Item key={item.id}>
-            {
-              !icon || icon === undefined && <Icon name={icon} />
-            }
+            { icon && <Icon name={icon} /> }
             <Content>
               <span>{item.text}</span>
-              <p>{item.supporttingText && item.supporttingText}</p>
+              { item.supporttingText && <p>{item.supporttingText}</p> }
             </Content>
           </Item>
         ))

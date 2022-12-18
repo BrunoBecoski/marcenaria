@@ -36,8 +36,8 @@ export default function Home() {
         products: client.products.map(product => (
           {
             id: product.id,
-            title: product.name,
-            description: product.description,          
+            text: product.name,
+            supporttingText: product.description,          
           }
         ))
       }

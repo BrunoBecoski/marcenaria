@@ -14,11 +14,11 @@ export const ListContainer = styled.ul`
 export const Item = styled.li`
   display: flex;
   align-items: center;
-  padding: var(--space_16) var(--space_24);
+  gap: var(--space_16);
+  padding: var(--space_16);
   
   list-style: none;
   background: ${({ theme }) => theme.colors.surface};
-
 `;
 
 export const Content = styled.div`
