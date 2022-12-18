@@ -3,8 +3,10 @@ import { MaterialSymbol } from 'material-symbols/index';
 
 import { IconContainer } from './styles';
 
+export type IconNamesTypes = MaterialSymbol;
+
 interface IconProps {
-  name: MaterialSymbol;
+  name: IconNamesTypes;
   fill?: boolean;
   weight?: '100' | '200' | '300' | '400' | '500' | '600' | '700';
 }

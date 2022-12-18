@@ -1,47 +1,31 @@
-import { Icon } from '../../MaterialDesign';
+import { Icon, IconNamesTypes } from '../../MaterialDesign';
 
-import { Item, ListContainer } from './styles';
+import { ListContainer, Item, Content } from './styles';
 
-interface ListProps {
-  contentList: {
-    id: string;
-    title: string;
-    description?: string;
-  }[]
-  type?: 'user';
+export type ListContentTypes = {
+  id: string;
+  text: string;
+  supporttingText?: string;
 }
 
-export function List({ contentList, type }: ListProps) {
-  
-  if (!contentList) {
-    return (<></>)
-  }
+interface ListProps {
+  content: ListContentTypes[];
+  icon?: IconNamesTypes;
+}
 
-  if(type === 'user') {
-    return (
-      <ListContainer>
-        {
-          contentList.map(content => (
-            <Item key={content.id}>
-              <Icon
-                name="person"
-              />
-              <span>{content.title}</span>
-            </Item>
-          ))
-        }
-    </ListContainer>
-    )
-  }
-
-
+export function List({ content, icon }: ListProps) {
   return (
     <ListContainer>
       {
-        contentList.map(content => (
-          <Item key={content.id}>
-            <span>{content.title}</span>
-            <p>{content.description}</p>
+        content.map(item => (
+          <Item key={item.id}>
+            {
+              !icon || icon === undefined && <Icon name={icon} />
+            }
+            <Content>
+              <span>{item.text}</span>
+              <p>{item.supporttingText && item.supporttingText}</p>
+            </Content>
           </Item>
         ))
       }

@@ -1,6 +1,6 @@
 import { Button } from './Button';
-import { Icon } from './Icon';
-import { List } from './List';
+import { Icon, IconNamesTypes } from './Icon';
+import { List, ListContentTypes } from './List';
 import { ProgressIndicator } from './ProgressIndicator';
 import { RadioBox } from './RadioBox';
 import { Tabs } from './Tabs';
@@ -15,4 +15,9 @@ export {
   Tabs,
   TextField,
   TextFieldCurrency,
+}
+
+export type {
+  IconNamesTypes,
+  ListContentTypes,
 }

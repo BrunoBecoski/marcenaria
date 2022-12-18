@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -7,8 +7,8 @@ import { useGetClientsQuery } from '../../../../graphql/generated';
 
 import { 
   List,
+  ListContentTypes,
   Tabs,
-  TextField,
  } from '../../../../components/MaterialDesign';
 
 import { Form } from './styles';
@@ -32,6 +32,8 @@ interface NewClientPros {
 export function NewClient({ client, submitRef, setStep, setClient }: NewClientPros) {
   const [tabActive, setTabActive] = useState('search');
 
+  const [clients, setClients] = useState<ListContentTypes[]>([]);
+
   const { handleSubmit, control } = useForm<ClientData>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -44,20 +46,18 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
     setClient(data)
   }
 
-  const { data } = useGetClientsQuery()
-
-  const clients = data?.clients.map(client => {
-    return {
-      id: client.id,
-      title: client.name,
-    }
-  })
-
-  console.log(data)
-
+  const { data, loading } = useGetClientsQuery()
+  
   useEffect(() => {
-    console.log(tabActive)
-  }, [tabActive])
+    if(data) {
+      setClients(data.clients.map(client => {
+        return {
+          id: client.id,
+          text: client.name,
+        }
+      }))
+    }
+  }, [loading])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -70,29 +70,13 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
         tabActive={tabActive}
       />
 
-      <List
-        contentList={clients}
-        type="user"
-      />
+     { !loading &&
+        <List
+          icon="person"
+          content={clients}
+        />
+      }
 
-      {/* <Controller
-        control={control}
-        name="name"
-        render={({ 
-          field: { name, onChange, value},
-          formState: { errors },
-        }) =>(
-          <TextField
-            list="clients"
-            label="Nome"
-            name={name}
-            value={value}
-            onChange={onChange}
-            errorMessage={errors.name?.message}                
-          />
-        )}
-      />
-     */}
       <button
         ref={submitRef}
         type="submit"

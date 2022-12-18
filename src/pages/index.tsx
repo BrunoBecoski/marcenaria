@@ -18,7 +18,7 @@ const HomeContainer = styled.div`
     margin-bottom: 2rem;
   }
 
-  div {
+  > div {
     margin: 1rem;
   }
 `;
@@ -53,7 +53,7 @@ export default function Home() {
                 <h2>{client.name}</h2>
                 {
                   client.products &&
-                  <List contentList={client.products} />
+                  <List icon="chair_alt" content={client.products} />
                 }
               </div>
             ))

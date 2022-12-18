@@ -22,7 +22,7 @@ interface ProductData {
 }
 
 export default function Create() {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(2)
 
   const [product, setProduct ] = useState<ProductData>({} as ProductData);
   const [client, setClient] = useState<ClientData>({} as ClientData);
