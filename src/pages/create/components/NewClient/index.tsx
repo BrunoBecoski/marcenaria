@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { useGetClientsQuery } from '../../../../graphql/generated';
 
 import { 
-  List,
+  ListWithRadioButton,
   ListContentTypes,
   Tabs,
  } from '../../../../components/MaterialDesign';
@@ -71,7 +71,7 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
       />
 
      { !loading &&
-        <List
+        <ListWithRadioButton
           icon="person"
           content={clients}
         />

@@ -1,4 +1,5 @@
-import { Icon, IconNamesTypes } from '../../MaterialDesign';
+import { useState } from 'react';
+import { Icon, IconNamesTypes,RadioButton } from '../../MaterialDesign';
 
 import { ListContainer, Item, Content } from './styles';
 
@@ -24,6 +25,31 @@ export function List({ content, icon = false }: ListProps) {
               <span>{item.text}</span>
               { item.supporttingText && <p>{item.supporttingText}</p> }
             </Content>
+          </Item>
+        ))
+      }
+    </ListContainer>
+  )
+}
+
+export function ListWithRadioButton({ content, icon = false }: ListProps) {
+  const [checked, setChecked] = useState(false)
+
+  function handleClick() {
+    setChecked(prevState => !prevState)
+  }
+
+  return (
+    <ListContainer>
+      {
+        content.map(item => (
+          <Item key={item.id} as="button" onClick={handleClick}>
+            { icon && <Icon name={icon} /> }
+            <Content>
+              <span>{item.text}</span>
+              { item.supporttingText && <p>{item.supporttingText}</p> }
+            </Content>
+            <RadioButton checked={checked} />
           </Item>
         ))
       }
