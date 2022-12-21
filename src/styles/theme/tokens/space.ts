@@ -10,6 +10,7 @@ export const space = css`
   --space_16: 1rem;     /* 16px */
   --space_20: 1.25rem;  /* 20px */
   --space_24: 1.5rem;   /* 24px */
+  --space_26: 1.625rem; /* 26px */
   --space_28: 1.75rem;  /* 28px */
   --space_32: 2rem;     /* 32px */
   --space_40: 2.5rem;   /* 40px */

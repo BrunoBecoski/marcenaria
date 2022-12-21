@@ -5,13 +5,11 @@ export const ListContainer = styled.ul`
   flex-direction: column;
   gap: var(--space_20);
 
-  .icon {
-    color: ${({ theme }) => theme.colors.onSurfaceVariant};
-    font-size: 24px;
-  }
 `;
 
 export const Item = styled.li`
+  cursor: pointer;
+  
   display: flex;
   align-items: center;
   gap: var(--space_16);
@@ -19,6 +17,10 @@ export const Item = styled.li`
   
   list-style: none;
   background: ${({ theme }) => theme.colors.surface};
+
+  > .icon {
+    color: ${({ theme }) => theme.colors.onSurfaceVariant};
+  }
 `;
 
 export const Content = styled.div`

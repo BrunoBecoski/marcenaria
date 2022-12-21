@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon, IconNamesTypes,RadioButton } from '../../MaterialDesign';
 
 import { ListContainer, Item, Content } from './styles';
@@ -32,24 +32,71 @@ export function List({ content, icon = false }: ListProps) {
   )
 }
 
-export function ListWithRadioButton({ content, icon = false }: ListProps) {
-  const [checked, setChecked] = useState(false)
+interface ContentListProps {
+  id: string;
+  text: string;
+  supporttingText?: string;
+  selected: boolean;
+}
 
-  function handleClick() {
-    setChecked(prevState => !prevState)
+export function ListWithRadioButton({ content, icon = false }: ListProps) {
+  
+  const [contentList, setContentList] = useState<ContentListProps[]>([]);
+
+  function handleSelect(itemSelected: ContentListProps) {
+
+    let newList: ContentListProps[]
+
+    const selectedId = itemSelected.id;
+    const hasSelected = contentList.find(item => item.id === selectedId && item.selected === true);
+
+    if(hasSelected) {
+      newList = contentList.map(item => {
+        return { ...item, selected: false }
+      })
+
+    } else {
+      const listWithoutSelected = contentList
+        .filter(item => item.id !== selectedId)
+        .map(item => {
+          return {
+            ...item,
+            selected: false,
+          }
+        })
+           
+      newList = [
+        {
+          ...itemSelected,
+          selected: true,
+        },
+        ...listWithoutSelected,
+      ]
+    }
+
+    setContentList(newList)
   }
+
+  useEffect(() => {
+    setContentList(content.map(item => {
+      return {
+        ...item,
+        selected: false,
+      }
+    }))
+  }, [content])
 
   return (
     <ListContainer>
       {
-        content.map(item => (
-          <Item key={item.id} as="button" onClick={handleClick}>
-            { icon && <Icon name={icon} /> }
+        contentList.map(item => (
+          <Item key={item.id} onClick={() => handleSelect(item)}>
+            { icon && <Icon name={icon} fill={false} /> }
             <Content>
               <span>{item.text}</span>
               { item.supporttingText && <p>{item.supporttingText}</p> }
             </Content>
-            <RadioButton checked={checked} />
+            <RadioButton selected={item.selected} />
           </Item>
         ))
       }
