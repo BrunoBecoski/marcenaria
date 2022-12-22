@@ -11,7 +11,7 @@ const HomeContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-top: var(--space_40);
+  margin-top: var(--size_40);
   background: ${({ theme }) => theme.colors.surfaceAt_1};
 
   h2 {

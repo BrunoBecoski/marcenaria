@@ -39,7 +39,13 @@ interface ContentListProps {
   selected: boolean;
 }
 
-export function ListWithRadioButton({ content, icon = false }: ListProps) {
+interface ListWithRadioButtonProps {
+  content: ListContentTypes[];
+  icon?: IconNamesTypes | false;
+  setSelected: (value: string) => void;
+}
+
+export function ListWithRadioButton({ content, icon = false, setSelected }: ListWithRadioButtonProps) {
   
   const [contentList, setContentList] = useState<ContentListProps[]>([]);
 
@@ -51,11 +57,16 @@ export function ListWithRadioButton({ content, icon = false }: ListProps) {
     const hasSelected = contentList.find(item => item.id === selectedId && item.selected === true);
 
     if(hasSelected) {
+  
+      setSelected('');
+
       newList = contentList.map(item => {
         return { ...item, selected: false }
       })
-
     } else {
+
+      setSelected(itemSelected.id);
+
       const listWithoutSelected = contentList
         .filter(item => item.id !== selectedId)
         .map(item => {
@@ -74,7 +85,7 @@ export function ListWithRadioButton({ content, icon = false }: ListProps) {
       ]
     }
 
-    setContentList(newList)
+    setContentList(newList);
   }
 
   useEffect(() => {
@@ -91,11 +102,11 @@ export function ListWithRadioButton({ content, icon = false }: ListProps) {
       {
         contentList.map(item => (
           <Item key={item.id} onClick={() => handleSelect(item)}>
-            { icon && <Icon name={icon} fill={false} /> }
-            <Content>
-              <span>{item.text}</span>
-              { item.supporttingText && <p>{item.supporttingText}</p> }
-            </Content>
+              { icon && <Icon name={icon} fill={false} /> }
+              <Content>
+                <span>{item.text}</span>
+                { item.supporttingText && <p>{item.supporttingText}</p> }
+              </Content>
             <RadioButton selected={item.selected} />
           </Item>
         ))

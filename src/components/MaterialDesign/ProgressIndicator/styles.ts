@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ProgressIndicatorContainer = styled.div`
   width: 100%;
-  height: var(--space_4);
+  height: var(--size_4);
   display: flex;
 
   background: ${({ theme }) => theme.colors.surfaceVariant};

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const RadioBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: var(--space_20);
+  gap: var(--size_20);
 `;
 
 export const Title = styled.p`
@@ -25,7 +25,7 @@ export const Button = styled.label`
   input {
     opacity: 0;
     cursor: pointer;
-    width: var(--space_16);
+    width: var(--size_16);
   }
 
   
@@ -70,8 +70,8 @@ export const Button = styled.label`
 `;
 
 export const Icon = styled.div`
-  width: var(--space_20);
-  height: var(--space_20);
+  width: var(--size_20);
+  height: var(--size_20);
 
   border: 2px solid ${({ theme }) => theme.colors.onSurfaceVariant};
 
@@ -88,8 +88,8 @@ export const Icon = styled.div`
     position: absolute;
     z-index: -10;
 
-    width: var(--space_40);
-    height: var(--space_40);
+    width: var(--size_40);
+    height: var(--size_40);
     border-radius: var(--radio_full);
   }
 
@@ -100,13 +100,13 @@ export const Icon = styled.div`
     top: 50%;
     left: 50%;
 
-    margin-top: calc(var(--space_5) * -1);
-    margin-left: calc(var(--space_5) * -1);
+    margin-top: calc(var(--size_5) * -1);
+    margin-left: calc(var(--size_5) * -1);
 
     transform: scale(0);
 
-    width: var(--space_10);
-    height: var(--space_10);
+    width: var(--size_10);
+    height: var(--size_10);
     border-radius: var(--radio_full);
     background: ${({ theme }) => theme.colors.primary};
   }

@@ -7,7 +7,7 @@ export const TextFieldContainer = styled.div`
 export const Border = styled.div`
   cursor: text;
   position: relative;
-  padding: var(--space_16);
+  padding: var(--size_16);
 
   border-radius: var(--radio_md);
   border: 1px solid ${({ theme }) => theme.colors.outline};
@@ -17,7 +17,7 @@ export const Border = styled.div`
     box-shadow: 0 0 0 1px ${({ theme }) => theme.colors.primary};
 
     label {
-      top: calc(var(--space_8) * -1);
+      top: calc(var(--size_8) * -1);
       
       font-size: var(--body_sm);
       font-weight: var(--weight_md);
@@ -39,7 +39,7 @@ export const Border = styled.div`
   
   :not(:has(input:placeholder-shown)) {
     label {
-      top: calc(var(--space_8) * -1);
+      top: calc(var(--size_8) * -1);
     
       font-size: var(--body_sm);
     }
@@ -50,8 +50,8 @@ export const Label = styled.label`
   cursor: text;
 
   position: absolute;
-  top: var(--space_16);
-  padding-inline: var(--space_4);
+  top: var(--size_16);
+  padding-inline: var(--size_4);
   
   font-size: var(--body_lg);
   color: ${({ theme }) => theme.colors.onSurface};
@@ -74,8 +74,8 @@ export const Span = styled.span`
   display: block;
   font-size: var(--body_sm);
   color: ${({ theme }) => theme.colors.error};
-  height: var(--space_16);
+  height: var(--size_16);
 
-  margin-left: calc(var(--space_16) + var(--space_4));
-  margin-top: var(--space_4);
+  margin-left: calc(var(--size_16) + var(--size_4));
+  margin-top: var(--size_4);
 `;

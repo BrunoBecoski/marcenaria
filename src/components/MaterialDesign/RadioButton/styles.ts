@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const RadioButtonContainer = styled.div`
-  width: var(--space_26);
-  height: var(--space_26);
+  display: flex;
   
   .icon {
-    font-size: var(--space_24);
+    font-size: var(--size_24);
   }
 
   &.selected {

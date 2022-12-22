@@ -11,7 +11,7 @@ export const TabsContainer = styled.div`
 
 export const Tab = styled.button`
   flex: 1;
-  padding-block: var(--space_14);
+  padding-block: var(--size_14);
 
   border: none;
   background: none;
@@ -37,7 +37,7 @@ export const Tab = styled.button`
   
   span {
     position: relative;
-    padding-block: var(--space_14);
+    padding-block: var(--size_14);
 
     &:after {
       content: '';

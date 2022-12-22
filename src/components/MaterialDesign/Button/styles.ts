@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ButtonContainer = styled.button`
-  padding: var(--space_10) var(--space_24);
+  padding: var(--size_10) var(--size_24);
     
   outline: none;
   border: none;

@@ -31,8 +31,10 @@ interface NewClientPros {
 
 export function NewClient({ client, submitRef, setStep, setClient }: NewClientPros) {
   const [tabActive, setTabActive] = useState('search');
-
   const [clients, setClients] = useState<ListContentTypes[]>([]);
+  const [selected, setSelected] = useState('');
+
+  const { data, loading } = useGetClientsQuery()
 
   const { handleSubmit, control } = useForm<ClientData>({
     resolver: yupResolver(schema),
@@ -46,7 +48,6 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
     setClient(data)
   }
 
-  const { data, loading } = useGetClientsQuery()
   
   useEffect(() => {
     if(data) {
@@ -74,6 +75,7 @@ export function NewClient({ client, submitRef, setStep, setClient }: NewClientPr
         <ListWithRadioButton
           icon="person"
           content={clients}
+          setSelected={setSelected}
         />
       }
 

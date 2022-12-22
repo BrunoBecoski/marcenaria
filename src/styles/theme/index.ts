@@ -1,7 +1,7 @@
 import { light } from './tokens/light' 
 import { font } from './tokens/font'
 import { radio } from './tokens/radio'
-import { space } from './tokens/space'
+import { size } from './tokens/size'
 
 const theme = {
   colors: light,
@@ -13,5 +13,5 @@ export {
   theme,
   font,
   radio,
-  space,
+  size,
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CreateContainer = styled.div`
   width: 100%;
   margin-inline: auto;
-  margin-top: var(--space_40);
+  margin-top: var(--size_40);
   
   h1 {
     font-size: var(--headline_lg);
@@ -13,6 +13,6 @@ export const CreateContainer = styled.div`
   .nav {
     display: flex;
     justify-content: space-between;
-    margin-top: var(--space_16);
+    margin-top: var(--size_16);
   }
 `;

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-import { font, radio, space } from './theme'
+import { font, radio, size } from './theme'
 
 export const GlobalStyle = createGlobalStyle` 
   * {
@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     ${font}
     ${radio}
-    ${space}
+    ${size}
   }
 
   body {
