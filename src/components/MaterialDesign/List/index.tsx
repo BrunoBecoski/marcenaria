@@ -42,7 +42,7 @@ interface ContentListProps {
 interface ListWithRadioButtonProps {
   content: ListContentTypes[];
   icon?: IconNamesTypes | false;
-  setSelected: (value: string) => void;
+  setSelected: (value: ContentListProps | undefined) => void;
 }
 
 export function ListWithRadioButton({ content, icon = false, setSelected }: ListWithRadioButtonProps) {
@@ -58,14 +58,14 @@ export function ListWithRadioButton({ content, icon = false, setSelected }: List
 
     if(hasSelected) {
   
-      setSelected('');
+      setSelected(undefined);
 
       newList = contentList.map(item => {
         return { ...item, selected: false }
       })
     } else {
 
-      setSelected(itemSelected.id);
+      setSelected(itemSelected);
 
       const listWithoutSelected = contentList
         .filter(item => item.id !== selectedId)
@@ -102,7 +102,7 @@ export function ListWithRadioButton({ content, icon = false, setSelected }: List
       {
         contentList.map(item => (
           <Item key={item.id} onClick={() => handleSelect(item)}>
-              { icon && <Icon name={icon} fill={false} /> }
+              { icon && <Icon name={icon} /> }
               <Content>
                 <span>{item.text}</span>
                 { item.supporttingText && <p>{item.supporttingText}</p> }

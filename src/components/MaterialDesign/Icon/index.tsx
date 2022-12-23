@@ -14,7 +14,7 @@ interface IconProps {
 export function Icon({ name, fill = false, weight = '400' }: IconProps) {
   return (
     <IconContainer 
-      fill={fill}
+      fill={fill ? '1' : '0'}
       weight={weight}
       className="material-symbols-outlined icon"
     >

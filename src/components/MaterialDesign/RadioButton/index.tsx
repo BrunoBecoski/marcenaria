@@ -13,7 +13,6 @@ export function RadioButton({ selected }: RadioButtonProps) {
     >
       <Icon 
         weight="700"
-        fill={false}
         name={ selected ? "radio_button_checked" : "radio_button_unchecked" }
       />
     </RadioButtonContainer>

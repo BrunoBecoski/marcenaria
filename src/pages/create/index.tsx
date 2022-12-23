@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
-import { ProductType, useCreateClientMutation, useCreateProductMutation } from '../../graphql/generated';
+import { ProductType } from '../../graphql/generated';
 
 import { Layout } from '../../components/Layout';
-import { NewClient, ClientData } from './components/NewClient';
+import { Client } from './components/Client';
 
 import {
   ProgressIndicator,
@@ -11,7 +11,6 @@ import {
 } from '../../components/MaterialDesign'
 
 import { CreateContainer } from './styles';
-import { NewProduct } from './components/NewProduct';
 
 interface ProductData {
   name: string;
@@ -21,33 +20,21 @@ interface ProductData {
   type: ProductType;
 }
 
+interface ClientData {
+  id: string;
+  name: string;
+}
+
 export default function Create() {
   const [step, setStep] = useState(2)
 
   const [product, setProduct ] = useState<ProductData>({} as ProductData);
-  const [client, setClient] = useState<ClientData>({} as ClientData);
+  const [client, setClient] = useState<ClientData | undefined>();
 
-  const productSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
-  const clientSubmit = useRef<HTMLButtonElement>({} as HTMLButtonElement);
-
-  function nextStep() {   
-    if(step === 1) {
-      productSubmit.current.click();
+  function nextStep() {
+    if(step === 2 && client) {
+      setStep(3);
     }
-
-    if(step === 2) {
-      clientSubmit.current.click();
-    }
-
-    if(step === 3) {
-
-    }
-  }
-
-  function handleCreate() {
-    // const { data } = useCreateClientMutation();
-    // const { data } = useCreateProductMutation();
-
   }
 
   return (
@@ -80,22 +67,19 @@ export default function Create() {
           }
         </div>
 
-          {
+          {/* {
             step === 1 &&
             <NewProduct
               product={product}
               setStep={setStep}
-              submitRef={productSubmit}
+              productRef={productRef}
               setProduct={setProduct}
             />
-          }
+          } */}
 
           {
             step === 2 &&
-              <NewClient
-                client={client}
-                setStep={setStep}
-                submitRef={clientSubmit}
+              <Client
                 setClient={setClient}
               />
           }
@@ -104,7 +88,6 @@ export default function Create() {
             <>
               {JSON.stringify(product)}
               {JSON.stringify(client)}
-              <button onClick={handleCreate}>Criar</button>
             </>
           }
       </CreateContainer>
