@@ -1,4 +1,3 @@
-import { MutableRefObject } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,13 +5,15 @@ import { format } from 'date-fns';
 
 import { ProductType } from '../../../../graphql/generated';
 
-import { 
-  RadioBox, 
+import {
+  RadioGroup,
+  RadioButton, 
   TextField, 
   TextFieldCurrency
 } from '../../../../components/MaterialDesign';
 
-import { Form } from './styles';
+import { Form, RadioContainer } from './styles';
+import { useState } from 'react';
 
 export interface ProductData {
   name: string;
@@ -24,7 +25,6 @@ export interface ProductData {
 
 interface NewProductProps {
   setStep: (value: number) => void;
-  submitRef: MutableRefObject<HTMLButtonElement>;
   setProduct: (data: ProductData) => void;
   product: ProductData;
 }
@@ -37,7 +37,9 @@ const productSchema = yup.object({
   type: yup.string(),
 })
 
-export function NewProduct({ setStep ,setProduct, submitRef, product }: NewProductProps) {
+export function Product({ setStep ,setProduct, product }: NewProductProps) {
+  const [type, setType] = useState('new');
+
 
   const { handleSubmit, control, getValues, setValue } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
@@ -128,30 +130,27 @@ export function NewProduct({ setStep ,setProduct, submitRef, product }: NewProdu
         )}
       />
 
-      <Controller
-        control={control}
-        name="type"
-        render={({
-          field: { name, value, onChange },
-        }) => (
-          <RadioBox
-            title="Tipo de trabalho"
-            name={name}
-            items={[
-              { label: 'Novo', value: ProductType.New },
-              { label: 'Reforma', value: ProductType.Reform },
-            ]}
-            value={value}
-            onChange={onChange}
-          />
-        )}
-      />  
+      <RadioGroup />
 
       <button
-        ref={submitRef}
-        type="submit"
-        style={{ display: 'none' }}
-      />      
+        type="button"
+        onClick={() => setType('new')}
+      >
+        <RadioButton
+          selected={type === 'new' && true}
+          label="Novo"  
+        />
+      </button>
+
+      <button 
+        type="button"
+        onClick={() => setType('reform')}
+      >
+        <RadioButton
+          selected={type === 'reform' && true}
+          label="Reforma"
+        />
+      </button>
     </Form>
   )
 }

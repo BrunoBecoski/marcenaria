@@ -1,20 +1,25 @@
+import { ButtonHTMLAttributes } from 'react';
 import { Icon } from '../../MaterialDesign';
 
-import { RadioButtonContainer } from './styles';
+import { RadioButtonContainer, Label } from './styles';
 
-interface RadioButtonProps {
+interface RadioButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   selected: boolean;
+  label?: string;
 }
 
-export function RadioButton({ selected }: RadioButtonProps) {
+export function RadioButton({ selected, label, ...props }: RadioButtonProps) {
   return (
     <RadioButtonContainer
-      className={ selected ? 'selected' : 'unselected'}
+      selected={selected}
+      type="button"
+      {...props}
     >
       <Icon 
         weight="700"
         name={ selected ? "radio_button_checked" : "radio_button_unchecked" }
       />
+      {label && <Label>{label}</Label>}
     </RadioButtonContainer>
   )
 }

@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family:  var(--family_default);
-    background: ${({ theme }) => theme.colors.surfaceAt_1};
+    background: ${({ theme }) => theme.colors.background};
   }
 
   button {

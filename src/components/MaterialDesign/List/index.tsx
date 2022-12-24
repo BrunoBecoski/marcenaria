@@ -67,22 +67,19 @@ export function ListWithRadioButton({ content, icon = false, setSelected }: List
 
       setSelected(itemSelected);
 
-      const listWithoutSelected = contentList
-        .filter(item => item.id !== selectedId)
-        .map(item => {
+      newList = contentList.map(item => {
+        if(item.id === selectedId) {
+          return {
+            ...item,
+            selected: true,
+          }
+        } else {
           return {
             ...item,
             selected: false,
           }
-        })
-           
-      newList = [
-        {
-          ...itemSelected,
-          selected: true,
-        },
-        ...listWithoutSelected,
-      ]
+        }
+      })
     }
 
     setContentList(newList);

@@ -18,7 +18,7 @@ export const Item = styled.li`
   padding: var(--size_16);
   
   list-style: none;
-  background: ${({ theme }) => theme.colors.surface};
+  background: ${({ theme }) => theme.colors.surfaceAt_1};
 
   > .icon {
     color: ${({ theme }) => theme.colors.onSurfaceVariant};

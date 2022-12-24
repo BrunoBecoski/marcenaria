@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ProductType } from '../../graphql/generated';
 
 import { Layout } from '../../components/Layout';
+import { Product } from './components/Product';
 import { Client } from './components/Client';
 
 import {
@@ -26,7 +27,7 @@ interface ClientData {
 }
 
 export default function Create() {
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(2);
 
   const [product, setProduct ] = useState<ProductData>({} as ProductData);
   const [client, setClient] = useState<ClientData | undefined>();
@@ -39,9 +40,7 @@ export default function Create() {
 
   return (
     <Layout>
-
       <CreateContainer>
-
         <ProgressIndicator
           size={3}
           active={step}
@@ -67,15 +66,14 @@ export default function Create() {
           }
         </div>
 
-          {/* {
+          {
             step === 1 &&
-            <NewProduct
+            <Product
               product={product}
               setStep={setStep}
-              productRef={productRef}
               setProduct={setProduct}
             />
-          } */}
+          }
 
           {
             step === 2 &&

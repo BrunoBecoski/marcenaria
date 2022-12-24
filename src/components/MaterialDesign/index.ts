@@ -2,7 +2,7 @@ import { Button } from './Button';
 import { Icon, IconNamesTypes } from './Icon';
 import { List, ListWithRadioButton,ListContentTypes } from './List';
 import { ProgressIndicator } from './ProgressIndicator';
-import { RadioBox } from './RadioBox';
+import { RadioGroup } from './RadioGroup';
 import { RadioButton } from './RadioButton';
 import { Tabs } from './Tabs';
 import { TextField, TextFieldCurrency } from './TextField';
@@ -14,7 +14,7 @@ export {
   ListWithRadioButton,
   ProgressIndicator,
   RadioButton,
-  RadioBox,
+  RadioGroup,
   Tabs,
   TextField,
   TextFieldCurrency,
