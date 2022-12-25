@@ -19,7 +19,7 @@ export const font = css`
 
   --title_sm: 0.875rem;   /* 14px */
   --title_md: 1rem;       /* 16px */
-  --title_ld: 1.375;      /* 22px */
+  --title_lg: 1.375rem;   /* 22px */
 
   --headline_sm: 1.5rem;  /* 24px */
   --headline_md: 1.75rem; /* 28px */

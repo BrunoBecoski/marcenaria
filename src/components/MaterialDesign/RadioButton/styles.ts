@@ -8,34 +8,29 @@ export const RadioButtonContainer = styled.button<RadioButtonContainerProps>`
   display: flex;
   align-items: center;
   gap: var(--size_16);
+  padding: var(--size_8);
+  width: fit-content;
+
+  border: none;
+  background: none;
 
   .icon {
-    font-size: var(--size_24);
+    font-size: var(--size_20);
   }
 
-  ${({ selected }) => selected 
+  ${({ selected, theme }) => selected 
     ? 
       css`
-        background: royalblue;
+        font-weight: var(--weight_md);
+        color: ${theme.colors.primary}
       `
     : css`
-        background: firebrick;
+        font-weight: var(--weight_rg);
+        color: ${theme.colors.onSurfaceVariant}
       `
-  };
-
-
-  &.selected {
-    .icon {
-      color: ${({ theme }) => theme.colors.primary};
-    }
-  }
-
-  &.unselected {
-    .icon {
-      color: ${({ theme }) => theme.colors.onSurfaceVariant};
-    }
   }
 `;
 
-
-export const Label = styled.span``;
+export const Label = styled.p`
+  font-size: var(--label_lg);
+`;

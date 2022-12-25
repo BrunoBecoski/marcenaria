@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,13 +8,11 @@ import { ProductType } from '../../../../graphql/generated';
 
 import {
   RadioGroup,
-  RadioButton, 
   TextField, 
   TextFieldCurrency
 } from '../../../../components/MaterialDesign';
 
-import { Form, RadioContainer } from './styles';
-import { useState } from 'react';
+import { Form } from './styles';
 
 export interface ProductData {
   name: string;
@@ -39,7 +38,6 @@ const productSchema = yup.object({
 
 export function Product({ setStep ,setProduct, product }: NewProductProps) {
   const [type, setType] = useState('new');
-
 
   const { handleSubmit, control, getValues, setValue } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
@@ -130,27 +128,14 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
         )}
       />
 
-      <RadioGroup />
-
-      <button
-        type="button"
-        onClick={() => setType('new')}
-      >
-        <RadioButton
-          selected={type === 'new' && true}
-          label="Novo"  
-        />
-      </button>
-
-      <button 
-        type="button"
-        onClick={() => setType('reform')}
-      >
-        <RadioButton
-          selected={type === 'reform' && true}
-          label="Reforma"
-        />
-      </button>
+      <RadioGroup
+        title="Tipo"
+        options={[
+          { label: 'Novo', value: 'new' },
+          { label: 'Reforma', value: 'reform' },
+        ]}
+        setSelected={setType} 
+      />     
     </Form>
   )
 }

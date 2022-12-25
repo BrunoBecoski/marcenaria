@@ -1,50 +1,61 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { RadioButton } from '../RadioButton';
 
-import { RadioBoxContainer, Title, Button, Label } from './styles';
+import { RadioBoxContainer, Title, Options } from './styles';
 
 interface RadioGroupProps {
   title?: string;
-  items: {
+  options: {
     label: string;
+    value: string;
   }[];
+  setSelected: (value: string) => void;
 }
 
-export function RadioGroup({ title, items }: RadioGroupProps) {
-  const [list, setList] = useState([]);
+export function RadioGroup({ title, options, setSelected }: RadioGroupProps) {
+  const [optionsList, setOptionsList] = useState(
+    options.map((item, index) => {
+      return {
+        ...item,
+        selected: index === 0 ? true : false,
+      }
+    })
+  );
 
-  function handleSelect(label: string) {
-    const newList = list.map(item => {
-      if(item.label === label) {
+  function handleSelect(value: string) {
+    setSelected(value);
+
+    const newOptionsList = optionsList.map(item => {
+      if(item.value === value) {
         return {
           ...item,
-          select: true,
+          selected: true,
         }
       } else {
         return {
           ...item,
-          select: false,
+          selected: false,
         }
       }
     })
 
-    setList(newList);
+    setOptionsList(newOptionsList);
   }
 
   return (
     <RadioBoxContainer>
-      <Title>{title}</Title>
-      {
-        list.map(item => 
-          <Button key={item.label}>
-            <RadioButton
-              label={item.label}
-              selected
-              onClick={() => handleSelect(item.label)}
-            />            
-         </Button>
-        )
-      }
+      {title && <Title>{title}</Title>}
+      <Options>
+
+        {optionsList.map(item => 
+          <RadioButton
+            key={item.value}
+            label={item.label}
+            selected={item.selected}
+            onClick={() => handleSelect(item.value)}
+          />            
+        )}
+      </Options>
     </RadioBoxContainer>
   )
 }
