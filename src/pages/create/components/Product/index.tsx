@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,9 +23,10 @@ export interface ProductData {
 }
 
 interface NewProductProps {
-  setStep: (value: number) => void;
   setProduct: (data: ProductData) => void;
   product: ProductData;
+  productSubmitButtonRef: MutableRefObject<HTMLButtonElement>;
+  setStep: (step: number) => void;
 }
 
 const productSchema = yup.object({
@@ -35,7 +37,7 @@ const productSchema = yup.object({
   type: yup.string(),
 })
 
-export function Product({ setStep ,setProduct, product }: NewProductProps) {
+export function Product({ setProduct, product, setStep, productSubmitButtonRef }: NewProductProps) {
   const { handleSubmit, control, getValues, setValue } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
     defaultValues: {
@@ -48,9 +50,8 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
   });
 
   async function onSubmit(data: ProductData) {
-    // setStep(2)
-    // setProduct(data)
-    console.log(data)
+    setProduct(data);
+    setStep(2);
   }
 
   return (
@@ -144,7 +145,11 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
         )}
       />
 
-      <button type="submit">Submit</button>
+      <button 
+        ref={productSubmitButtonRef}
+        type="submit"
+        style={{ display: 'hidden' }}
+      />
     </Form>
   )
 }
