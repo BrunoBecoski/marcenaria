@@ -130,7 +130,7 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
         control={control}
         name="type"
         render={({
-          field: { onChange },
+          field: { onChange, value },
         }) => (
           <RadioGroup
             title="Tipo"
@@ -138,7 +138,8 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
               { label: 'Novo', value: ProductType.New },
               { label: 'Reforma', value: ProductType.Reform },
             ]}
-            setSelected={onChange} 
+            onChange={onChange}
+            value={value}
           />    
         )}
       />
