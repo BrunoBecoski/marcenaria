@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -37,8 +36,6 @@ const productSchema = yup.object({
 })
 
 export function Product({ setStep ,setProduct, product }: NewProductProps) {
-  const [type, setType] = useState('new');
-
   const { handleSubmit, control, getValues, setValue } = useForm<ProductData>({
     resolver: yupResolver(productSchema),
     defaultValues: {
@@ -51,8 +48,9 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
   });
 
   async function onSubmit(data: ProductData) {
-    setStep(2)
-    setProduct(data)
+    // setStep(2)
+    // setProduct(data)
+    console.log(data)
   }
 
   return (
@@ -128,14 +126,24 @@ export function Product({ setStep ,setProduct, product }: NewProductProps) {
         )}
       />
 
-      <RadioGroup
-        title="Tipo"
-        options={[
-          { label: 'Novo', value: 'new' },
-          { label: 'Reforma', value: 'reform' },
-        ]}
-        setSelected={setType} 
-      />     
+      <Controller
+        control={control}
+        name="type"
+        render={({
+          field: { onChange },
+        }) => (
+          <RadioGroup
+            title="Tipo"
+            options={[
+              { label: 'Novo', value: ProductType.New },
+              { label: 'Reforma', value: ProductType.Reform },
+            ]}
+            setSelected={onChange} 
+          />    
+        )}
+      />
+
+      <button type="submit">Submit</button>
     </Form>
   )
 }

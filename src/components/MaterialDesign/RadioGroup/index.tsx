@@ -46,7 +46,6 @@ export function RadioGroup({ title, options, setSelected }: RadioGroupProps) {
     <RadioBoxContainer>
       {title && <Title>{title}</Title>}
       <Options>
-
         {optionsList.map(item => 
           <RadioButton
             key={item.value}
