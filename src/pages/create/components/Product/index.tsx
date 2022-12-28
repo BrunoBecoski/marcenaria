@@ -12,7 +12,7 @@ import {
   TextFieldCurrency
 } from '../../../../components/MaterialDesign';
 
-import { Form } from './styles';
+import { ProductContainer } from './styles';
 
 export interface ProductData {
   name: string;
@@ -55,7 +55,7 @@ export function Product({ setProduct, product, setStep, productSubmitButtonRef }
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <ProductContainer onSubmit={handleSubmit(onSubmit)}>
       <Controller
         control={control}
         name="name"
@@ -150,6 +150,6 @@ export function Product({ setProduct, product, setStep, productSubmitButtonRef }
         type="submit"
         style={{ display: 'hidden' }}
       />
-    </Form>
+    </ProductContainer>
   )
 }

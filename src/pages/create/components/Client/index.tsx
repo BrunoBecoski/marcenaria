@@ -1,24 +1,28 @@
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 
-import { 
-  Tabs,
- } from '../../../../components/MaterialDesign';
+import { useGetClientsQuery } from '../../../../graphql/generated';
 
- import { SelectClient } from '../SelectClient';
+import {
+  ListWithRadioButton,
+  ListContentTypes,
+  TextField,
+} from '../../../../components/MaterialDesign';
 
-import { ClientContainer } from './styles';
+import { ClientContainer, SelectClientContainer } from './styles';
 
-interface ClientPros {
-  setClient: (data: ClientInfoProps | undefined) => void;
-}
-
-interface ClientInfoProps {
+interface ClientData {
   id: string;
   name: string;
 }
 
-export function Client({ setClient }: ClientPros) {
-  const [tabActive, setTabActive] = useState('select');
+interface ClientPros {
+  setClient: (data: ClientData) => void;
+  client: ClientData;
+  clientSubmitButtonRef: MutableRefObject<HTMLButtonElement>;
+  setStep: (step: number) => void;
+}
+
+export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: ClientPros) {
   const [clientSelected, setClientSelected] = useState<any | undefined>(undefined);
 
   useEffect(() => {
@@ -27,25 +31,52 @@ export function Client({ setClient }: ClientPros) {
         id: clientSelected.id,
         name: clientSelected.text,
       })
-    } else {
-      setClient(undefined)
     }
   }, [clientSelected])
 
+
+  async function onSubmit(data: ClientData) {
+    setClient(data);
+    setStep(2);
+  }
+
+
+  const [clients, setClients] = useState<ListContentTypes[]>([]);
+
+  const { data, loading } = useGetClientsQuery();
+
+  useEffect(() => {
+    if (data) {
+      setClients(data.clients.map(client => {
+        return {
+          id: client.id,
+          text: client.name,
+        }
+      }))
+    }
+  }, [loading])
+
   return (
-    <ClientContainer>
-      <Tabs
-        tabs={[
-          { id: 'select', label: 'Selecione' },
-          { id: 'create', label: 'Criar' },
-        ]}
-        setTabActive={setTabActive}
-        tabActive={tabActive}
+    <ClientContainer onSubmit={() => onSubmit}>
+      <TextField
+        name="name"
+        label="Nome"
       />
+      <SelectClientContainer>
+        {!loading &&
+          <ListWithRadioButton
+            icon="person"
+            content={clients}
+            setSelected={setClientSelected}
+          />
+        }
+      </SelectClientContainer>
 
-      { tabActive === 'select' && <SelectClient setClientSelected={setClientSelected} /> }
-
-      { tabActive === 'create' && <h1>Criar novo cliente</h1> }
+      <button 
+        ref={clientSubmitButtonRef}
+        type="submit"
+        style={{ display: 'hidden' }}
+      />
     </ClientContainer>
   )
 }

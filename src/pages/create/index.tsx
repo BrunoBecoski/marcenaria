@@ -30,9 +30,10 @@ export default function Create() {
   const [step, setStep] = useState(1);
 
   const [product, setProduct ] = useState<ProductData>({} as ProductData);
-  const [client, setClient] = useState<ClientData | undefined>();
+  const [client, setClient] = useState<ClientData>({} as ClientData);
 
   const productSubmitButtonRef = useRef<HTMLButtonElement>({} as HTMLButtonElement);
+  const clientSubmitButtonRef = useRef<HTMLButtonElement>({} as HTMLButtonElement);
 
   function nextStep() {
     if(step === 1) {
@@ -40,7 +41,7 @@ export default function Create() {
     }
 
     if(step === 2 && client) {
-      setStep(3);
+      clientSubmitButtonRef.current.click();
     }
   }
 
@@ -85,7 +86,10 @@ export default function Create() {
           {
             step === 2 &&
               <Client
+                client={client}
                 setClient={setClient}
+                setStep={setStep}
+                clientSubmitButtonRef={clientSubmitButtonRef}
               />
           }
 
