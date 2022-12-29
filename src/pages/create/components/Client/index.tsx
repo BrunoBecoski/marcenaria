@@ -6,6 +6,7 @@ import {
   ListWithRadioButton,
   ListContentTypes,
   TextField,
+  Tabs,
 } from '../../../../components/MaterialDesign';
 
 import { ClientContainer, SelectClientContainer } from './styles';
@@ -24,6 +25,8 @@ interface ClientPros {
 
 export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: ClientPros) {
   const [clientSelected, setClientSelected] = useState<any | undefined>(undefined);
+
+  const [tab, setTab] = useState('new');
 
   useEffect(() => {
     if(clientSelected) {
@@ -58,19 +61,42 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
 
   return (
     <ClientContainer onSubmit={() => onSubmit}>
-      <TextField
-        name="name"
-        label="Nome"
-      />
-      <SelectClientContainer>
-        {!loading &&
-          <ListWithRadioButton
-            icon="person"
-            content={clients}
-            setSelected={setClientSelected}
-          />
-        }
-      </SelectClientContainer>
+
+      {
+        <Tabs
+          setTabActive={setTab}
+          tabActive={tab}
+          tabs={
+            [
+              { id: 'new', label: 'Novo' },
+              { id: 'create', label: 'Criação' },
+            ]
+          }
+        />
+      }
+
+      {
+        tab === 'new' &&
+        
+        <TextField
+          name="name"
+          label="Nome"
+        />
+      }
+
+      {
+        tab === 'create' &&
+
+        <SelectClientContainer>
+          {!loading &&
+            <ListWithRadioButton
+              icon="person"
+              content={clients}
+              setSelected={setClientSelected}
+            />
+          }
+        </SelectClientContainer>
+      }
 
       <button 
         ref={clientSubmitButtonRef}
