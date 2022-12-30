@@ -61,6 +61,10 @@ export default function Create() {
             </Button>
             : <span />
           }
+          
+          { step === 1 && <h2>Produto</h2> }
+          
+          { step === 2 && <h2>Client</h2> }
 
           { 
             step < 3 ?
