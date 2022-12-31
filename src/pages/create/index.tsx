@@ -59,7 +59,7 @@ export default function Create() {
             <Button onClick={() => setStep(prevState => prevState - 1)}>
               Anterior
             </Button>
-            : <span />
+            : <span style={{ width: '100px'}} />
           }
           
           { step === 1 && <h2>Produto</h2> }
@@ -73,7 +73,7 @@ export default function Create() {
             >
               Próximo
             </Button>
-            : <span />
+            : <span style={{ width: '100px'}} />
           }
         </div>
 

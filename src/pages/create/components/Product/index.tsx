@@ -8,7 +8,7 @@ import { ProductType } from '../../../../graphql/generated';
 
 import {
   RadioGroup,
-  TextField, 
+  TextField,
   TextFieldCurrency
 } from '../../../../components/MaterialDesign';
 
@@ -56,99 +56,109 @@ export function Product({ setProduct, product, setStep, productSubmitButtonRef }
 
   return (
     <ProductContainer onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        control={control}
-        name="name"
-        render={({
-          field: { name, onChange, value },
-          formState: { errors }
-        }) => (
-          <TextField
-            label="Nome"
-            name={name}
-            value={value}
-            onChange={onChange}
-            errorMessage={errors.name?.message}            
-          />
-        )}
-      />
 
-      <Controller
-        control={control}
-        name="description"
-        render={({
-          field: { name, onChange, value },
-          formState: { errors }
-        }) => (
-          <TextField
-            label="Descrição"
-            name={name}
-            value={value}
-            onChange={onChange}
-            errorMessage={errors.description?.message}     
-          />
-        )}
-      />
+      <div className="name">
+        <Controller
+          control={control}
+          name="name"
+          render={({
+            field: { name, onChange, value },
+            formState: { errors }
+          }) => (
+            <TextField
+              label="Nome"
+              name={name}
+              value={value}
+              onChange={onChange}
+              errorMessage={errors.name?.message}
+            />
+          )}
+        />
+      </div>
 
-      <Controller
-        control={control}
-        name="price"
-        render={({
-          field: { name, onChange, value },
-          formState: { errors }
-        }) => (
-          <TextFieldCurrency
-            getValues={getValues}
-            setValue={setValue}
-            label="Preço"
-            name={name}
-            value={value}
-            onChange={onChange}
-            errorMessage={errors.price?.message}
-          />
-        )}
-      />
+      <div className="description">
+        <Controller
+          control={control}
+          name="description"
+          render={({
+            field: { name, onChange, value },
+            formState: { errors }
+          }) => (
+            <TextField
+              label="Descrição"
+              name={name}
+              value={value}
+              onChange={onChange}
+              errorMessage={errors.description?.message}
+            />
+          )}
+        />
+      </div>
+
+      <div className="date">
+        <Controller
+          control={control}
+          name="price"
+          render={({
+            field: { name, onChange, value },
+            formState: { errors }
+          }) => (
+            <TextFieldCurrency
+              getValues={getValues}
+              setValue={setValue}
+              label="Preço"
+              name={name}
+              value={value}
+              onChange={onChange}
+              errorMessage={errors.price?.message}
+            />
+          )}
+        />
+      </div>
+
+      <div className="price">
+        <Controller
+          control={control}
+          name="date"
+          render={({
+            field: { name, onChange, value },
+            formState: { errors },
+          }) => (
+            <TextField
+              type="date"
+              label="Data"
+              name={name}
+              value={value}
+              onChange={onChange}
+              errorMessage={errors.date?.message}
+            />
+          )}
+        />
+      </div>
+
+      <div className="type">
+        <Controller
+          control={control}
+          name="type"
+          render={({
+            field: { onChange, value },
+          }) => (
+            <RadioGroup
+              title="Tipo"
+              options={[
+                { label: 'Novo', value: ProductType.New },
+                { label: 'Reforma', value: ProductType.Reform },
+              ]}
+              onChange={onChange}
+              value={value}
+            />
+          )}
+        />
+      </div>
       
-      <Controller
-        control={control}
-        name="date"
-        render={({
-          field: { name, onChange, value },
-          formState: { errors },
-        }) => (
-          <TextField
-            type="date"
-            label="Data"
-            name={name}
-            value={value}
-            onChange={onChange}
-            errorMessage={errors.date?.message}
-          />
-        )}
-      />
-
-      <Controller
-        control={control}
-        name="type"
-        render={({
-          field: { onChange, value },
-        }) => (
-          <RadioGroup
-            title="Tipo"
-            options={[
-              { label: 'Novo', value: ProductType.New },
-              { label: 'Reforma', value: ProductType.Reform },
-            ]}
-            onChange={onChange}
-            value={value}
-          />    
-        )}
-      />
-
-      <button 
-        ref={productSubmitButtonRef}
+      <button
         type="submit"
-        style={{ display: 'hidden' }}
+        ref={productSubmitButtonRef}
       />
     </ProductContainer>
   )
