@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const ProductContainer = styled.form`
   display: grid;
   gap: var(--size_16);
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: var(--size_16);
 
   .name { grid-area: name; }
   .description { grid-area: description; }
@@ -13,13 +13,10 @@ export const ProductContainer = styled.form`
   .type { grid-area: type; }
 
   grid-template-areas:
-    "name name description description description description"
-    "name name description description description description"
-    "name name description description description description"
-    "price price price date date date"
-    "price price price date date date"
-    "price price price date date date"
-    "type type type type type type"
+    "name name"
+    "description description"
+    "date price"
+    "type ."
   ;
 
   button[type="submit"] {
