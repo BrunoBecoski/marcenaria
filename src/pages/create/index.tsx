@@ -11,7 +11,7 @@ import {
   Button,
 } from '../../components/MaterialDesign'
 
-import { CreateContainer } from './styles';
+import { CreateContainer, Subtitle } from './styles';
 
 interface ProductData {
   name: string;
@@ -62,9 +62,9 @@ export default function Create() {
             : <span style={{ width: '100px'}} />
           }
           
-          { step === 1 && <h2>Produto</h2> }
+          { step === 1 && <Subtitle>Produto</Subtitle> }
           
-          { step === 2 && <h2>Client</h2> }
+          { step === 2 && <Subtitle>Cliente</Subtitle> }
 
           { 
             step < 3 ?

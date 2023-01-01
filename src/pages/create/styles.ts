@@ -12,7 +12,13 @@ export const CreateContainer = styled.div`
 
   .nav {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-top: var(--size_16);
   }
+`;
+
+export const Subtitle = styled.h2`
+  color: ${({ theme }) => theme.colors.onSurface};
+  font-size: var(--title_lg);
 `;

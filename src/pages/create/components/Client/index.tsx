@@ -69,7 +69,7 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
           tabs={
             [
               { id: 'new', label: 'Novo' },
-              { id: 'create', label: 'Criação' },
+              { id: 'select', label: 'Selecione' },
             ]
           }
         />
@@ -85,7 +85,7 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
       }
 
       {
-        tab === 'create' &&
+        tab === 'select' &&
 
         <SelectClientContainer>
           {!loading &&
