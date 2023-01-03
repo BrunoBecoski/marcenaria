@@ -39,10 +39,15 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
 
 
   async function onSubmit(data: ClientData) {
-    setClient(data);
-    setStep(2);
+    if(tab === 'new') {
+      setClient(clientSelected);
+      setStep(2);
+    } 
+    if (tab === 'select') {
+      setClient(data);
+      setStep(2);
+    }
   }
-
 
   const [clients, setClients] = useState<ListContentTypes[]>([]);
 
