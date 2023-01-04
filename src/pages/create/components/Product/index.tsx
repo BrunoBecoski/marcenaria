@@ -97,26 +97,6 @@ export function Product({ setProduct, product, setStep, productSubmitButtonRef }
       <div className="price">
         <Controller
           control={control}
-          name="date"
-          render={({
-            field: { name, onChange, value },
-            formState: { errors },
-          }) => (
-            <TextField
-              type="date"
-              label="Data"
-              name={name}
-              value={value}
-              onChange={onChange}
-              errorMessage={errors.date?.message}
-            />
-          )}
-        />
-      </div>
-
-      <div className="date">
-        <Controller
-          control={control}
           name="price"
           render={({
             field: { name, onChange, value },
@@ -130,6 +110,26 @@ export function Product({ setProduct, product, setStep, productSubmitButtonRef }
               value={value}
               onChange={onChange}
               errorMessage={errors.price?.message}
+            />
+          )}
+        />
+      </div>
+
+      <div className="date">
+        <Controller
+          control={control}
+          name="date"
+          render={({
+            field: { name, onChange, value },
+            formState: { errors },
+          }) => (
+            <TextField
+              type="date"
+              label="Data"
+              name={name}
+              value={value}
+              onChange={onChange}
+              errorMessage={errors.date?.message}
             />
           )}
         />

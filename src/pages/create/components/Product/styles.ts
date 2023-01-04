@@ -15,7 +15,7 @@ export const ProductContainer = styled.form`
   grid-template-areas:
     "name name"
     "description description"
-    "date price"
+    "price date"
     "type ."
   ;
 
