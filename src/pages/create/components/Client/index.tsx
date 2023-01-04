@@ -80,18 +80,14 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
         />
       }
 
-      {
-        tab === 'new' &&
-        
+      { tab === 'new' &&
         <TextField
           name="name"
           label="Nome"
         />
       }
 
-      {
-        tab === 'select' &&
-
+      { tab === 'select' &&
         <SelectClientContainer>
           {!loading &&
             <ListWithRadioButton
