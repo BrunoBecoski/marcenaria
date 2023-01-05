@@ -1,4 +1,7 @@
 import { MutableRefObject, useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useGetClientsQuery } from '../../../../graphql/generated';
 
@@ -22,6 +25,10 @@ interface ClientPros {
   clientSubmitButtonRef: MutableRefObject<HTMLButtonElement>;
   setStep: (step: number) => void;
 }
+
+const clientSchema = yup.object({
+  name: yup.string().required('Obrigatório'),
+})
 
 export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: ClientPros) {
   const [clientSelected, setClientSelected] = useState<any | undefined>(undefined);
