@@ -35,6 +35,13 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
 
   const [tab, setTab] = useState('new');
 
+  const { handleSubmit, control } = useForm<ClientData>({
+    resolver: yupResolver(clientSchema),
+    defaultValues: {
+      name: '',
+    }
+  })
+
   useEffect(() => {
     if(clientSelected) {
       setClient({
@@ -73,7 +80,6 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
 
   return (
     <ClientContainer onSubmit={() => onSubmit}>
-
       {
         <Tabs
           setTabActive={setTab}
