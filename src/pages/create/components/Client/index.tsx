@@ -79,7 +79,7 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
   }, [loading])
 
   return (
-    <ClientContainer onSubmit={() => onSubmit}>
+    <ClientContainer onSubmit={handleSubmit(onSubmit)}>
       {
         <Tabs
           setTabActive={setTab}
