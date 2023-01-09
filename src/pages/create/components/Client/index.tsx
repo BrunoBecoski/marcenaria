@@ -94,9 +94,21 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
       }
 
       { tab === 'new' &&
-        <TextField
+        <Controller
+          control={control}
           name="name"
-          label="Nome"
+          render={({
+            field: { name, onChange, value },
+            formState: { errors }
+          }) => (
+            <TextField
+              label="Nome"
+              name={name}
+              value={value}
+              onChange={onChange}
+              errorMessage={errors.name?.message}
+            />
+          )}
         />
       }
 
