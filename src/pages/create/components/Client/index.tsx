@@ -125,9 +125,8 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
       }
 
       <button 
-        ref={clientSubmitButtonRef}
         type="submit"
-        style={{ display: 'hidden' }}
+        ref={clientSubmitButtonRef}
       />
     </ClientContainer>
   )
