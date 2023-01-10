@@ -55,11 +55,11 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
   async function onSubmit(data: ClientData) {
     if(tab === 'new') {
       setClient(clientSelected);
-      setStep(2);
+      setStep(3);
     } 
     if (tab === 'select') {
       setClient(data);
-      setStep(2);
+      setStep(3);
     }
   }
 
