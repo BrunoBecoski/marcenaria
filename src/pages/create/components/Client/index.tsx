@@ -79,15 +79,8 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
     }
   }, [loading])
 
-
-  function ConsoleLog(e){
-    e.preventDefault()
-    console.log('submit')
-  }
-
   return (
-    <ClientContainer onSubmit={ConsoleLog}>
-    {/* <ClientContainer onSubmit={handleSubmit(onSubmit)}> */}
+    <ClientContainer onSubmit={handleSubmit(onSubmit)}>
       {
         <Tabs
           setTabActive={setTab}
