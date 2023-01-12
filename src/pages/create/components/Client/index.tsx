@@ -53,6 +53,7 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
 
 
   async function onSubmit(data: ClientData) {
+    console.log(data)
     if(tab === 'new') {
       setClient(clientSelected);
       setStep(3);
@@ -78,8 +79,15 @@ export function Client({ setClient, client, setStep, clientSubmitButtonRef  }: C
     }
   }, [loading])
 
+
+  function ConsoleLog(e){
+    e.preventDefault()
+    console.log('submit')
+  }
+
   return (
-    <ClientContainer onSubmit={handleSubmit(onSubmit)}>
+    <ClientContainer onSubmit={ConsoleLog}>
+    {/* <ClientContainer onSubmit={handleSubmit(onSubmit)}> */}
       {
         <Tabs
           setTabActive={setTab}
