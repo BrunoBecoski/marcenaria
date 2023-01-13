@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, MutableRefObject, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, InputHTMLAttributes, MutableRefObject, useRef } from 'react';
 
 import { TextFieldContainer, Border, Label, Input, Span } from './styles';
 
@@ -14,7 +14,7 @@ export function TextField({ label, name, errorMessage, ...props }: TextFieldProp
   const inputRef = useRef() as  MutableRefObject<HTMLInputElement>
 
   return (
-    <TextFieldContainer >
+    <TextFieldContainer>
       <Border onClick={() => inputRef.current.focus()}>
         <Label htmlFor={name}>
           {label}
