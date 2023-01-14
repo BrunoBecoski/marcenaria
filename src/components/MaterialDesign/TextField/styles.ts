@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const TextFieldContainer = styled.div`
+interface TextFieldContainerProps {
+  hasValue: boolean;
+}
+
+export const TextFieldContainer = styled.div<TextFieldContainerProps>`
   width: 100%;
 `;
 

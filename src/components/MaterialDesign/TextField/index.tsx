@@ -14,7 +14,7 @@ export function TextField({ label, name, errorMessage, ...props }: TextFieldProp
   const inputRef = useRef() as  MutableRefObject<HTMLInputElement>
 
   return (
-    <TextFieldContainer>
+    <TextFieldContainer hasValue={!!props.value}>
       <Border onClick={() => inputRef.current.focus()}>
         <Label htmlFor={name}>
           {label}
@@ -75,7 +75,7 @@ export function TextFieldCurrency({ label, name, errorMessage, getValues, setVal
   }
 
   return (
-    <TextFieldContainer>
+    <TextFieldContainer hasValue={!!props.value}>
       <Border onClick={() => inputRef.current.focus()}>
         <Label htmlFor={name}>
           {label}
