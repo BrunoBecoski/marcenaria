@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface TextFieldContainerProps {
   hasValue: boolean;
@@ -6,6 +6,14 @@ interface TextFieldContainerProps {
 
 export const TextFieldContainer = styled.div<TextFieldContainerProps>`
   width: 100%;
+
+  ${({ hasValue }) => hasValue && css`
+    label {
+      top: calc(var(--size_8) * -1);
+      
+      font-size: var(--body_sm);
+    }
+  `}
 `;
 
 export const Border = styled.div`
@@ -41,13 +49,13 @@ export const Border = styled.div`
     }
   }
   
-  :not(:has(input:placeholder-shown)) {
-    label {
-      top: calc(var(--size_8) * -1);
+  // :not(:has(input:placeholder-shown)) {
+  //   label {
+  //     top: calc(var(--size_8) * -1);
     
-      font-size: var(--body_sm);
-    }
-  }
+  //     font-size: var(--body_sm);
+  //   }
+  // }
 `;
 
 export const Label = styled.label`
