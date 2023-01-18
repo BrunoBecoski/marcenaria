@@ -6,14 +6,6 @@ interface TextFieldContainerProps {
 
 export const TextFieldContainer = styled.div<TextFieldContainerProps>`
   width: 100%;
-
-  // ${({ hasValue }) => hasValue && css`
-  //   label {
-  //     top: calc(var(--size_8) * -1);
-      
-  //     font-size: var(--body_sm);
-  //   }
-  // `}
 `;
 
 export const Border = styled.div`
